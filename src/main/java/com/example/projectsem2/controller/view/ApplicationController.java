@@ -10,4 +10,9 @@ public class ApplicationController {
     public String getLogin(){
         return "Login";
     }
+    @GetMapping("/contact")
+    public String getContact(){
+        return "Contact";
+    }
+
 }
