@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/Login/login.css">
     <link rel="stylesheet" href="/style.css">
 
+
 </head>
 
 <body>
@@ -210,21 +211,24 @@
     <!--Bắt Đầu Phần Nội Dung-->
     <div class="noi-dung">
         <div class="form">
-            <h2>Trang Đăng Nhập</h2>
-            <form action="">
+            <h2>Đăng Nhập</h2>
+            <form action="" name="formlogin" onsubmit="return(validate())"; >
                 <div class="input-form">
-                    <span>Tên Người Dùng</span>
-                    <input type="text" name="">
+                    <span>Tên đăng nhập</span>
+                    <input type="text" name="username" id="username" >
+                    <span id="username_error"></span>
                 </div>
                 <div class="input-form">
                     <span>Mật Khẩu</span>
-                    <input type="password" name="">
+                    <input type="password" name="password" id="password">
+                    <span id="password_error"></span>
                 </div>
+
                 <div class="nho-dang-nhap">
                     <label><input type="checkbox" name=""> Nhớ Đăng Nhập</label>
                 </div>
                 <div class="input-form">
-                    <input type="submit" value="Đăng Nhập">
+                    <input type="submit"  id="btn" name="btn" value="Đăng Nhập">
                 </div>
                 <div class="input-form">
                     <p>Bạn Chưa Có Tài Khoản? <a href="#">Đăng Ký</a></p>
@@ -333,6 +337,21 @@
 <!-- Active js -->
 <script src="js/active.js"></script>
 
+<script>
+    function validate(){
+        if (document.formlogin.username.value == ""){
+            alert("Vui lòng nhập tên đăng nhập !");
+            document.formlogin.username.focus();
+            return false;
+        }
+        if (document.formlogin.password.value == ""){
+            alert("Vui lòng điền mật khẩu !");
+            document.formlogin.password.focus();
+            return false;
+        }
+
+    }
+</script>
 </body>
 
 </html>
