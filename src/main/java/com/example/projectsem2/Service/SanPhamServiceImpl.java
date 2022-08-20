@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SanPhamServiceImpl implements SanPhamService{
@@ -17,6 +18,19 @@ public class SanPhamServiceImpl implements SanPhamService{
     public List<tblSanpham> findAllSanpham() {
         return sanPhamRepository.findAll();
     }
+
+    @Override
+    public Optional<tblSanpham> findOptionalByIdSanpham(Long id) {
+        return sanPhamRepository.findById(id);
+    }
+
+
+    @Override
+    public tblSanpham themSanPham(tblSanpham newSanpham) {
+        return sanPhamRepository.save(newSanpham);
+    }
+
+
 
     @Override
     public tblSanpham updateSanpham(Long id , tblSanpham newSanpham) {
