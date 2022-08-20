@@ -26,7 +26,4 @@ public class ApplicationUserController {
     public String getContact(){
         return "contact";
     }
-
-    @GetMapping("/blog")
-    public String getBlog(){return "blog";}
 }
