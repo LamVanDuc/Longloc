@@ -26,4 +26,7 @@ public class ApplicationUserController {
     public String getContact(){
         return "contact";
     }
+
+
+
 }
