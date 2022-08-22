@@ -1,12 +1,17 @@
 package com.example.projectsem2.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "chitietdonhang", schema = "dbo", catalog = "clothes")
-public class tblChitietdonhang {
+@AllArgsConstructor
+@NoArgsConstructor
+public class tblChitietdonhang extends tblDonhang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_chitietdonhang")

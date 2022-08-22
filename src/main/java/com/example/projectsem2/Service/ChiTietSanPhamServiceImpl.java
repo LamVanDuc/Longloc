@@ -4,10 +4,12 @@ import com.example.projectsem2.comman.GenaricClass;
 import com.example.projectsem2.entity.tblChitietsanpham;
 import com.example.projectsem2.reponsitory.ChiTietSanPhamReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService{
 
     @Autowired
