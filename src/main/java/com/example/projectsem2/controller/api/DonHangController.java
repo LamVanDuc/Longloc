@@ -3,13 +3,6 @@ package com.example.projectsem2.controller.api;
 import com.example.projectsem2.Service.DonHangService;
 import com.example.projectsem2.dto.dtoChiTietDonHang;
 import com.example.projectsem2.dto.responseObject;
-<<<<<<< HEAD
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-=======
-
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> main
 
 @RestController
 @RequestMapping("/api/v1/donhang")
@@ -26,19 +18,6 @@ public class DonHangController {
     @Autowired
     DonHangService donHangService;
 
-<<<<<<< HEAD
-//    @GetMapping("/q")
-//    public ResponseEntity<responseObject> getById(@RequestParam("id")String id){
-//        try{
-//            dtoChiTietDonHang donHang = donHangService.getByIdDonHang(id);
-//            return ResponseEntity.status(HttpStatus.OK).body(
-//                    new responseObject("ok","Query thành công !" ,donHang));
-//        }catch (Exception ex){
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new responseObject("false","Đã sảy ra lỗi",ex.getMessage()));
-//        }
-//
-//    }
-=======
     @GetMapping("/q")
     public ResponseEntity<responseObject> findByIdDonhang(@RequestParam(value = "id") String id){
         try{
@@ -55,5 +34,4 @@ public class DonHangController {
                     new responseObject("false" , "Đã sảy ra lỗi : "+exx.getMessage(),""));
         }
     }
->>>>>>> main
 }
