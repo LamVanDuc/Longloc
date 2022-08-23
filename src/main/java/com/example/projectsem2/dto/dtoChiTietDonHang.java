@@ -1,6 +1,5 @@
 package com.example.projectsem2.dto;
 
-import com.example.projectsem2.entity.tblChitietdonhang;
 import com.example.projectsem2.entity.tblDonhang;
 
 import java.util.List;

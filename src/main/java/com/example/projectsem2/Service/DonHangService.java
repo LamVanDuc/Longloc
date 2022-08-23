@@ -3,13 +3,15 @@ package com.example.projectsem2.Service;
 import com.example.projectsem2.dto.dtoChiTietDonHang;
 import com.example.projectsem2.entity.tblChitietdonhang;
 import com.example.projectsem2.entity.tblDonhang;
+import javassist.NotFoundException;
+
 import java.util.List;
 
 import java.util.Optional;
 
 public interface DonHangService {
 
-    dtoChiTietDonHang getByIdDonHang(String id);
+    dtoChiTietDonHang getByIdDonHang(String id) throws NotFoundException;
 
     tblDonhang findDonhangByIdDonHang(String id);
 

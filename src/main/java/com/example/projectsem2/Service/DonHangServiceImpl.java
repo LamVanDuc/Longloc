@@ -5,15 +5,17 @@ import com.example.projectsem2.dto.dtoChitietsanphamAndChitietdonhang;
 import com.example.projectsem2.entity.tblChitietdonhang;
 import com.example.projectsem2.entity.tblChitietsanpham;
 import com.example.projectsem2.entity.tblDonhang;
+import com.example.projectsem2.entity.tblSanpham;
 import com.example.projectsem2.reponsitory.ChiTietDonHangReponsitory;
 import com.example.projectsem2.reponsitory.ChiTietSanPhamReponsitory;
 import com.example.projectsem2.reponsitory.DonHangRepository;
+import com.example.projectsem2.reponsitory.SanPhamRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DonHangServiceImpl implements DonHangService{
@@ -21,30 +23,44 @@ public class DonHangServiceImpl implements DonHangService{
     DonHangRepository donHangRepository;
 
     @Autowired
+    SanPhamRepository sanPhamRepository;
+    @Autowired
     ChiTietSanPhamReponsitory chiTietSanPhamReponsitory;
 
     @Autowired
     ChiTietDonHangReponsitory chiTietDonHangReponsitory;
 
     @Override
-    public dtoChiTietDonHang getByIdDonHang(String id) throws RuntimeException {
+    public dtoChiTietDonHang getByIdDonHang(String id) throws RuntimeException, NotFoundException {
         tblDonhang donhang = donHangRepository.findByIdDonhang(id);
-        dtoChiTietDonHang dtoChiTietDonHang = null;
-        List<dtoChitietsanphamAndChitietdonhang> chitietsanphamAndChitietdonhangList = new ArrayList<>();
+        dtoChiTietDonHang dtoChiTietDonHang = new dtoChiTietDonHang();
+        List<dtoChitietsanphamAndChitietdonhang> chitiet = new ArrayList<>();
 
         if (donhang==null){
-            throw new RuntimeException("Không tìm thấy Đơn Hàng");
-        }else {
 
+            throw new NotFoundException("Không tìm thấy Đơn Hàng");
+        }else{
+
+            // gắn đơn hàng vào
             dtoChiTietDonHang.setDonhang(donhang);
+            //tìm chi tiết đơn hàng thuộc đơn hàng nào
             List<tblChitietdonhang> chitietdonhang = chiTietDonHangReponsitory.findByIdDonhang(donhang.getIdDonhang());
 
+            //duyệt tất cả chi tiết đơn hàng tìm được
             for (tblChitietdonhang  item: chitietdonhang){
+                //tìm chi tiết sản phẩm thộc chi tiết đơn hàng nào
                 tblChitietsanpham chitietsanphams = chiTietSanPhamReponsitory.findByIdChitietsanpham(item.getIdChitietsanpham());
-                dtoChitietsanphamAndChitietdonhang chitietsanphamAndChitietdonhang = new dtoChitietsanphamAndChitietdonhang(item,chitietsanphams);
-                chitietsanphamAndChitietdonhangList.add(chitietsanphamAndChitietdonhang);
+                //chi tiết sản phẩm thuộc sản phẩm nào
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietsanphams.getIdSanpham());
+
+                // gắn vào list gồm có chi tiết đơn hàng , chi tiết sản phẩm , sản phẩm
+                dtoChitietsanphamAndChitietdonhang chitietsanphamAndChitietdonhang = new dtoChitietsanphamAndChitietdonhang(item,sanpham,chitietsanphams);
+                //  add ngược lại list
+                chitiet.add(chitietsanphamAndChitietdonhang);
             }
-            dtoChiTietDonHang.setChitietsanphamAndChitietdonhang(chitietsanphamAndChitietdonhangList);
+
+            // list này biết được đơn hàng , có chi tiết đơn hàng nào , chi tiết sản phẩm thuộc sản phẩm nào
+            dtoChiTietDonHang.setChitietsanphamAndChitietdonhang(chitiet);
             return dtoChiTietDonHang;
         }
     }
