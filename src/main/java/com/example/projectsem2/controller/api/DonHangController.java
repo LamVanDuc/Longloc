@@ -29,9 +29,9 @@ public class DonHangController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     new responseObject("false" , "Đơn hàng không tồn tại!",""));
 
-        }catch (Exception exx){
+        }catch (Exception ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new responseObject("false" , "Đã sảy ra lỗi : "+exx.getMessage(),""));
+                    new responseObject("false" , "Đã sảy ra lỗi : "+ex.getMessage(),""));
         }
     }
 }
