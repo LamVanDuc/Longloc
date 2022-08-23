@@ -7,23 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ApplicationUserController {
-    @RequestMapping(value = {"","/","/home","/index"},method = RequestMethod.GET)
-    public String getIndex(){
-        return "index";
-    }
-
-    @GetMapping("/login")
-    public String getLogin(){
-        return "Login";
-    }
-
-    @GetMapping("/register")
-    public String getRegister(){
-        return "Register";
-    }
-
-    @GetMapping("/contact")
-    public String getContact(){
-        return "contact";
+    @GetMapping("/checkout")
+    public String getCheckout(){
+        return "checkout";
     }
 }
