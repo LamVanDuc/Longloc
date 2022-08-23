@@ -42,4 +42,9 @@ public class ApplicationController {
     public String getBlog(){
         return "blog";
     }
+
+    @GetMapping("/detail")
+    public String getProductDetail(){
+        return "single-product-details";
+    }
 }

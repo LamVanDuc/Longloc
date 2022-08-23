@@ -1,5 +1,5 @@
 var map;
-var latlng = new google.maps.LatLng(51.5074, 0.1278);
+var latlng = new window.google.maps.LatLng(51.5074, 0.1278);
 var stylez = [
     {
         "featureType": "administrative.locality",

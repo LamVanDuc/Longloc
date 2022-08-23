@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout.html}">>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout.html}">
 
 <head>
     <meta charset="UTF-8">
@@ -17,17 +17,13 @@
 </head>
 
 <body layout:fragment="content">
-<!-- ##### Header Area Start ##### -->
-
-
-    <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
 
     <div class="right-side-cart-area">
 
         <!-- Cart Button -->
         <div class="cart-button">
-            <a href="#" id="rightSideCart"><img src="../../../../LongLocShop/img/core-img/bag.svg" alt=""> <span>3</span></a>
+            <a href="#" id="rightSideCart"><img src="../img/core-img/bag.svg" alt=""> <span>3</span></a>
         </div>
 
         <div class="cart-content d-flex">
@@ -37,7 +33,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="../../../../LongLocShop/img/product-img/product-1.jpg" class="cart-thumb" alt="">
+                        <img src="../img/product-img/product-1.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -53,7 +49,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="../../../../LongLocShop/img/product-img/product-2.jpg" class="cart-thumb" alt="">
+                        <img src="../img/product-img/product-2.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -69,7 +65,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <img src="../../../../LongLocShop/img/product-img/product-3.jpg" class="cart-thumb" alt="">
+                        <img src="../img/product-img/product-3.jpg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                           <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -267,334 +263,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" id="itemSanpham">
 
                             <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-1.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-11.jpg" alt="">
 
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
 
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">540.000</span> 450.000</p>
 
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-2.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-22.jpg" alt="">
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">320.000</span> 280.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-3.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-33.jpg" alt="">
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge new-badge">
-                                            <span>New</span>
-                                        </div>
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price">450.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-4.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-44.jpg" alt="">
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price">330.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-5.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-55.jpg" alt="">
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-30%</span>
-                                        </div>
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">450.000</span> 390.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-6.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-66.jpg" alt="">
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price">460.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-7.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="img/product-img/product77.jpg" alt="">
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge new-badge">
-                                            <span>New</span>
-                                        </div>
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price">280.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-8.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-88.jpg" alt="">
-                                        
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price">270.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="../../../../LongLocShop/img/product-img/product-9.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="../../../../LongLocShop/img/product-img/product-99.jpg" alt="">
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>topshop</span>
-                                        <a href="../../../../LongLocShop/single-product-details.html">
-                                            <h6>Áo sơ mi nhung tăm</h6>
-                                        </a>
-                                        <p class="product-price">350.000</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">Add to Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                     <!-- Pagination -->
                     <nav aria-label="navigation">
@@ -615,18 +289,73 @@
     <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="../../../../LongLocShop/js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="../../../../LongLocShop/js/popper.min.js"></script>
+    <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="../../../../LongLocShop/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <!-- Plugins js -->
-    <script src="../../../../LongLocShop/js/plugins.js"></script>
+    <script src="js/plugins.js"></script>
     <!-- Classy Nav js -->
-    <script src="../../../../LongLocShop/js/classy-nav.min.js"></script>
+    <script src="js/classy-nav.min.js"></script>
     <!-- Active js -->
-    <script src="../../../../LongLocShop/js/active.js"></script>
+    <script src="js/active.js"></script>
+    <script>
 
+            $(document).ready(function (){
+                // let searchParams = new URLSearchParams(window.location.search)
+                // searchParams.has('id')
+                // let idDanhmuc = searchParams.get('id')
+
+                var htmlContent='';
+                $.ajax({
+                    url: '/api/v1/sanpham/getall',
+                    type: 'GET',
+                    dataType: "json",
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    success: function (response){
+                        response.forEach(function (item , index){
+                            htmlContent +='<div class="col-12 col-sm-6 col-lg-4">\n' +
+                                '                                <div class="single-product-wrapper">\n' +
+                                '                                    <div class="product-img">\n' +
+                                '                                        <img src="'+item.img+'" alt="">\n' +
+                                '                                        <img class="hover-img" src="'+item.img+'" alt="">\n' +
+                                // '                                        <div class="product-badge offer-badge">\n' +
+                                // // '                                            <span>-30%</span>\n' +
+                                // '                                        </div>\n' +
+                                // '                                        <div class="product-favourite">\n' +
+                                // '                                            <a href="#" class="favme fa fa-heart"></a>\n' +
+                                // '                                        </div>\n' +
+                                '                                    </div>\n' +
+                                '                                    <div class="product-description">\n' +
+                                '                                        <span>topshop</span>\n' +
+                                '                                        <a href="/detail?id='+item.idSanpham+'">\n' +
+                                '                                            <h6>Áo sơ mi nhung tăm</h6>\n' +
+                                '                                        </a>\n' +
+                                '                                        <p class="product-price"><span class="old-price">500000</span> 450.000</p>\n' +
+                                '                                        <div class="hover-content">\n' +
+                                '                                            <div class="add-to-cart-btn">\n' +
+                                '                                                <a href="#" onclick="themGioHang('+item.idSanpham+')" class="btn essence-btn">Add to Cart</a>\n' +
+                                '                                            </div>\n' +
+                                '                                        </div>\n' +
+                                '                                    </div>\n' +
+                                '                                </div>\n' +
+                                '                            </div>'
+                            $('#itemSanpham').html(htmlContent)
+                        })
+
+                    },
+                    error: function (err) {
+                        alert("error : "+err.message);
+                    }
+                });
+            })
+
+
+            function themGioHang(id){
+                alert('them thanh cong')
+            }
+    </script>
 </body>
 
 </html>
