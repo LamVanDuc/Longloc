@@ -3,7 +3,6 @@ package com.example.projectsem2.controller.api;
 import com.example.projectsem2.Service.DonHangService;
 import com.example.projectsem2.dto.dtoChiTietDonHang;
 import com.example.projectsem2.dto.responseObject;
-
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,9 +29,9 @@ public class DonHangController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     new responseObject("false" , "Đơn hàng không tồn tại!",""));
 
-        }catch (Exception exx){
+        }catch (Exception ex){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new responseObject("false" , "Đã sảy ra lỗi : "+exx.getMessage(),""));
+                    new responseObject("false" , "Đã sảy ra lỗi : "+ex.getMessage(),""));
         }
     }
 }
