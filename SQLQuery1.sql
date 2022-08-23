@@ -11,7 +11,7 @@ GO--
 GO--
 CREATE TABLE [role](
     id_role BIGINT PRIMARY KEY IDENTITY(1,1),
-	ten_role VARCHAR(50),
+	ten_role VARCHAR(50) UNIQUE,
     ngay_tao DATETIME DEFAULT(GETDATE()),
     ngay_chinh_sua DATETIME,)
 
@@ -24,7 +24,7 @@ GO--
 CREATE TABLE nguoidung
 (
     id_nguoidung   BIGINT PRIMARY KEY IDENTITY(1,1),
-    email          NVARCHAR(120),
+    email          NVARCHAR(120) UNIQUE,
     dien_thoai     NVARCHAR(15),
     password       NVARCHAR(500),
     trang_thai     NVARCHAR(20),
@@ -157,7 +157,7 @@ CREATE TABLE giohang
 (
     id_giohang        BIGINT PRIMARY KEY IDENTITY(1,1),
     id_nguoidung      BIGINT,
-    id_chitietsanpham BIGINT,
+    id_chitietsanpham BIGINT UNIQUE,
     so_luong          INT,
     gia               DECIMAL(15),
 	chot				varchar(50),
