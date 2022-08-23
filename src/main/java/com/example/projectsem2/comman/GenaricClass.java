@@ -1,11 +1,11 @@
 package com.example.projectsem2.comman;
 
 import java.sql.Date;
-
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 
 public class GenaricClass {
+
     public static Long idNguoidung(){
         return 3L;
     }
@@ -28,7 +28,6 @@ public class GenaricClass {
 
         SimpleDateFormat formatterDay = new SimpleDateFormat("dd");
         String day = formatterMonth.format(dateNow);
-
 
         idDonHang="DH"+ year + moth + day +strRandom;
 
