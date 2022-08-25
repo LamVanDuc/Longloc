@@ -43,6 +43,11 @@ public class ApplicationController {
         return "blog";
     }
 
+    @GetMapping("/giohang")
+    public String getGioHang(){
+        return "giohang";
+    }
+
     @GetMapping("/detail")
     public String getProductDetail(){
         return "single-product-details";
