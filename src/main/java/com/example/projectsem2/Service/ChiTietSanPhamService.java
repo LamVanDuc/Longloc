@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ChiTietSanPhamService {
 
-    List<tblChitietsanpham> getByIdSanPham(Long id);
+    List<tblChitietsanpham> findByIdSanPham(Long id);
 
     tblChitietsanpham addChitietsanpham(tblChitietsanpham chitietsanpham);
 

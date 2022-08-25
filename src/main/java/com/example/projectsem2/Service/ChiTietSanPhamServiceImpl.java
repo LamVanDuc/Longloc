@@ -16,7 +16,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService{
     ChiTietSanPhamReponsitory chiTietSanPhamReponsitory;
 
     @Override
-    public List<tblChitietsanpham> getByIdSanPham(Long id) {
+    public List<tblChitietsanpham> findByIdSanPham(Long id) {
         return chiTietSanPhamReponsitory.findByIdSanpham(id);
     }
 

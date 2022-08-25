@@ -30,7 +30,7 @@ public class DonHangController {
                     new responseObject("false" , "Đơn hàng không tồn tại!",""));
 
         }catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new responseObject("false" , "Đã sảy ra lỗi : "+ex.getMessage(),""));
         }
     }

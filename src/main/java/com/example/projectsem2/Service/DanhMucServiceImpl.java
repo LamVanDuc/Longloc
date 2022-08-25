@@ -45,16 +45,21 @@ public class DanhMucServiceImpl implements DanhMucService{
 
     @Override
     public Boolean deleteDanhMuc(Long id) {
-        return null;
+        Boolean exists = danhMucRepository.existsById(id);
+        if (exists){
+            danhMucRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public Optional<tblDanhmuc> optionalGetById(Long id) {
-        return Optional.empty();
+        return danhMucRepository.findById(id);
     }
 
     @Override
     public tblDanhmuc getById(Long id) {
-        return null;
+        return danhMucRepository.findByIdDanhmuc(id);
     }
 }
