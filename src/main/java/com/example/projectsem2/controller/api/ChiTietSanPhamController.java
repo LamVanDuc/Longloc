@@ -16,8 +16,10 @@ public class ChiTietSanPhamController {
     @Autowired
     ChiTietSanPhamService chiTietSanPhamService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/getsanpham/{id}")
     public List<tblChitietsanpham> getByIdSanPham(@PathVariable Long id){
-        return chiTietSanPhamService.getByIdSanPham(id);
+        return chiTietSanPhamService.findByIdSanPham(id);
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.example.projectsem2.comman;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Calendar;
 
 public class GenaricClass {
 
@@ -16,21 +17,31 @@ public class GenaricClass {
 
     public static String idDonHang(){
         String idDonHang;
-        int random = (int) (Math.random()*1000);
-        String strRandom = String.valueOf(random);
-        Date dateNow = (Date) Date.from(Instant.now());
+        Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat formatterYear = new SimpleDateFormat("yy");
-        String year= formatterYear.format(dateNow);
+        String year = String.valueOf(calendar.get(Calendar.YEAR));
+        year = year.substring(2);
 
-        SimpleDateFormat formatterMonth = new SimpleDateFormat("MM");
-        String moth = formatterMonth.format(dateNow);
+        int month = calendar.get(Calendar.MONTH)+1;
 
-        SimpleDateFormat formatterDay = new SimpleDateFormat("dd");
-        String day = formatterMonth.format(dateNow);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        idDonHang="DH"+ year + moth + day +strRandom;
+        String strMonth;
+        if (month >=0 && month <=9){
+            strMonth ="0"+String.valueOf(month);
+        }else {
+            strMonth = String.valueOf(month);
+        }
 
+        String stDay;
+        if (day >=0 && day <=9){
+            stDay ="0"+String.valueOf(day);
+        }else {
+            stDay = String.valueOf(day);
+        }
+        int dandom = (int) (Math.random() * 10000);
+
+        idDonHang="DH"+ year + month + day +"L"+dandom;
         return idDonHang;
     }
 }
