@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout.html}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <!-- Title  -->
+  <title>LongLoc - Shop quần áo thời trang</title>
+
+  <!-- Favicon  -->
+  <link rel="icon" href="img/core-img/favicon.png">
+
+  <!-- Core Style CSS -->
+  <link rel="stylesheet" href="css/core-style.css">
+  <link rel="stylesheet" href="/giohang/thanhtoan.css">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body layout:fragment="content">
+<!-- ##### Right Side Cart Area ##### -->
+<div class="cart-bg-overlay"></div>
+
+<div class="right-side-cart-area">
+
+  <!-- Cart Button -->
+  <div class="cart-button">
+    <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+  </div>
+
+  <div class="cart-content d-flex">
+
+    <!-- Cart List Area -->
+    <div class="cart-list">
+      <!-- Single Cart Item -->
+      <div class="single-cart-item">
+        <a href="#" class="product-image">
+          <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
+          <!-- Cart Item Desc -->
+          <div class="cart-item-desc">
+            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+            <span class="badge">Mango</span>
+            <h6>Button Through Strap Mini Dress</h6>
+            <p class="size">Size: S</p>
+            <p class="color">Color: Red</p>
+            <p class="price">$45.00</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Single Cart Item -->
+      <div class="single-cart-item">
+        <a href="#" class="product-image">
+          <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
+          <!-- Cart Item Desc -->
+          <div class="cart-item-desc">
+            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+            <span class="badge">Mango</span>
+            <h6>Button Through Strap Mini Dress</h6>
+            <p class="size">Size: S</p>
+            <p class="color">Color: Red</p>
+            <p class="price">$45.00</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Single Cart Item -->
+      <div class="single-cart-item">
+        <a href="#" class="product-image">
+          <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
+          <!-- Cart Item Desc -->
+          <div class="cart-item-desc">
+            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+            <span class="badge">Mango</span>
+            <h6>Button Through Strap Mini Dress</h6>
+            <p class="size">Size: S</p>
+            <p class="color">Color: Red</p>
+            <p class="price">$45.00</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="cart-amount-summary">
+
+      <h2>Summary</h2>
+      <ul class="summary-table">
+        <li><span>subtotal:</span> <span>$274.00</span></li>
+        <li><span>delivery:</span> <span>Free</span></li>
+        <li><span>discount:</span> <span>-15%</span></li>
+        <li><span>total:</span> <span>$232.00</span></li>
+      </ul>
+      <div class="checkout-btn mt-100">
+        <a href="checkout.html" class="btn essence-btn">check out</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Right Side Cart End ##### -->
+<!-- ##### Thanh toan Start ##### -->
+<secticon class="thanhtoan">
+  <div class="container">
+    <div class="header-tt">
+      <span><h2><img src="/giohang/img-giohang/thanhtoan.png" alt="" width="50px">| Thanh Toán</h2></span>
+    </div>
+    <div class="diachi" style="background-color: #ddd">
+      <div class="diachi-nd" style="background-color: #fff">
+        <p><strong>Địa chỉ nhận hàng :</strong></p>
+        <p>Địa chỉ</p>
+      </div>
+    </div>
+    <div class="sanpham">
+      <h3 style="text-align: center;padding: 20px">Sản Phẩm</h3>
+      <form action="">
+        <table class="checkout">
+          <thead>
+          <tr>
+            <th>Tên Sản Phẩm</th>
+            <th>Đơn Giá</th>
+            <th>Số Lượng</th>
+            <th>Thành Tiền</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><img src="/img/product-img/product-1.jpg" alt="" style="width: 80px"><span>Sản Phẩm 1</span></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+            <td><input type="number" value="1" min="1" style="width: 31px;outline: none;"></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+          </tr>
+          <tr>
+            <td><img src="/img/product-img/product-2.jpg" alt="" style="width: 80px"><span>Sản Phẩm 2</span></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+          </tr>
+          <tr>
+            <td><img src="/img/product-img/product-3.jpg" alt="" style="width: 80px"><span>Sản Phẩm 3</span></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+          </tr>
+          <tr>
+            <td><img src="/img/product-img/product-4.jpg" alt="" style="width: 80px"><span>Sản Phẩm 4</span></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>
+            <td><span>300.000</span><sup>vnd</sup></td>
+          </tr>
+
+          </tbody>
+        </table>
+        <h4><span>Tổng tiền :</span><span>300.000</span><sup>vnd</sup></h4>
+        <table class="ln-dvvc">
+          <tr>
+            <td>
+            <span class="loinhan" style="">
+              <strong>Lời nhắn :</strong>
+              <input type="text" placeholder="Lưu ý cho người bán !" style="width: 300px;height: 30px;padding-left: 15px;margin-left: 15px">
+            </span>
+            </td>
+            <td>
+              <p><strong>Đơn vị vận chuyển :</strong></p>
+            </td>
+            <td>
+              <p>Nhanh</p>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><p>Nhận hàng vào ngày 29 Th08 - 31 Th08</p></td>
+          </tr>
+        </table>
+
+
+        <div class="thanhtien"><button>Thanh Toán</button></div>
+      </form>
+    </div>
+  </div>
+</secticon>
+<!-- ##### Thanh toan End ##### -->
+
+<!-- ##### Brands Area Start ##### -->
+<div class="brands-area d-flex align-items-center justify-content-between">
+  <!-- Brand Logo -->
+  <div class="single-brands-logo">
+    <img src="img/core-img/brand1.png" alt="">
+  </div>
+  <!-- Brand Logo -->
+  <div class="single-brands-logo">
+    <img src="img/core-img/brand2.png" alt="">
+  </div>
+  <!-- Brand Logo -->
+  <div class="single-brands-logo">
+    <img src="img/core-img/brand3.png" alt="">
+  </div>
+  <!-- Brand Logo -->
+  <div class="single-brands-logo">
+    <img src="img/core-img/brand4.png" alt="">
+  </div>
+  <!-- Brand Logo -->
+  <div class="single-brands-logo">
+    <img src="img/core-img/brand5.png" alt="">
+  </div>
+  <!-- Brand Logo -->
+  <div class="single-brands-logo">
+    <img src="img/core-img/brand6.png" alt="">
+  </div>
+</div>
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/classy-nav.min.js"></script>
+<script src="js/active.js"></script>
+</body>
+
+</html>
