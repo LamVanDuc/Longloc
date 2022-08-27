@@ -3,6 +3,7 @@ package com.example.projectsem2.controller.api;
 import com.example.projectsem2.Service.DonHangService;
 import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
 import com.example.projectsem2.dto.responseObject;
+import com.example.projectsem2.entity.tblDonhang;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +67,17 @@ public class DonHangController {
 
 
 
+    @PostMapping("/add")
+    public ResponseEntity<responseObject> themDonHang(@RequestBody tblDonhang donhang){
+        try{
+            tblDonhang donhang1 = donHangService.themDonHangWithGioHang(donhang);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok" , "đặt hàng thành công" ,donhang1));
+        }catch (Exception ex){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new responseObject("false","đã sảy ra lỗi!",ex.getLocalizedMessage()));
+        }
+    }
     @PostMapping("/huydon/{id}")
     public ResponseEntity<responseObject> huyDonhang(@PathVariable String id){
         Boolean check = donHangService.huyDonhang(id);

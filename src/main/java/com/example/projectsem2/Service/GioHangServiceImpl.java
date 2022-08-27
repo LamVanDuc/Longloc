@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class GioHangServiceImpl implements GioHangService{
 
-    static List<tblGiohang> giohangs = new ArrayList<>();
+    static List<tblGiohang> giohangs = new ArrayList<tblGiohang>();
     @Autowired
     GioHangReponsitory gioHangReponsitory;
     @Autowired

@@ -7,6 +7,7 @@ import com.example.projectsem2.entity.tblGiohang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,6 +54,18 @@ public class GioHangController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new responseObject("false",exception.getMessage(),exception.getLocalizedMessage()));
         }
+    }
+    
+    //mua hang
+    @PostMapping("/muahang")
+    public ResponseEntity<responseObject> muaHang(@RequestBody List<Long> idGiohang){
+      List<tblGiohang> giohangs =  gioHangService.muaGiohang(idGiohang);
+      if (giohangs != null){
+          return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok" , "query thành công", giohangs));
+      }else {
+          return ResponseEntity.status(HttpStatus.OK).body(new responseObject("false" , "đã có lỗi sảy ra !",""));
+      }
+
     }
 
 

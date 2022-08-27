@@ -5,6 +5,7 @@ import com.example.projectsem2.dto.donhang.dtoDonhangAndChitietdonhang;
 import com.example.projectsem2.entity.tblChitietdonhang;
 import com.example.projectsem2.entity.tblDonhang;
 import javassist.NotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public interface DonHangService {
 
     Boolean deleteDonHang(String id);
 
+    @Transactional
     tblDonhang themDonHangWithGioHang(tblDonhang newDonhang) throws RuntimeException;
 
     List<tblChitietdonhang> findChitietdonhangByIddonhang(String idDonhang);
