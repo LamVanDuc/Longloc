@@ -36,6 +36,7 @@ public class tblVoucher {
     @Column(name = "ngay_chinh_sua")
     private Date ngayChinhSua;
 
+
     public long getIdVoucher() {
         return idVoucher;
     }
@@ -120,4 +121,5 @@ public class tblVoucher {
     public int hashCode() {
         return Objects.hash(idVoucher, idNguoidung, ngayBatDau, ngayKetThuc, dieuKien, triGia, noiDung, ngayTao, ngayChinhSua);
     }
+
 }

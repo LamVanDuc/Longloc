@@ -2,6 +2,7 @@ package com.example.projectsem2.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -87,4 +88,5 @@ public class tblDanhmuc {
     public int hashCode() {
         return Objects.hash(idDanhmuc, idDanhmucCha, tenDanhMuc, moTa, ngayTao, ngayChinhSua);
     }
+
 }

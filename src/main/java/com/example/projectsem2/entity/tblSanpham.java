@@ -2,6 +2,7 @@ package com.example.projectsem2.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +12,9 @@ public class tblSanpham {
     @Id
     @Column(name = "id_sanpham")
     private long idSanpham;
+    @Basic
+    @Column(name = "id_sanpham_cha")
+    private Long idSanphamCha;
     @Basic
     @Column(name = "id_nhacungcap")
     private Long idNhacungcap;
@@ -30,11 +34,31 @@ public class tblSanpham {
     @Column(name = "thuong_hieu")
     private String thuongHieu;
     @Basic
+    @Column(name = "gia_ban")
+    private Double giaBan;
+    @Basic
+    @Column(name = "chat_lieu")
+    private String chatLieu;
+    @Basic
+    @Column(name = "phan_loai")
+    private String phanLoai;
+    @Basic
+    @Column(name = "mau_sac")
+    private String mauSac;
+    @Basic
+    @Column(name = "kich_co")
+    private String kichCo;
+    @Basic
+    @Column(name = "so_luong")
+    private Long soLuong;
+    @Basic
     @Column(name = "ngay_tao")
     private Date ngayTao;
     @Basic
     @Column(name = "ngay_chinh_sua")
     private Date ngayChinhSua;
+
+
 
     public long getIdSanpham() {
         return idSanpham;
@@ -92,6 +116,23 @@ public class tblSanpham {
         this.thuongHieu = thuongHieu;
     }
 
+    public Double getGiaBan() {
+        return giaBan;
+    }
+
+
+    public void setGiaBan(Double giaBan) {
+        this.giaBan = giaBan;
+    }
+
+    public String getChatLieu() {
+        return chatLieu;
+    }
+
+    public void setChatLieu(String chatLieu) {
+        this.chatLieu = chatLieu;
+    }
+
     public Date getNgayTao() {
         return ngayTao;
     }
@@ -120,4 +161,45 @@ public class tblSanpham {
     public int hashCode() {
         return Objects.hash(idSanpham, idNhacungcap, idDanhmuc, img, tenSanPham, moTa, thuongHieu, ngayTao, ngayChinhSua);
     }
+
+    public Long getIdSanphamCha() {
+        return idSanphamCha;
+    }
+
+    public void setIdSanphamCha(Long idSanphamCha) {
+        this.idSanphamCha = idSanphamCha;
+    }
+
+    public String getPhanLoai() {
+        return phanLoai;
+    }
+
+    public void setPhanLoai(String phanLoai) {
+        this.phanLoai = phanLoai;
+    }
+
+    public String getMauSac() {
+        return mauSac;
+    }
+
+    public void setMauSac(String mauSac) {
+        this.mauSac = mauSac;
+    }
+
+    public String getKichCo() {
+        return kichCo;
+    }
+
+    public void setKichCo(String kichCo) {
+        this.kichCo = kichCo;
+    }
+
+    public Long getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(Long soLuong) {
+        this.soLuong = soLuong;
+    }
+
 }

@@ -12,7 +12,7 @@ public interface SanPhamService {
 
     Optional<tblSanpham> findByid(Long id);
 
-    tblSanpham addSanpham(tblSanpham sanpham);
+    tblSanpham addSanpham(tblSanpham newSanpham);
 
     tblSanpham updateSanpham(Long id , tblSanpham newSanpham);
 
@@ -21,6 +21,10 @@ public interface SanPhamService {
     Boolean deleteSanpham(Long id);
 
     dtoChiTietSanPham findChitietByIdSanpham(Long id);
+
+    tblSanpham updateSoLuong(Long idSanpham , Long soLuong);
+
+    tblSanpham findSanphamByIdSanphamchaAndMausacAndKichco(tblSanpham sanpham);
 
 
 }

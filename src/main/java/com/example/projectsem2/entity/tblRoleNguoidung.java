@@ -76,4 +76,6 @@ public class tblRoleNguoidung {
     public int hashCode() {
         return Objects.hash(idRoleNguoidung, idNguoidung, idRole, ngayTao, ngayChinhSua);
     }
+
+
 }

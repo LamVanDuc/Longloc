@@ -2,10 +2,8 @@ package com.example.projectsem2.Service;
 
 import com.example.projectsem2.comman.GenaricClass;
 import com.example.projectsem2.dto.dtoGioHangAndChiTietSanPham;
-import com.example.projectsem2.entity.tblChitietsanpham;
 import com.example.projectsem2.entity.tblGiohang;
 import com.example.projectsem2.entity.tblSanpham;
-import com.example.projectsem2.reponsitory.ChiTietSanPhamReponsitory;
 import com.example.projectsem2.reponsitory.GioHangReponsitory;
 import com.example.projectsem2.reponsitory.SanPhamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +16,9 @@ import java.util.Optional;
 @Service
 public class GioHangServiceImpl implements GioHangService{
 
+    static List<tblGiohang> giohangs = new ArrayList<>();
     @Autowired
     GioHangReponsitory gioHangReponsitory;
-    @Autowired
-    ChiTietSanPhamReponsitory chiTietSanPhamReponsitory;
     @Autowired
     SanPhamRepository sanPhamRepository;
 
@@ -30,9 +27,8 @@ public class GioHangServiceImpl implements GioHangService{
         List<dtoGioHangAndChiTietSanPham> find = new ArrayList<>();
         List<tblGiohang> giohangList = gioHangReponsitory.findByIdNguoidung(GenaricClass.idNguoidung());
         for (tblGiohang giohang: giohangList) {
-           tblChitietsanpham chitietsanpham =  chiTietSanPhamReponsitory.findByIdChitietsanpham(giohang.getIdChitietsanpham());
-           tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietsanpham.getIdSanpham());
-           find.add(new dtoGioHangAndChiTietSanPham(giohang , sanpham , chitietsanpham));
+           tblSanpham sanpham = sanPhamRepository.findByIdSanpham(giohang.getIdSanpham());
+           find.add(new dtoGioHangAndChiTietSanPham(giohang , sanpham));
         }
         return  find;
     }
@@ -40,9 +36,10 @@ public class GioHangServiceImpl implements GioHangService{
     @Override
     public tblGiohang addGioHang(tblGiohang newGiohang) throws RuntimeException{
         newGiohang.setIdNguoidung(GenaricClass.idNguoidung());
-        tblChitietsanpham sanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(newGiohang.getIdChitietsanpham());
-        if (gioHangReponsitory.existsByIdChitietsanpham(newGiohang.getIdChitietsanpham())){
-            tblGiohang giohang = gioHangReponsitory.findByIdNguoidungAndIdChitietsanpham(GenaricClass.idNguoidung() , newGiohang.getIdChitietsanpham());
+//        tblChitietsanpham chitietsanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(newGiohang.getIdChitietsanpham());
+        tblSanpham sanpham = sanPhamRepository.findByIdSanpham(newGiohang.getIdSanpham());
+        if (gioHangReponsitory.existsByIdSanpham(newGiohang.getIdSanpham())){
+            tblGiohang giohang = gioHangReponsitory.findByIdNguoidungAndIdSanpham(GenaricClass.idNguoidung() , newGiohang.getIdSanpham());
             giohang.setGia(sanpham.getGiaBan());
             if (sanpham.getSoLuong() >= (giohang.getSoLuong() + newGiohang.getSoLuong())){
                 giohang.setSoLuong(giohang.getSoLuong()+ newGiohang.getSoLuong());
@@ -62,23 +59,21 @@ public class GioHangServiceImpl implements GioHangService{
 
     @Override
     public tblGiohang updateGiohang(Long id,tblGiohang newGiohang) throws RuntimeException{
-        tblChitietsanpham sanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(newGiohang.getIdChitietsanpham());
-        tblGiohang find = gioHangReponsitory.findById(id).map(gh ->{
-            if (sanpham.getSoLuong() >=newGiohang.getSoLuong()){
-                newGiohang.setGia(sanpham.getGiaBan());
+
+        tblGiohang findGiohang = gioHangReponsitory.findByIdGiohang(id);
+        if (findGiohang != null){
+//            tblChitietsanpham chitietsanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(findGiohang.getIdChitietsanpham());
+            tblSanpham sanpham = sanPhamRepository.findByIdSanpham(findGiohang.getIdSanpham());
+            if (sanpham.getSoLuong() >=(newGiohang.getSoLuong()+ findGiohang.getSoLuong())){
+                findGiohang.setGia(sanpham.getGiaBan());
+                findGiohang.setSoLuong(newGiohang.getSoLuong());
                 return gioHangReponsitory.save(newGiohang);
             }else {
                 throw new RuntimeException("Số thêm vào giỏ lớn hơn số lượng sản phẩm có !");
             }
-        }).orElseGet(()->{
-            if (sanpham.getSoLuong() >=newGiohang.getSoLuong()) {
-                newGiohang.setIdGiohang(id);
-                return gioHangReponsitory.save(newGiohang);
-            }else {
-                throw new RuntimeException("Số thêm vào giỏ lớn hơn số lượng sản phẩm có !");
-            }
-        });
-        return find;
+        }else {
+            throw new RuntimeException("Không tìm thấy giỏ hàng !");
+        }
     }
 
     @Override
@@ -100,4 +95,30 @@ public class GioHangServiceImpl implements GioHangService{
             return Optional.empty();
         }
     }
+
+
+    @Override
+    public List<tblGiohang> muaGiohang(List<Long> idGioHang){
+        giohangs.clear();
+        for (Long id : idGioHang){
+            tblGiohang giohang = gioHangReponsitory.findByIdGiohang(id);
+            giohangs.add(giohang);
+        }
+        return giohangs;
+    }
+
+
+    public List<dtoGioHangAndChiTietSanPham> loadDathang() {
+        List<dtoGioHangAndChiTietSanPham> dtoGioHangList = new ArrayList<dtoGioHangAndChiTietSanPham>();
+        dtoGioHangList.clear();
+        for (tblGiohang item: giohangs) {
+//            tblChitietsanpham chitietsanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(item.getIdChitietsanpham());
+            tblSanpham sanpham = sanPhamRepository.findByIdSanpham(item.getIdSanpham());
+            dtoGioHangList.add( new dtoGioHangAndChiTietSanPham(item , sanpham));
+        }
+        return dtoGioHangList;
+    }
+
+
+
 }

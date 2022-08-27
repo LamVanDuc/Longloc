@@ -1,11 +1,21 @@
 package com.example.projectsem2.comman;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
+
 import java.time.Instant;
 import java.util.Calendar;
 
 public class GenaricClass {
+    public static final String TRANGTHAI_dangCho ="Chờ xác nhận";
+    public static final String TRANGTHAI_daXacNhan = "Đã xác nhận";
+
+    public static final String TRANGTHAI_dangGiao ="Đang giao";
+    public static final String TRANGTHAI_giaoKhongThanhCong ="Giao không thành công";
+    public static final String TRANGTHAI_giaoThanhCong ="Giao thành công";
+    public static final String TRANGTHAI_daNhanHang ="Đã nhận hàng";
+
+    public static final String TRANGTHAI_daXoa ="Đơn hàng đã bị xóa";
+    public static final String TRANGTHAI_huydonhang ="Đã hủy";
 
     public static Long idNguoidung(){
         return 3L;
@@ -43,5 +53,13 @@ public class GenaricClass {
 
         idDonHang="DH"+ year + month + day +"L"+dandom;
         return idDonHang;
+    }
+
+
+    public static Date dayLater(int day){
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, + day);
+        Date todate = (Date) cal.getTime();
+        return todate;
     }
 }

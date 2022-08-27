@@ -1,6 +1,7 @@
 package com.example.projectsem2.controller.api;
 
 import com.example.projectsem2.Service.SanPhamService;
+import com.example.projectsem2.dto.dtoChiTietSanPham;
 import com.example.projectsem2.dto.responseObject;
 import com.example.projectsem2.entity.tblSanpham;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,26 @@ public class SanPhamController {
                 new responseObject("false","Sản phẩm không tồn tại",""));
     }
 
+
+    //getdetail
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<responseObject> findDetailsSanPham(@PathVariable Long id){
+        dtoChiTietSanPham chiTietSanPham = sanPhamService.findChitietByIdSanpham(id);
+        return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok","query thành công ",chiTietSanPham));
+    }
+
+    // get size and color
+    @GetMapping ("/getsal")
+    public ResponseEntity<responseObject> findSanphamByIdSanphamchaAndMausacAndKichco(@RequestBody tblSanpham sanpham){
+        tblSanpham tblSanpham = sanPhamService.findSanphamByIdSanphamchaAndMausacAndKichco(sanpham);
+        if (tblSanpham == null){
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok" , "Query Không thành công" , "không có sản phẩm"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new responseObject("ok" , "Query thành công" , tblSanpham));
+    }
+
     //add
     @PostMapping("/add")
     public ResponseEntity<responseObject> themSanpham(@RequestBody tblSanpham sanpham){
@@ -63,4 +84,7 @@ public class SanPhamController {
                     new responseObject("ok" , "xóa sản phẩm không thành công , đã sảy ra lỗi !",checkDelete));
         }
     }
+
+
+
 }
