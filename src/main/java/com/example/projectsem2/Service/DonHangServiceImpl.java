@@ -2,8 +2,6 @@ package com.example.projectsem2.Service;
 
 import com.example.projectsem2.comman.GenaricClass;
 import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
-import com.example.projectsem2.dto.donhang.dtoChiTietDonHangJoin;
-import com.example.projectsem2.dto.donhang.dtoDonhangAndChitietdonhang;
 import com.example.projectsem2.dto.dtoSanphamAndChitietdonhang;
 import com.example.projectsem2.entity.*;
 import com.example.projectsem2.reponsitory.ChiTietDonHangRepository;
@@ -101,19 +99,19 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     @Transactional
     public tblDonhang themDonHangWithGioHang(tblDonhang newDonhang) throws RuntimeException {
-        List<tblGiohang> tblGiohangList = GioHangServiceImpl.giohangs;
-        GioHangServiceImpl.giohangs.clear();
+        List<tblGiohang> tblGiohangList =GioHangServiceImpl.giohangs;
         try{
 
             String idDonhang = GenaricClass.idDonHang();
-            tblDonhang  donhang = donHangRepository.save(new tblDonhang(
+            tblDonhang donhang = new tblDonhang(
                     idDonhang ,
                     GenaricClass.idNguoidung(),
                     newDonhang.getIdDiachigiaohang(),
                     newDonhang.getGhiChu(),
                     GenaricClass.TRANGTHAI_dangCho,
                     GenaricClass.dateTimeNow(),
-                    GenaricClass.dayLater(5)));
+                    GenaricClass.dayLater(5));
+            tblDonhang  responseDonhang = donHangRepository.save(donhang);
 
             for (tblGiohang giohang : tblGiohangList) {
                 //lấy ra sản phẩm giỏ hàng
@@ -140,7 +138,7 @@ public class DonHangServiceImpl implements DonHangService{
                 }
             }
 
-            return donhang;
+            return responseDonhang;
         }catch (Exception ex){
             throw new RuntimeException("đã sảy ra lỗi : "+ex.getMessage());
         }

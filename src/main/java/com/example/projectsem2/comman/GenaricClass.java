@@ -1,6 +1,6 @@
 package com.example.projectsem2.comman;
 
-import java.sql.Date;
+import java.util.Date;
 
 import java.time.Instant;
 import java.util.Calendar;
@@ -22,7 +22,7 @@ public class GenaricClass {
     }
 
     public static Date dateTimeNow(){
-        return  (Date) Date.from(Instant.now());
+        return Date.from(Instant.now());
     }
 
     public static String idDonHang(){
@@ -59,7 +59,7 @@ public class GenaricClass {
     public static Date dayLater(int day){
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, + day);
-        Date todate = (Date) cal.getTime();
+        Date todate = cal.getTime();
         return todate;
     }
 }
