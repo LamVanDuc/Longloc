@@ -47,6 +47,10 @@ public class ApplicationController {
     public String getGioHang(){
         return "giohang";
     }
+    @GetMapping("/thanhtoan")
+    public String getThanhToan(){
+        return "thanhtoan";
+    }
 
     @GetMapping("/detail")
     public String getProductDetail(){
