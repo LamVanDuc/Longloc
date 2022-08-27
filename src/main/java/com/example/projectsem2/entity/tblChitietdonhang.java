@@ -1,11 +1,16 @@
 package com.example.projectsem2.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "chitietdonhang", schema = "dbo", catalog = "clothes")
+@AllArgsConstructor
+@NoArgsConstructor
 public class tblChitietdonhang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -15,20 +20,29 @@ public class tblChitietdonhang {
     @Column(name = "id_donhang")
     private String idDonhang;
     @Basic
-    @Column(name = "id_chitietsanpham")
-    private Long idChitietsanpham;
-    @Basic
     @Column(name = "so_luong")
-    private Integer soLuong;
+    private Long soLuong;
     @Basic
     @Column(name = "gia")
-    private Integer gia;
+    private Double gia;
     @Basic
     @Column(name = "ngay_tao")
     private Date ngayTao;
     @Basic
     @Column(name = "ngay_chinh_sua")
     private Date ngayChinhSua;
+    @Basic
+    @Column(name = "id_sanpham")
+    private Long idSanpham;
+
+
+    public tblChitietdonhang( String idDonhang, Long idSanpham, Long soLuong, Double gia, Date ngayTao) {
+        this.idDonhang = idDonhang;
+        this.idSanpham = idSanpham;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.ngayTao = ngayTao;
+    }
 
     public long getIdChitietdonhang() {
         return idChitietdonhang;
@@ -46,27 +60,19 @@ public class tblChitietdonhang {
         this.idDonhang = idDonhang;
     }
 
-    public Long getIdChitietsanpham() {
-        return idChitietsanpham;
-    }
-
-    public void setIdChitietsanpham(Long idChitietsanpham) {
-        this.idChitietsanpham = idChitietsanpham;
-    }
-
-    public Integer getSoLuong() {
+    public Long getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(Integer soLuong) {
+    public void setSoLuong(Long soLuong) {
         this.soLuong = soLuong;
     }
 
-    public Integer getGia() {
+    public Double getGia() {
         return gia;
     }
 
-    public void setGia(Integer gia) {
+    public void setGia(Double gia) {
         this.gia = gia;
     }
 
@@ -91,11 +97,19 @@ public class tblChitietdonhang {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         tblChitietdonhang that = (tblChitietdonhang) o;
-        return idChitietdonhang == that.idChitietdonhang && Objects.equals(idDonhang, that.idDonhang) && Objects.equals(idChitietsanpham, that.idChitietsanpham) && Objects.equals(soLuong, that.soLuong) && Objects.equals(gia, that.gia) && Objects.equals(ngayTao, that.ngayTao) && Objects.equals(ngayChinhSua, that.ngayChinhSua);
+        return idChitietdonhang == that.idChitietdonhang && Objects.equals(idDonhang, that.idDonhang) && Objects.equals(idSanpham, that.idSanpham) && Objects.equals(soLuong, that.soLuong) && Objects.equals(gia, that.gia) && Objects.equals(ngayTao, that.ngayTao) && Objects.equals(ngayChinhSua, that.ngayChinhSua);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idChitietdonhang, idDonhang, idChitietsanpham, soLuong, gia, ngayTao, ngayChinhSua);
+        return Objects.hash(idChitietdonhang, idDonhang, idSanpham, soLuong, gia, ngayTao, ngayChinhSua);
+    }
+
+    public Long getIdSanpham() {
+        return idSanpham;
+    }
+
+    public void setIdSanpham(Long idSanpham) {
+        this.idSanpham = idSanpham;
     }
 }

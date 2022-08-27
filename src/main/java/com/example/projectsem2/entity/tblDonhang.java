@@ -1,11 +1,17 @@
 package com.example.projectsem2.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "donhang", schema = "dbo", catalog = "clothes")
+@AllArgsConstructor
+@NoArgsConstructor
 public class tblDonhang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -32,6 +38,17 @@ public class tblDonhang {
     @Basic
     @Column(name = "ngay_du_kien_giao_hang")
     private Date ngayDuKienGiaoHang;
+
+
+    public tblDonhang(String idDonhang, Long idNguoidung, Long idDiachigiaohang, String ghiChu, String trangThai, Date ngayTao, Date ngayDuKienGiaoHang) {
+        this.idDonhang = idDonhang;
+        this.idNguoidung = idNguoidung;
+        this.idDiachigiaohang = idDiachigiaohang;
+        this.ghiChu = ghiChu;
+        this.trangThai = trangThai;
+        this.ngayTao = ngayTao;
+        this.ngayDuKienGiaoHang = ngayDuKienGiaoHang;
+    }
 
     public String getIdDonhang() {
         return idDonhang;
@@ -109,4 +126,6 @@ public class tblDonhang {
     public int hashCode() {
         return Objects.hash(idDonhang, idNguoidung, idDiachigiaohang, ghiChu, trangThai, ngayTao, ngayChinhSua, ngayDuKienGiaoHang);
     }
+
+
 }

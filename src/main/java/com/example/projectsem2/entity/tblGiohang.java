@@ -14,17 +14,14 @@ public class tblGiohang {
     @Column(name = "id_nguoidung")
     private Long idNguoidung;
     @Basic
-    @Column(name = "id_chitietsanpham")
-    private Long idChitietsanpham;
-    @Basic
     @Column(name = "so_luong")
-    private Integer soLuong;
+    private Long soLuong;
     @Basic
     @Column(name = "gia")
-    private Integer gia;
+    private Double gia;
     @Basic
-    @Column(name = "chot")
-    private String chot;
+    @Column(name = "id_sanpham")
+    private Long idSanpham;
 
     public long getIdGiohang() {
         return idGiohang;
@@ -42,48 +39,45 @@ public class tblGiohang {
         this.idNguoidung = idNguoidung;
     }
 
-    public Long getIdChitietsanpham() {
-        return idChitietsanpham;
-    }
 
-    public void setIdChitietsanpham(Long idChitietsanpham) {
-        this.idChitietsanpham = idChitietsanpham;
-    }
-
-    public Integer getSoLuong() {
+    public Long getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(Integer soLuong) {
+
+    public void setSoLuong(Long soLuong) {
         this.soLuong = soLuong;
     }
 
-    public Integer getGia() {
+    public Double getGia() {
         return gia;
     }
 
-    public void setGia(Integer gia) {
+
+    public void setGia(Double gia) {
         this.gia = gia;
     }
 
-    public String getChot() {
-        return chot;
-    }
 
-    public void setChot(String chot) {
-        this.chot = chot;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         tblGiohang that = (tblGiohang) o;
-        return idGiohang == that.idGiohang && Objects.equals(idNguoidung, that.idNguoidung) && Objects.equals(idChitietsanpham, that.idChitietsanpham) && Objects.equals(soLuong, that.soLuong) && Objects.equals(gia, that.gia) && Objects.equals(chot, that.chot);
+        return idGiohang == that.idGiohang && Objects.equals(idNguoidung, that.idNguoidung) && Objects.equals(soLuong, that.soLuong) && Objects.equals(gia, that.gia);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idGiohang, idNguoidung, idChitietsanpham, soLuong, gia, chot);
+        return Objects.hash(idGiohang, idNguoidung, soLuong, gia);
+    }
+
+    public Long getIdSanpham() {
+        return idSanpham;
+    }
+
+    public void setIdSanpham(Long idSanpham) {
+        this.idSanpham = idSanpham;
     }
 }

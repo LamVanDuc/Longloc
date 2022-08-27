@@ -1,6 +1,7 @@
 package com.example.projectsem2.Service;
 
-import com.example.projectsem2.dto.dtoChiTietDonHang;
+import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
+import com.example.projectsem2.dto.donhang.dtoDonhangAndChitietdonhang;
 import com.example.projectsem2.entity.tblChitietdonhang;
 import com.example.projectsem2.entity.tblDonhang;
 import javassist.NotFoundException;
@@ -13,7 +14,7 @@ public interface DonHangService {
 
     dtoChiTietDonHang getByIdDonHang(String id) throws NotFoundException;
 
-    tblDonhang findDonhangByIdDonHang(String id);
+    Optional<tblDonhang> findDonhangByIdDonHang(String id);
 
     List<tblDonhang> getAll();
 
@@ -23,7 +24,7 @@ public interface DonHangService {
 
     tblDonhang themDonHangWithGioHang(tblDonhang newDonhang) throws RuntimeException;
 
-    List<tblChitietdonhang> findByChitietDonhang(Long idChitietdonhang);
+    List<tblChitietdonhang> findChitietdonhangByIddonhang(String idDonhang);
 
 
     List<dtoChiTietDonHang> findAllTrangthaiDaNhan();
@@ -40,10 +41,10 @@ public interface DonHangService {
     List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiHuydonhang();
 
 
-    List<dtoChiTietDonHang> findAllDonHangUser();
+    List<dtoChiTietDonHang> findAllDonHangByNguoidung();
     List<dtoChiTietDonHang> findAllDonHang();
 
-    boolean daNhanHang(String id);
+    boolean nhanGiaoDonhang(String id);
 
 
     boolean duyetDonhang(String id);

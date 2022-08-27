@@ -17,5 +17,12 @@ public interface GioHangService {
 
     Optional<tblGiohang> getById(Long id);
 
+    List<tblGiohang> muaGiohang(List<Long> idGioHang);
+
+
+    List<dtoGioHangAndChiTietSanPham> loadDathang();
+
+
+
 
 }

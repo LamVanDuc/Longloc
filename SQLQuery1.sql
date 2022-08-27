@@ -113,12 +113,19 @@ CREATE TABLE nhacungcap
 CREATE TABLE sanpham
 (
     id_sanpham     BIGINT IDENTITY(1,1) PRIMARY KEY,
+	id_sanpham_cha BIGINT,
     id_nhacungcap  BIGINT,
     id_danhmuc     BIGINT,
 	img			varchar(500) ,
 	ten_san_pham NVARCHAR(255),
-	mo_ta NTEXT,
+	mo_ta NTEXT, 
 	thuong_hieu NVARCHAR(50),
+	gia_ban DECIMAL(15),
+	chat_lieu NVARCHAR(100),
+	phan_loai NVARCHAR(50),
+	mau_sac NVARCHAR(50),
+	kich_co VARCHAR(10),
+	so_luong INT,
     ngay_tao          DATETIME DEFAULT (GETDATE()),
     ngay_chinh_sua    DATETIME,
 
@@ -126,29 +133,14 @@ CREATE TABLE sanpham
     CONSTRAINT FK_NHACUNGCAP FOREIGN KEY (id_nhacungcap) REFERENCES nhacungcap (id_nhacungcap),
 )
 
-GO--
-CREATE TABLE chitietsanpham(
-id_chitietsanpham BIGINT PRIMARY KEY IDENTITY(1,1),
-id_sanpham BIGINT,
-phan_loai NVARCHAR(50),
-mau_sac NVARCHAR(50),
-kich_co VARCHAR(10),
-chat_lieu NVARCHAR(100),
-so_luong INT,
-gia_ban DECIMAL(15),
-ngay_tao DATETIME DEFAULT(GETDATE()),
-ngay_chinh_sua DATETIME,
-CONSTRAINT FK_SANPHAM_CHITIETSANPHAM FOREIGN KEY (id_sanpham) REFERENCES sanpham (id_sanpham),
-)
-
 -- TABLE IMAGE
 GO--
 CREATE TABLE [image]
 (
     id_image          BIGINT PRIMARY KEY IDENTITY(1,1),
-    id_chitietsanpham BIGINT ,
+    id_sanpham BIGINT ,
     ten_anh           VARCHAR(150),
-    CONSTRAINT FK_CHITIETSANPAM_IMG FOREIGN KEY (id_chitietsanpham) REFERENCES chitietsanpham (id_chitietsanpham),
+    CONSTRAINT FK_SANPAM_IMG FOREIGN KEY (id_sanpham) REFERENCES sanpham (id_sanpham),
 )
 
 --TABLE GIO HANG 
@@ -157,12 +149,12 @@ CREATE TABLE giohang
 (
     id_giohang        BIGINT PRIMARY KEY IDENTITY(1,1),
     id_nguoidung      BIGINT,
-    id_chitietsanpham BIGINT UNIQUE,
+    id_sanpham		 BIGINT,
     so_luong          INT,
     gia               DECIMAL(15),
 	chot				varchar(50),
     CONSTRAINT FK_NGUOIDUNG_GIOHANG FOREIGN KEY (id_nguoidung) REFERENCES nguoidung (id_nguoidung),
-    CONSTRAINT FK_GIOHANG_NGUOIDUNG FOREIGN KEY (id_chitietsanpham) REFERENCES chitietsanpham (id_chitietsanpham),
+    CONSTRAINT FK_GIOHANG_NGUOIDUNG FOREIGN KEY (id_sanpham) REFERENCES sanpham (id_sanpham),
 )
 
 --TABLE DON HANG
@@ -186,13 +178,13 @@ CREATE TABLE chitietdonhang
 (
     id_chitietdonhang BIGINT PRIMARY KEY IDENTITY(1,1),
 	id_donhang        VARCHAR(50),
-    id_chitietsanpham BIGINT,
+    id_sanpham			 BIGINT,
     so_luong          INT,
     gia               DECIMAL(15),
     ngay_tao          DATETIME DEFAULT (GETDATE()),
     ngay_chinh_sua    DATETIME,
-    CONSTRAINT FK_CHITIETSANPAM_CHITIETDONHANG FOREIGN KEY (id_chitietsanpham) REFERENCES chitietsanpham (id_chitietsanpham),
-	CONSTRAINT FK_CHITIETSANPAM_DONHANG FOREIGN KEY (id_donhang) REFERENCES donhang (id_donhang),
+    CONSTRAINT FK_SANPAM_CHITIETDONHANG FOREIGN KEY (id_sanpham) REFERENCES sanpham (id_sanpham),
+	CONSTRAINT FK_CHITIETDONHANG_DONHANG FOREIGN KEY (id_donhang) REFERENCES donhang (id_donhang),
 )
 
 
