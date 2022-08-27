@@ -1,6 +1,8 @@
 package com.example.projectsem2.controller.api;
 
 import com.example.projectsem2.Service.DanhMucService;
+import com.example.projectsem2.dto.danhmuc.dtoDanhmuc;
+import com.example.projectsem2.dto.danhmuc.dtoDanhmucAndSanpham;
 import com.example.projectsem2.dto.responseObject;
 import com.example.projectsem2.entity.tblDanhmuc;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,28 @@ public class DanhMucController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 new responseObject("false"," query không thành công",""));
+    }
+
+    // danh muc cha and danh muc con.
+
+    @GetMapping("/get")
+    public List<dtoDanhmuc> findDanhmucByDanhmucha(){
+        List<dtoDanhmuc> dtoDanhmucs = danhMucService.findDanhmucConByDanhmucCha();
+            return  dtoDanhmucs;
+    }
+
+
+    @GetMapping("filter/{name}")
+    public ResponseEntity<responseObject> getSanphamByDanhmuc(@PathVariable String name){
+        dtoDanhmucAndSanpham dtoDanhmucAndSanpham = danhMucService.findSanphamByDanhmuc(name);
+
+        if (dtoDanhmucAndSanpham!= null){
+             return ResponseEntity.status(HttpStatus.OK).body(
+                     new responseObject("ok","query thành công",dtoDanhmucAndSanpham));
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new responseObject("ok","đã sảy ra lỗi",""));
+        }
     }
 
     // thêm danh mục

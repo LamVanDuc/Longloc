@@ -1,5 +1,7 @@
 package com.example.projectsem2.Service;
 
+import com.example.projectsem2.dto.danhmuc.dtoDanhmuc;
+import com.example.projectsem2.dto.danhmuc.dtoDanhmucAndSanpham;
 import com.example.projectsem2.entity.tblDanhmuc;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,12 @@ public interface DanhMucService {
     Optional<tblDanhmuc> optionalGetById(Long id);
 
     tblDanhmuc getById(Long id);
+
+    List<dtoDanhmuc> findDanhmucConByDanhmucCha();
+
+    dtoDanhmucAndSanpham findSanphamByDanhmuc(String name);
+
+
 
 
 }

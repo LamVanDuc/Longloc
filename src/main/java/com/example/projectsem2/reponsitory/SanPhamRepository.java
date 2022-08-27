@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface SanPhamRepository extends JpaRepository<tblSanpham ,Long> {
+
+
     tblSanpham findByIdSanpham(Long id);
 
 
@@ -19,7 +21,9 @@ public interface SanPhamRepository extends JpaRepository<tblSanpham ,Long> {
     @Query("select t from tblSanpham t where t.idSanphamCha = ?1")
     List<tblSanpham> findByIdSanphamCha(Long id);
 
+
     tblSanpham findByIdSanphamChaAndMauSacAndKichCo(Long idSanpham , String mausac , String kichco);
 
 
+    List<tblSanpham> findByIdDanhmucAndIdSanphamChaIsNull(Long id);
 }
