@@ -107,5 +107,23 @@
     padding-top: 12px;
 }
 
+button[name="btn"] {
+    height: 50px ;
+    color: red ;
+    text-decoration-line:underline ;
+    background-color: white ;
+    border: none
+}
 
+button[name="btn"]:focus-visible{
+    outline: none;
+}
+button[name="btn"]:focus{
+    outline: none;
+}
+
+input[name=radio-diachi]{
+    width: 25px;
+    height: 25px;
+}
 

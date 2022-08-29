@@ -24,11 +24,22 @@ public class tblDiachigiaohang {
     @Column(name = "dien_thoai")
     private String dienThoai;
     @Basic
+    @Column(name = "mac_dinh")
+    private String macDinh;
+    @Basic
     @Column(name = "ngay_tao")
     private Date ngayTao;
     @Basic
     @Column(name = "ngay_chinh_sua")
     private Date ngayChinhSua;
+
+    public String getMacDinh() {
+        return macDinh;
+    }
+
+    public void setMacDinh(String macDinh) {
+        this.macDinh = macDinh;
+    }
 
     public long getIdDiachigiaohang() {
         return idDiachigiaohang;

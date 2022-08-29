@@ -24,7 +24,7 @@
 <body layout:fragment="content">
 
 <!--cart start-->
-<secticon class="giohang">
+<secticon class="giohang container">
     <h2><img src="giohang/img-giohang/icongiohang-1.png" alt="" style="width: 90px">| Giỏ Hàng</h2>
     <form action="">
         <table>
@@ -51,7 +51,9 @@
 <!--            </tr>-->
             </tbody>
         </table>
-        <button type="button" id="thanhtoan">Thanh Toán</button>
+        <div class="thanhtien d-flex justify-content-end container" >
+            <button type="button" class=btn"" id="button-dathang" style="height: 50px" onclick="datHang()">Mua hàng</button>
+        </div>
     </form>
 </secticon>
 <!--cart end-->
@@ -68,6 +70,7 @@
 <script src="js/classy-nav.min.js"></script>
 <!-- Active js -->
 <script src="js/active.js"></script>
+<script src="js/main.js"></script>
 <script>
     function toggle(source) {
         var checkboxes =document.querySelectorAll('input[type="checkbox"]')
@@ -77,9 +80,11 @@
                 checkboxes[i].checked = source.checked;
             }
         }
+        addItem();
     }
 
     $(document).ready(function (){
+        $('#button-dathang').hide();
         // let searchParams = new URLSearchParams(window.location.search)
         // searchParams.has('id')
         // let idDanhmuc = searchParams.get('id')
@@ -92,19 +97,19 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function (response){
 
-
+                console.log(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(100));
                 response.data.forEach(function (item,index){
                     var thanhtien = 0;
                     thanhtien = parseInt(item.giohang.soLuong) * parseInt(item.sanpham.giaBan);
                     htmlContent +='<tr>\n' +
-                        '                    <td><input type="checkbox"></td>\n' +
-                        '                    <td><img src="'+item.sanpham.img+'" alt="" style="width: 50px">' +
-                        '                        <span>San pham 1</span></td>' +
+                        '                    <td><input type="checkbox" value="'+item.giohang.idGiohang+'" class="checkboxItem" onchange="addItem()"></td>\n' +
+                        '                    <td><img src="'+item.sanpham.img+'" alt="" style="width: 50px; height: 65px">' +
+                        '                        <span>'+formatTenSanPham(item.sanpham.tenSanPham)+'</span></td>' +
                         '                        <td><span>'+item.sanpham.kichCo+'</span></td>' +
                         '                       <td> <span>'+item.sanpham.mauSac+'</span></td>\n' +
-                        '                    <td><span>'+item.sanpham.giaBan+'</span><sup>vnd</sup></td>\n' +
-                        '                    <td><input type="number" name="soluong'+item.giohang.idGiohang+'" onblur="updateGioHang('+item.giohang.idGiohang+')" value="'+item.giohang.soLuong+'" min="1" style="width: 50px;outline: none;" id="xoa"></td>\n' +
-                        '                    <td><span>'+thanhtien+'</span><sup>vnd</sup></td>\n' +
+                        '                    <td><span>'+formatMoney(item.sanpham.giaBan)+'</span></td>\n' +
+                        '                    <td><input type="number" id="'+index+'" name="soluong'+item.giohang.idGiohang+'"  onblur="updateGioHang('+item.giohang.idGiohang+','+index+')" value="'+item.giohang.soLuong+'" min="0" style="width: 50px;outline: none;"></td>\n' +
+                        '                    <td><span>'+formatMoney(thanhtien)+'</span></td>\n' +
                         '                    <td><button type="button" onclick="xoaGioHang('+item.giohang.idGiohang+')">Xóa</button></td>\n' +
                         '            </tr>'
 
@@ -151,36 +156,90 @@
 
     }
 
-    function updateGioHang(id) {
+    function updateGioHang(id , index) {
 
         var requestData = {
-            soLuong: $('input[name=soluong' + id + ']').val()
+            // soLuong: $('input[id=soluong' + id + ']').val()
+            soLuong: $('input[id='+index+']').val()
         }
-        //,jQuery.param({id:id})
+        if (requestData.soLuong <=0){
+            if (window.confirm("Bạn có chắc muốn bỏ sản phẩm này ?")){
+                xoaGioHang(id);
+            }
+        }
+        else {
+            //,jQuery.param({id:id})
+            $.ajax({
+                url: "/api/v1/giohang/" + id,
+                type: 'PUT',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(requestData),
+                // headers: {
+                //     "Content-Type": "application/json",
+                //     "Accept": "application/json",
+                //     "Authorization": "Bearer " + jwt
+                // },
+                success: function (respon) {
+                    location.reload();
+                },
+                error: function (error) {
+                    if (error.message === undefined) {
+                        alert(error.responseJSON.message)
+                    } else {
+                        alert(error.message +" : "+error.data);
+                    }
+                }
+            })
+            event.preventDefault();
+        }
+
+    }
+
+
+
+    var Itemgiohang = [];
+    function addItem(){
+
+        $('.checkboxItem').each(function (index ,item ){
+            if(item.checked == true){
+                if ((jQuery.inArray(parseInt(item.value),Itemgiohang))<0){
+                    Itemgiohang.push(parseInt(item.value));
+                }
+            }else {
+                if ((jQuery.inArray(parseInt(item.value),Itemgiohang))>=0){
+                    Itemgiohang.splice($.inArray(parseInt(item.value), Itemgiohang), 1);
+                }
+            }
+            if (Itemgiohang.length >0){
+                $('#button-dathang').show();
+            }else {
+                $('#button-dathang').hide();
+            }
+        });
+    }
+
+    function datHang(){
+        var data = Itemgiohang
         $.ajax({
-            url: "/api/v1/giohang/" + id,
-            type: 'PUT',
+            url:"/api/v1/giohang/dathang",
+            type: 'POST',
             dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(requestData),
-            // headers: {
-            //     "Content-Type": "application/json",
-            //     "Accept": "application/json",
-            //     "Authorization": "Bearer " + jwt
-            // },
-            success: function (respon) {
-                location.reload();
+            contentType:'application/json',
+            data:JSON.stringify(data),
+            success:function (respon){
+                location.href ="/thanhtoan"
             },
-            error: function (error) {
-                if (error.message === undefined) {
+            error:function (error){
+                if(error.message === undefined){
                     alert(error.responseJSON.message)
-                } else {
-                    alert(error.message +" : "+error.data);
+                }else {
+                    alert(error.message);
                 }
             }
         })
-        event.preventDefault();
     }
+
 </script>
 
 </body>

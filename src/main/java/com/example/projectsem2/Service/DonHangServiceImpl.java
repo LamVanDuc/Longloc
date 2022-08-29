@@ -101,13 +101,18 @@ public class DonHangServiceImpl implements DonHangService{
     public tblDonhang themDonHangWithGioHang(tblDonhang newDonhang) throws RuntimeException {
         List<tblGiohang> tblGiohangList =GioHangServiceImpl.giohangs;
         try{
-
+            String ghitru;
             String idDonhang = GenaricClass.idDonHang();
+            if (newDonhang.getGhiChu().isEmpty()){
+                ghitru = "Không có ghi trú";
+            }else {
+                ghitru = newDonhang.getGhiChu();
+            }
             tblDonhang donhang = new tblDonhang(
                     idDonhang ,
                     GenaricClass.idNguoidung(),
                     newDonhang.getIdDiachigiaohang(),
-                    newDonhang.getGhiChu(),
+                   ghitru,
                     GenaricClass.TRANGTHAI_dangCho,
                     GenaricClass.dateTimeNow(),
                     GenaricClass.dayLater(5));

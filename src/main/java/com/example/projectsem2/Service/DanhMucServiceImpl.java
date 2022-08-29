@@ -16,11 +16,13 @@ import java.util.Optional;
 @Service
 public class DanhMucServiceImpl implements DanhMucService{
 
+
     @Autowired
     DanhMucRepository danhMucRepository;
 
     @Autowired
     SanPhamRepository sanPhamRepository;
+
 
     @Override
     public List<tblDanhmuc> getAll() {
