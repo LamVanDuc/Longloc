@@ -32,13 +32,13 @@
     <div class="diachi" style="background-color: #ddd">
       <div class="diachi-nd" id="diachigiaohang" style="background-color: #fff">
         <h5><strong>Địa chỉ nhận hàng</strong></h5>
-        <div class="d-flex justify-content-between h6">
+        <div class="d-flex align-items-center justify-content-between h6">
             <div>
               <strong name="tenNguoiNhan"></strong>
               <strong class="ml-2 mr-5" name="soDienThoai"></strong>
               <span name="diaChiGiaoHang"></span>
             </div>
-            <div >
+            <div class="ml-5">
               <button type="button" id="thaydoidiachigiaohang" name="btn" data-toggle="modal" data-target="#changeAdress" class="h6" >Thay đổi</button>
             </div>
         </div>
@@ -105,7 +105,7 @@
 <!-- model bootStrap-->
 
 
-<!-- Modal -->
+<!-- Modal show all-->
 <div class="modal fade" id="changeAdress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -119,6 +119,9 @@
           <div id="showAllDiachigiaohang">
 
           </div>
+          <div>
+              <button type="button"  data-toggle="modal" data-target="#addAdress" data-dismiss="modal" class=" btn h5"> +Thêm địa chỉ</button>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -127,8 +130,36 @@
     </div>
   </div>
 </div>
-
-
+<!-- Modal Add  -->
+<div class="modal fade" id="addAdress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật địa chỉ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <div class="mr-3 ">
+                        <input type="text" style="width: 225px; padding-left: 5px" id="add-diachigiaohang-name" placeholder="tên người nhận">
+                    </div>
+                    <div>
+                        <input type="number" style="width: 225px; padding-left: 5px" id="add-diachigiaohang-phonenumber" placeholder="điện thoại">
+                    </div>
+                </div>
+                <div class="d-flex my-5">
+                    <textarea style="padding-left: 5px" id="add-diachigiaohang-diachi" class="w-100" placeholder="Địa chỉ giao hàng cụ thể"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#changeAdress" data-dismiss="modal">Trở lại</button>
+                <button type="button" class="btn btn-primary"   onclick="addAdress()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal Update -->
 <div class="modal fade" id="updateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -342,31 +373,31 @@ $('#thaydoidiachigiaohang').click(function (){
   });
 })
 
-// function changeDiachigiaohang(){
-//     $('input[name=radio-diachi]').each(function (index ,item){
-//         if(item.checked == true){
-//             idDiaChiGiaoHang = parseInt(item.value);
-//         }
-//     });
-//     // /change/{id}
-//     $.ajax({
-//         url: '/api/v1/diachigiaohang/change/'+id_DiaChiGiaoHang,
-//         type: 'POST',
-//         dataType: "json",
-//         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-//         success: function (response){
-//             window.location.reload();
-//         },
-//         error: function (err) {
-//             if (err.message != undefined){
-//                 alert("error : "+err.message);
-//             }else {
-//                 alert("Error : "+err.responseJSON.message)
-//             }
-//
-//         }
-//     });
-// }
+function changeDiachigiaohang(){
+    $('input[name=radio-diachi]').each(function (index ,item){
+        if(item.checked == true){
+            idDiaChiGiaoHang = parseInt(item.value);
+        }
+    });
+    // /change/{id}
+    $.ajax({
+        url: '/api/v1/diachigiaohang/change/'+id_DiaChiGiaoHang,
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        success: function (response){
+            window.location.reload();
+        },
+        error: function (err) {
+            if (err.message != undefined){
+                alert("error : "+err.message);
+            }else {
+                alert("Error : "+err.responseJSON.message)
+            }
+
+        }
+    });
+}
 
 function updateDiaChiGiaoHang(){
 
@@ -422,6 +453,36 @@ function showDiaChiGiaoHang(id){
 
 }
 
+
+function addAdress(){
+      var requestBody = {
+          tenNguoiNhan: $("#add-diachigiaohang-name").val(),
+          diaChi: $("#add-diachigiaohang-diachi").val(),
+          dienThoai: $("#add-diachigiaohang-phonenumber").val(),
+      }
+
+    $.ajax({
+        url: '/api/v1/diachigiaohang/add',
+        type: 'Post',
+        dataType: "json",
+        contentType: 'application/json',
+        Accept:'application/json',
+        data:JSON.stringify(requestBody),
+        success: function (response){
+            $('#modal').modal('show');
+        },
+        error: function (err) {
+            if (err.message != undefined){
+                alert("error : "+err.message);
+            }else {
+                alert("Error : "+err.responseJSON.message)
+            }
+
+        }
+    });
+
+
+}
 </script>
 </body>
 

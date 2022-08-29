@@ -33,13 +33,7 @@ public class tblDiachigiaohang {
     @Column(name = "ngay_chinh_sua")
     private Date ngayChinhSua;
 
-    public String getMacDinh() {
-        return macDinh;
-    }
 
-    public void setMacDinh(String macDinh) {
-        this.macDinh = macDinh;
-    }
 
     public long getIdDiachigiaohang() {
         return idDiachigiaohang;
@@ -92,10 +86,18 @@ public class tblDiachigiaohang {
     public Date getNgayChinhSua() {
         return ngayChinhSua;
     }
+    public String getMacDinh() {
+        return macDinh;
+    }
+
+    public void setMacDinh(String macDinh) {
+        this.macDinh = macDinh;
+    }
 
     public void setNgayChinhSua(Date ngayChinhSua) {
         this.ngayChinhSua = ngayChinhSua;
     }
+
 
     @Override
     public boolean equals(Object o) {

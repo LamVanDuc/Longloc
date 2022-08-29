@@ -4,11 +4,12 @@ import com.example.projectsem2.Service.DiaChiGiaoHangService;
 import com.example.projectsem2.dto.responseObject;
 import com.example.projectsem2.entity.tblDiachigiaohang;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,8 +54,8 @@ public class DiaChiGiaoHangController {
         }
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<responseObject> add(@RequestBody tblDiachigiaohang diachigiaohang){
+    @PostMapping(value ="/add")
+    public ResponseEntity<responseObject> add(@Valid @RequestBody tblDiachigiaohang diachigiaohang){
         try {
             tblDiachigiaohang diachigiaohang1 = diaChiGiaoHangService.add(diachigiaohang);
             if (diachigiaohang != null){
@@ -89,7 +90,6 @@ public class DiaChiGiaoHangController {
         }
 
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<responseObject> update(@PathVariable Long id, @RequestBody tblDiachigiaohang diachigiaohang){

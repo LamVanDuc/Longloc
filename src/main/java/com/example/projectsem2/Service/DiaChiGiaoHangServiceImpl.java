@@ -39,15 +39,24 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
 
     @Override
     public tblDiachigiaohang changeDiaChiGiaoHang(Long id) throws RuntimeException{
+
         try{
+            tblDiachigiaohang find = diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
+            tblDiachigiaohang diachigiaohang1 = diaChiGiaoHangReponsitory.findById(find.getIdDiachigiaohang()).map(dc1->{
+                dc1.setMacDinh(GenaricClass.MACDINH_false);
+                return  diaChiGiaoHangReponsitory.save(dc1);
+            }).orElseGet(()->{
+                throw new RuntimeException("đã sảy ra lỗi , update trạng thái false không thành công");
+            });
+
+            tblDiachigiaohang tblDiachigiaohang = diachigiaohang1;
+
             tblDiachigiaohang diachigiaohang = diaChiGiaoHangReponsitory.findById(id).map(dc->{
                 dc.setMacDinh(GenaricClass.MACDINH_true);
                 return diaChiGiaoHangReponsitory.save(dc);
             }).orElseGet(()->{
                 throw new RuntimeException("đã xảy ra lỗi , update trạng thái true không thành công .");
             });
-
-            tblDiachigiaohang tblDiachigiaohang = changeDiachigiaohang2();
 
             return diachigiaohang;
         }catch (Exception e){
@@ -56,16 +65,6 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
 
     }
 
-    public tblDiachigiaohang changeDiachigiaohang2() throws RuntimeException{
-        tblDiachigiaohang find = diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
-        tblDiachigiaohang diachigiaohang = diaChiGiaoHangReponsitory.findById(find.getIdDiachigiaohang()).map(dc->{
-            dc.setMacDinh(GenaricClass.MACDINH_false);
-            return  diaChiGiaoHangReponsitory.save(dc);
-        }).orElseGet(()->{
-            throw new RuntimeException("đã sảy ra lỗi , update trạng thái false không thành công");
-        });
-        return diachigiaohang;
-    }
 
     @Override
     public tblDiachigiaohang add(tblDiachigiaohang diachigiaohang) {
