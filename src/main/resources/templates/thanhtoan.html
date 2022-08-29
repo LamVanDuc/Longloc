@@ -10,7 +10,7 @@
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title  -->
-  <title>LongLoc - Shop quần áo thời trang</title>
+  <title>LongLoc | Đặt hàng</title>
 
   <!-- Favicon  -->
   <link rel="icon" href="img/core-img/favicon.png">
@@ -23,86 +23,6 @@
 </head>
 
 <body layout:fragment="content">
-<!-- ##### Right Side Cart Area ##### -->
-<div class="cart-bg-overlay"></div>
-
-<div class="right-side-cart-area">
-
-  <!-- Cart Button -->
-  <div class="cart-button">
-    <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
-  </div>
-
-  <div class="cart-content d-flex">
-
-    <!-- Cart List Area -->
-    <div class="cart-list">
-      <!-- Single Cart Item -->
-      <div class="single-cart-item">
-        <a href="#" class="product-image">
-          <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
-          <!-- Cart Item Desc -->
-          <div class="cart-item-desc">
-            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-            <span class="badge">Mango</span>
-            <h6>Button Through Strap Mini Dress</h6>
-            <p class="size">Size: S</p>
-            <p class="color">Color: Red</p>
-            <p class="price">$45.00</p>
-          </div>
-        </a>
-      </div>
-
-      <!-- Single Cart Item -->
-      <div class="single-cart-item">
-        <a href="#" class="product-image">
-          <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
-          <!-- Cart Item Desc -->
-          <div class="cart-item-desc">
-            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-            <span class="badge">Mango</span>
-            <h6>Button Through Strap Mini Dress</h6>
-            <p class="size">Size: S</p>
-            <p class="color">Color: Red</p>
-            <p class="price">$45.00</p>
-          </div>
-        </a>
-      </div>
-
-      <!-- Single Cart Item -->
-      <div class="single-cart-item">
-        <a href="#" class="product-image">
-          <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
-          <!-- Cart Item Desc -->
-          <div class="cart-item-desc">
-            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-            <span class="badge">Mango</span>
-            <h6>Button Through Strap Mini Dress</h6>
-            <p class="size">Size: S</p>
-            <p class="color">Color: Red</p>
-            <p class="price">$45.00</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- Cart Summary -->
-    <div class="cart-amount-summary">
-
-      <h2>Summary</h2>
-      <ul class="summary-table">
-        <li><span>subtotal:</span> <span>$274.00</span></li>
-        <li><span>delivery:</span> <span>Free</span></li>
-        <li><span>discount:</span> <span>-15%</span></li>
-        <li><span>total:</span> <span>$232.00</span></li>
-      </ul>
-      <div class="checkout-btn mt-100">
-        <a href="checkout.html" class="btn essence-btn">check out</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ##### Right Side Cart End ##### -->
 <!-- ##### Thanh toan Start ##### -->
 <secticon class="thanhtoan">
   <div class="container">
@@ -110,10 +30,27 @@
       <span><h2><img src="/giohang/img-giohang/thanhtoan.png" alt="" width="50px">| Thanh Toán</h2></span>
     </div>
     <div class="diachi" style="background-color: #ddd">
-      <div class="diachi-nd" style="background-color: #fff">
-        <p><strong>Địa chỉ nhận hàng :</strong></p>
-        <p>Địa chỉ</p>
+      <div class="diachi-nd" id="diachigiaohang" style="background-color: #fff">
+        <h5><strong>Địa chỉ nhận hàng</strong></h5>
+        <div class="d-flex justify-content-between h6">
+            <div>
+              <strong name="tenNguoiNhan"></strong>
+              <strong class="ml-2 mr-5" name="soDienThoai"></strong>
+              <span name="diaChiGiaoHang"></span>
+            </div>
+            <div >
+              <button type="button" id="thaydoidiachigiaohang" name="btn" data-toggle="modal" data-target="#changeAdress" class="h6" >Thay đổi</button>
+            </div>
+        </div>
       </div>
+    </div>
+    <div class="my-3" style="height: 100px">
+        <div>
+            <label><strong>Ghi chú :</strong></label>
+        </div>
+        <div>
+            <textarea id="ghichu" type="text" class="w-100" style="height: 100px;" placeholder="Nhập ghi Chú của bạn !"></textarea>
+        </div>
     </div>
     <div class="sanpham">
       <h3 style="text-align: center;padding: 20px">Sản Phẩm</h3>
@@ -122,103 +59,370 @@
           <thead>
           <tr>
             <th>Tên Sản Phẩm</th>
+            <th></th>
+            <th></th>
             <th>Đơn Giá</th>
             <th>Số Lượng</th>
             <th>Thành Tiền</th>
           </tr>
           </thead>
-          <tbody>
-          <tr>
-            <td><img src="/img/product-img/product-1.jpg" alt="" style="width: 80px"><span>Sản Phẩm 1</span></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-            <td><input type="number" value="1" min="1" style="width: 31px;outline: none;"></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-          </tr>
-          <tr>
-            <td><img src="/img/product-img/product-2.jpg" alt="" style="width: 80px"><span>Sản Phẩm 2</span></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-          </tr>
-          <tr>
-            <td><img src="/img/product-img/product-3.jpg" alt="" style="width: 80px"><span>Sản Phẩm 3</span></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-          </tr>
-          <tr>
-            <td><img src="/img/product-img/product-4.jpg" alt="" style="width: 80px"><span>Sản Phẩm 4</span></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>
-            <td><span>300.000</span><sup>vnd</sup></td>
-          </tr>
+          <tbody id="data">
+
+<!--          <tr>-->
+<!--            <td><img src="/img/product-img/product-2.jpg" alt="" style="width: 80px"><span>Sản Phẩm 2</span></td>-->
+<!--            <td>đỏ</td>-->
+<!--            <td>xl</td>-->
+<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
+<!--            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>-->
+<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td><img src="/img/product-img/product-3.jpg" alt="" style="width: 80px"><span>Sản Phẩm 3</span></td>-->
+<!--            <td>đỏ</td>-->
+<!--            <td>xl</td>-->
+<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
+<!--            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>-->
+<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td><img src="/img/product-img/product-4.jpg" alt="" style="width: 80px"><span>Sản Phẩm 4</span></td>-->
+<!--            <td>đỏ</td>-->
+<!--            <td>xl</td>-->
+<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
+<!--            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>-->
+<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
+<!--          </tr>-->
 
           </tbody>
         </table>
-        <h4><span>Tổng tiền :</span><span>300.000</span><sup>vnd</sup></h4>
-        <table class="ln-dvvc">
-          <tr>
-            <td>
-            <span class="loinhan" style="">
-              <strong>Lời nhắn :</strong>
-              <input type="text" placeholder="Lưu ý cho người bán !" style="width: 300px;height: 30px;padding-left: 15px;margin-left: 15px">
-            </span>
-            </td>
-            <td>
-              <p><strong>Đơn vị vận chuyển :</strong></p>
-            </td>
-            <td>
-              <p>Nhanh</p>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td><p>Nhận hàng vào ngày 29 Th08 - 31 Th08</p></td>
-          </tr>
-        </table>
+        <h4 style="color: red"><span>Tổng tiền :</span><span id="total"></span></h4>
 
-
-        <div class="thanhtien"><button>Thanh Toán</button></div>
+        <div class="thanhtien d-flex justify-content-end"><button class="btn" style="height: 50px" onclick="dathang()">Đặt hàng</button></div>
       </form>
     </div>
   </div>
 </secticon>
+<!-- model bootStrap-->
+
+
+<!-- Modal -->
+<div class="modal fade" id="changeAdress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Địa chỉ của tôi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div id="showAllDiachigiaohang">
+
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-primary"  onclick="changeDiachigiaohang()">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Update -->
+<div class="modal fade" id="updateModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật địa chỉ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <div class="mr-3 ">
+                        <input type="text" style="width: 225px; padding-left: 5px" id="update-diachigiaohang-name" placeholder="tên người nhận">
+                    </div>
+                    <div>
+                        <input type="number" style="width: 225px; padding-left: 5px" id="update-diachigiaohang-phonenumber" placeholder="điện thoại">
+                    </div>
+                </div>
+                <div class="d-flex my-5">
+                    <textarea style="padding-left: 5px" id="update-diachigiaohang-diachi" class="w-100" placeholder="Địa chỉ giao hàng cụ thể"></textarea>
+                </div>
+                <input type="hidden"  id="update-diachigiaohang-id">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#changeAdress" data-dismiss="modal">Trở lại</button>
+                <button type="button" class="btn btn-primary"  onclick="updateDiaChiGiaoHang()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- ##### Thanh toan End ##### -->
 
 <!-- ##### Brands Area Start ##### -->
-<div class="brands-area d-flex align-items-center justify-content-between">
-  <!-- Brand Logo -->
-  <div class="single-brands-logo">
-    <img src="img/core-img/brand1.png" alt="">
-  </div>
-  <!-- Brand Logo -->
-  <div class="single-brands-logo">
-    <img src="img/core-img/brand2.png" alt="">
-  </div>
-  <!-- Brand Logo -->
-  <div class="single-brands-logo">
-    <img src="img/core-img/brand3.png" alt="">
-  </div>
-  <!-- Brand Logo -->
-  <div class="single-brands-logo">
-    <img src="img/core-img/brand4.png" alt="">
-  </div>
-  <!-- Brand Logo -->
-  <div class="single-brands-logo">
-    <img src="img/core-img/brand5.png" alt="">
-  </div>
-  <!-- Brand Logo -->
-  <div class="single-brands-logo">
-    <img src="img/core-img/brand6.png" alt="">
-  </div>
-</div>
+<!--<div class="brands-area d-flex align-items-center justify-content-between">-->
+<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
+<!--  <div class="single-brands-logo">-->
+<!--    <img src="img/core-img/brand1.png" alt="">-->
+<!--  </div>-->
+<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
+<!--  <div class="single-brands-logo">-->
+<!--    <img src="img/core-img/brand2.png" alt="">-->
+<!--  </div>-->
+<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
+<!--  <div class="single-brands-logo">-->
+<!--    <img src="img/core-img/brand3.png" alt="">-->
+<!--  </div>-->
+<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
+<!--  <div class="single-brands-logo">-->
+<!--    <img src="img/core-img/brand4.png" alt="">-->
+<!--  </div>-->
+<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
+<!--  <div class="single-brands-logo">-->
+<!--    <img src="img/core-img/brand5.png" alt="">-->
+<!--  </div>-->
+<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
+<!--  <div class="single-brands-logo">-->
+<!--    <img src="img/core-img/brand6.png" alt="">-->
+<!--  </div>-->
+<!--</div>-->
 <script src="js/jquery/jquery-2.2.4.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/classy-nav.min.js"></script>
 <script src="js/active.js"></script>
+<script src="js/main.js"></script>
+<script>
+
+var id_DiaChiGiaoHang;
+
+  $(document).ready(function (){
+
+    var htmlContent='';
+    $.ajax({
+      url: '/api/v1/giohang/donhang/load',
+      type: 'GET',
+      dataType: "json",
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      success: function (response){
+        var tongTatCa = 0;
+        response.data.forEach(function (item){
+          var tongTien = 0;
+              tongTien = parseInt(item.giohang.soLuong)* parseInt(item.sanpham.giaBan);
+
+              tongTatCa = parseInt(tongTien) + parseInt(tongTatCa);
+
+          htmlContent+='<tr>\n' +
+                  '            <td><img src="'+item.sanpham.img+'" alt="" style="width: 80px"><span>'+formatTenSanPham(item.sanpham.tenSanPham)+'</span></td>\n' +
+                  '            <td>'+item.sanpham.kichCo+'</td>\n' +
+                  '            <td>'+item.sanpham.mauSac+'</td>\n' +
+                  '            <td><span>'+formatMoney(item.sanpham.giaBan)+'</span></td>\n' +
+                  '            <td>'+item.giohang.soLuong+'</td>\n' +
+                  '            <td><span>'+formatMoney(tongTien)+'</span></td>\n' +
+                  '          </tr>'
+        })
+
+        $('#total').text(formatMoney(tongTatCa))
+        $('#data').html(htmlContent)
+
+      },
+      error: function (err) {
+        if (err.message != undefined){
+          alert("error : "+err.message);
+        }else {
+          alert("Error : "+err.responseJSON.message)
+        }
+
+      }
+    });
+
+
+    $.ajax({
+      url: '/api/v1/diachigiaohang/macdinh',
+      type: 'GET',
+      dataType: "json",
+      contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+      success: function (response){
+        id_DiaChiGiaoHang = response.data.idDiachigiaohang;
+       $('Strong[name=tenNguoiNhan]').text(response.data.tenNguoiNhan);
+       $('span[name=diaChiGiaoHang]').text(response.data.diaChi);
+       $('strong[name=soDienThoai]').text(response.data.dienThoai);
+
+      },
+      error: function (err) {
+        if (err.message != undefined){
+          alert("error : "+err.message);
+        }else {
+          alert("Error : "+err.responseJSON.message)
+        }
+
+      }
+    });
+
+  })
+
+
+function dathang(){
+    var dataDathang ={
+      idDiachigiaohang : id_DiaChiGiaoHang,
+      ghiChu: $('#ghichu').val()
+    }
+
+  $.ajax({
+    url: '/api/v1/donhang/add',
+    type: 'POST',
+    dataType: "json",
+    contentType: 'application/json',
+    data:JSON.stringify(dataDathang),
+    success: function (response){
+      alert("dat hang thanh cong");
+      location.href="/shop";
+    },
+    error: function (err) {
+      if (err.message != undefined){
+        alert("error : "+err.message);
+      }else {
+        alert("Error : "+err.responseJSON.message)
+      }
+
+    }
+  });
+
+}
+
+$('#thaydoidiachigiaohang').click(function (){
+  $.ajax({
+    url: '/api/v1/diachigiaohang/getall',
+    type: 'GET',
+    dataType: "json",
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    success: function (response){
+      var showAllDiaChiGiaoHang ='';
+      var radioIndex;
+      response.forEach(function (item , index){
+        showAllDiaChiGiaoHang+='<div class="d-flex justify-content-between"><div class="mx-3">'+
+                '                    <div>\n' +
+                '                       <input type="radio" class="Diachi form-check-input mr-1" name="radio-diachi" value="'+item.idDiachigiaohang+'" id="'+item.idDiachigiaohang+'">\n'+
+                '                        <strong class="ml-2">'+item.tenNguoiNhan+'</strong>   | <span>'+item.dienThoai+'</span>'+
+                '                    </div>\n' +
+                '                    <div class="ml-2">\n' +
+                '                        <label>Địa chỉ : </label>\n' +
+                '                        <span>'+item.diaChi+'</span>\n' +
+                '                    </div>\n' +
+                '                    <hr>' +
+                '                </div>' +
+                '                <div>' +
+                '                    <button type="button" data-toggle="modal" data-dismiss="modal" data-target="#updateModel" class="h6"  onclick="showDiaChiGiaoHang('+item.idDiachigiaohang+')" name="btn" class="h6">Cập nhật</button>' +
+                '                 </div></div>'
+
+          if(item.macDinh === true){
+              radioIndex = index;
+          }
+      })
+
+
+      $('#showAllDiachigiaohang').html(showAllDiaChiGiaoHang)
+      $('input[name=radio-diachi]')[radioIndex].checked = true;
+
+    },
+    error: function (err) {
+      if (err.message != undefined){
+        alert("error : "+err.message);
+      }else {
+        alert("Error : "+err.responseJSON.message)
+      }
+
+    }
+  });
+})
+
+// function changeDiachigiaohang(){
+//     $('input[name=radio-diachi]').each(function (index ,item){
+//         if(item.checked == true){
+//             idDiaChiGiaoHang = parseInt(item.value);
+//         }
+//     });
+//     // /change/{id}
+//     $.ajax({
+//         url: '/api/v1/diachigiaohang/change/'+id_DiaChiGiaoHang,
+//         type: 'POST',
+//         dataType: "json",
+//         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+//         success: function (response){
+//             window.location.reload();
+//         },
+//         error: function (err) {
+//             if (err.message != undefined){
+//                 alert("error : "+err.message);
+//             }else {
+//                 alert("Error : "+err.responseJSON.message)
+//             }
+//
+//         }
+//     });
+// }
+
+function updateDiaChiGiaoHang(){
+
+      var id = $("#update-diachigiaohang-id").val();
+      var requestData = {
+          tenNguoiNhan: $("#update-diachigiaohang-name").val(),
+          diaChi: $("#update-diachigiaohang-diachi").val(),
+          dienThoai: $("#update-diachigiaohang-phonenumber").val(),
+      }
+    $.ajax({
+        url: '/api/v1/diachigiaohang/'+id,
+        type: 'PUT',
+        dataType: "json",
+        contentType: 'application/json',
+        data:JSON.stringify(requestData),
+        success: function (response){
+            $('#modal').modal('toggle');
+        },
+        error: function (err) {
+            if (err.message != undefined){
+                alert("error : "+err.message);
+            }else {
+                alert("Error : "+err.responseJSON.message)
+            }
+
+        }
+    });
+
+}
+
+function showDiaChiGiaoHang(id){
+
+    $.ajax({
+        url: '/api/v1/diachigiaohang/'+id,
+        type: 'GET',
+        dataType: "json",
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        success: function (response){
+            $("#update-diachigiaohang-id").val(response.data.idDiachigiaohang)
+            $("#update-diachigiaohang-name").val(response.data.tenNguoiNhan)
+            $("#update-diachigiaohang-phonenumber").val(response.data.dienThoai)
+            $("#update-diachigiaohang-diachi").val(response.data.diaChi)
+        },
+        error: function (err) {
+            if (err.message != undefined){
+                alert("error : "+err.message);
+            }else {
+                alert("Error : "+err.responseJSON.message)
+            }
+
+        }
+    });
+
+}
+
+</script>
 </body>
 
 </html>

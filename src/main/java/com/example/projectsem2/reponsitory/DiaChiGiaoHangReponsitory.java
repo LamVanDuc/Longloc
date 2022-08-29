@@ -9,4 +9,9 @@ import java.util.List;
 public interface DiaChiGiaoHangReponsitory extends JpaRepository<tblDiachigiaohang, Long> {
 
     List<tblDiachigiaohang> findByIdNguoidung(Long id);
+    tblDiachigiaohang findByIdDiachigiaohang(Long id);
+
+    tblDiachigiaohang findByIdNguoidungAndMacDinh(Long idNguoidung , String macdinh);
+
+    Boolean existsByIdNguoidungAndMacDinh(Long idNguoidung , String macdinh);
 }

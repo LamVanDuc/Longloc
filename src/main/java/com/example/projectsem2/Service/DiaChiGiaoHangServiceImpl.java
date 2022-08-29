@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
@@ -21,10 +22,69 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
     }
 
     @Override
+    public tblDiachigiaohang findByMac_Dinh() throws RuntimeException{
+        try{
+            return diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
+        }catch (Exception ex){
+            throw new RuntimeException("đã sảy ra lỗi : "+ex.getLocalizedMessage());
+        }
+
+    }
+
+    @Override
+    public Optional<tblDiachigiaohang> findById(Long id) {
+        Optional<tblDiachigiaohang> diachigiaohang = diaChiGiaoHangReponsitory.findById(id);
+        return diachigiaohang;
+    }
+
+    @Override
+    public tblDiachigiaohang changeDiaChiGiaoHang(Long id) throws RuntimeException{
+        try{
+            tblDiachigiaohang diachigiaohang = diaChiGiaoHangReponsitory.findById(id).map(dc->{
+                dc.setMacDinh(GenaricClass.MACDINH_true);
+                return diaChiGiaoHangReponsitory.save(dc);
+            }).orElseGet(()->{
+                throw new RuntimeException("đã xảy ra lỗi , update trạng thái true không thành công .");
+            });
+
+            tblDiachigiaohang tblDiachigiaohang = changeDiachigiaohang2();
+
+            return diachigiaohang;
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+
+    public tblDiachigiaohang changeDiachigiaohang2() throws RuntimeException{
+        tblDiachigiaohang find = diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
+        tblDiachigiaohang diachigiaohang = diaChiGiaoHangReponsitory.findById(find.getIdDiachigiaohang()).map(dc->{
+            dc.setMacDinh(GenaricClass.MACDINH_false);
+            return  diaChiGiaoHangReponsitory.save(dc);
+        }).orElseGet(()->{
+            throw new RuntimeException("đã sảy ra lỗi , update trạng thái false không thành công");
+        });
+        return diachigiaohang;
+    }
+
+    @Override
     public tblDiachigiaohang add(tblDiachigiaohang diachigiaohang) {
-        diachigiaohang.setIdNguoidung(GenaricClass.idNguoidung());
-        diachigiaohang.setNgayTao(GenaricClass.dateTimeNow());
-        return diaChiGiaoHangReponsitory.save(diachigiaohang);
+        try{
+            boolean check = diaChiGiaoHangReponsitory.existsByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
+            if (check) {
+                diachigiaohang.setIdNguoidung(GenaricClass.idNguoidung());
+                diachigiaohang.setMacDinh(GenaricClass.MACDINH_false);
+                diachigiaohang.setNgayTao(GenaricClass.dateTimeNow());
+                return diaChiGiaoHangReponsitory.save(diachigiaohang);
+            }else {
+                diachigiaohang.setIdNguoidung(GenaricClass.idNguoidung());
+                diachigiaohang.setMacDinh(GenaricClass.MACDINH_true);
+                diachigiaohang.setNgayTao(GenaricClass.dateTimeNow());
+                return diaChiGiaoHangReponsitory.save(diachigiaohang);
+            }
+        }catch (Exception ex){
+            throw new RuntimeException("đã sảy ra lỗi :"+ex.getMessage());
+        }
     }
 
     @Override

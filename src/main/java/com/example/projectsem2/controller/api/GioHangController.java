@@ -32,7 +32,7 @@ public class GioHangController {
         }
     }
     // load đặt hàng
-    @GetMapping("/load")
+    @GetMapping("/donhang/load")
     public ResponseEntity<responseObject> loadDatHang(){
         List<dtoGioHangAndChiTietSanPham> dtoGioHangAndChiTietSanPham = gioHangService.loadDathang();
         if (dtoGioHangAndChiTietSanPham.isEmpty()){
@@ -48,8 +48,13 @@ public class GioHangController {
     @PostMapping("/add")
     public ResponseEntity<responseObject> addGiohang(@RequestBody tblGiohang giohang){
         try{
+            if (giohang.getSoLuong() > 0){
             tblGiohang tblGiohang = gioHangService.addGioHang(giohang);
             return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok" ,"them thanh cong", tblGiohang));
+            }else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false" , "Số lượng thêm vào giỏ phải lớn hơn 0",""));
+            }
         }catch (Exception exception){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new responseObject("false",exception.getMessage(),exception.getLocalizedMessage()));
@@ -57,11 +62,11 @@ public class GioHangController {
     }
     
     //mua hang
-    @PostMapping("/muahang")
+    @PostMapping("/dathang")
     public ResponseEntity<responseObject> muaHang(@RequestBody List<Long> idGiohang){
       List<tblGiohang> giohangs =  gioHangService.muaGiohang(idGiohang);
       if (giohangs != null){
-          return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok" , "query thành công", giohangs));
+          return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok" , "mua hàng thành công !", giohangs));
       }else {
           return ResponseEntity.status(HttpStatus.OK).body(new responseObject("false" , "đã có lỗi sảy ra !",""));
       }
@@ -73,8 +78,10 @@ public class GioHangController {
     @PutMapping("/{id}")
     public ResponseEntity<responseObject> updateGiohang(@PathVariable Long id , @RequestBody tblGiohang giohang){
         try {
-            tblGiohang tblGiohang = gioHangService.updateGiohang(id , giohang);
-            return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok", "Sửa giỏ hàng thành công", tblGiohang));
+                tblGiohang tblGiohang = gioHangService.updateGiohang(id , giohang);
+                return ResponseEntity.status(HttpStatus.OK).body(
+                        new responseObject("ok", "Sửa giỏ hàng thành công", tblGiohang));
+
         }catch (Exception ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new responseObject("false", "Sửa giỏ hàng không thành công , đã sảy ra lỗi !", ex.getLocalizedMessage()));

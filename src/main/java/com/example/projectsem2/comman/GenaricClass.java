@@ -17,6 +17,10 @@ public class GenaricClass {
     public static final String TRANGTHAI_daXoa ="Đơn hàng đã bị xóa";
     public static final String TRANGTHAI_huydonhang ="Đã hủy";
 
+
+    public static final String MACDINH_true ="true";
+    public static final String MACDINH_false ="false";
+
     public static Long idNguoidung(){
         return 3L;
     }

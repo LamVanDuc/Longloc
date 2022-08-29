@@ -7,7 +7,9 @@ import com.example.projectsem2.entity.tblSanpham;
 import com.example.projectsem2.reponsitory.GioHangReponsitory;
 import com.example.projectsem2.reponsitory.SanPhamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,22 +60,26 @@ public class GioHangServiceImpl implements GioHangService{
     }
 
     @Override
+    @Transactional
     public tblGiohang updateGiohang(Long id,tblGiohang newGiohang) throws RuntimeException{
 
-        tblGiohang findGiohang = gioHangReponsitory.findByIdGiohang(id);
-        if (findGiohang != null){
-//            tblChitietsanpham chitietsanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(findGiohang.getIdChitietsanpham());
-            tblSanpham sanpham = sanPhamRepository.findByIdSanpham(findGiohang.getIdSanpham());
-            if (sanpham.getSoLuong() >=(newGiohang.getSoLuong()+ findGiohang.getSoLuong())){
-                findGiohang.setGia(sanpham.getGiaBan());
-                findGiohang.setSoLuong(newGiohang.getSoLuong());
-                return gioHangReponsitory.save(newGiohang);
+        tblGiohang findGiohang = gioHangReponsitory.findById(id).map(gh ->{
+            if (newGiohang.getSoLuong() > 0){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(gh.getIdSanpham());
+                if (sanpham.getSoLuong() >=(newGiohang.getSoLuong())){
+                    gh.setGia(sanpham.getGiaBan());
+                    gh.setSoLuong(newGiohang.getSoLuong());
+                    return gioHangReponsitory.save(gh);
+                }else {
+                    throw new RuntimeException("Số thêm vào giỏ lớn hơn số lượng sản phẩm có !");
+                }
             }else {
-                throw new RuntimeException("Số thêm vào giỏ lớn hơn số lượng sản phẩm có !");
+                throw new RuntimeException("Số lượng phải lớn hơn 0");
             }
-        }else {
-            throw new RuntimeException("Không tìm thấy giỏ hàng !");
-        }
+        }).orElseGet(()->{
+            throw new RuntimeException("không tìm thấy giỏ hàng");
+        });
+        return findGiohang;
     }
 
     @Override
