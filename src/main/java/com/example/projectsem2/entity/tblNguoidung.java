@@ -3,7 +3,9 @@ package com.example.projectsem2.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "nguoidung", schema = "dbo", catalog = "clothes")
@@ -34,6 +36,19 @@ public class tblNguoidung {
     @Column(name = "ngay_chinh_sua")
     private Date ngayChinhSua;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "role_nguoidung",
+            joinColumns = @JoinColumn(name = "id_nguoidung"),
+            inverseJoinColumns = @JoinColumn(name = "id_role"))
+    private Set<tblRole> role = new HashSet<>();
+
+    public Set<tblRole> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<tblRole> role) {
+        this.role = role;
+    }
 
     public long getIdNguoidung() {
         return idNguoidung;

@@ -1,11 +1,25 @@
 package com.example.projectsem2.comman;
 
-import java.util.Date;
+import com.example.projectsem2.Service.NguoiDungDetailImpl;
+import com.example.projectsem2.Service.NguoiDungDetailServiceImpl;
+import com.example.projectsem2.entity.tblNguoidung;
+import com.example.projectsem2.reponsitory.NguoidungReponsitory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Date;
 import java.time.Instant;
 import java.util.Calendar;
+import java.util.Optional;
+import java.util.List;
 
 public class GenaricClass {
+
+//    @Autowired
+//    private static NguoidungReponsitory nguoidungReponsitory;
+
+    // trang thai don hang
     public static final String TRANGTHAI_dangCho ="Chờ xác nhận";
     public static final String TRANGTHAI_daXacNhan = "Đã xác nhận";
 
@@ -18,10 +32,35 @@ public class GenaricClass {
     public static final String TRANGTHAI_huydonhang ="Đã hủy";
 
 
+    // trang thai dia chi giao hang
     public static final String MACDINH_true ="true";
     public static final String MACDINH_false ="false";
 
+    // role
+    public static final String ROLE_USER ="ROLE_USER";
+    public static final String ROLE_ADMIN ="ROLE_ADMIN";
+    public static final String ACTIVE = "ACTIVE";
+    public static final String IN_ACTIVE = "INACTIVE";
+
+
+
     public static Long idNguoidung(){
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+////        Optional<tblNguoidung> nguoidungOptional =nguoidungReponsitory.findAllByEmail(currentPrincipalName);
+//        tblNguoidung nguoidung = new tblNguoidung();
+
+
+
+//        if(nguoidungOptional.isPresent()) {
+//            nguoidung = nguoidungOptional.get();
+//        } else {
+//            throw new RuntimeException("không tìm kiếm được user");
+//        }
+//        System.out.println("U id = " + nguoidung.getIdNguoidung());
+
+
         return 3L;
     }
 
