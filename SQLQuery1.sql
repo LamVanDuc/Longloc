@@ -59,6 +59,7 @@ CREATE TABLE diachigiaohang
     ten_nguoi_nhan    NVARCHAR(50),
     dia_chi           NVARCHAR(10),
     dien_thoai        VARCHAR(15),
+	mac_dinh			VARCHAR(10),
     ngay_tao          DATETIME DEFAULT (GETDATE()) ,
     ngay_chinh_sua    DATETIME,
 	CONSTRAINT FK_NGUOIDUNG_DIACHIGIAOHANG FOREIGN KEY (id_nguoidung) REFERENCES nguoidung (id_nguoidung),

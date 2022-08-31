@@ -1,14 +1,16 @@
-package com.example.projectsem2.controller.view.user;
+package com.example.projectsem2.controller.view.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ApplicationUserController {
-    @GetMapping("/checkout")
+@RequestMapping("/admin")
+public class ApplicationAdminController {
+
+
+    @GetMapping("/index")
     public String getCheckout(){
-        return "checkout";
+        return "admin/index";
     }
 }
