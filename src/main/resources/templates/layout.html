@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Layout</title>
@@ -7,6 +7,50 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .dropbtnInfor {
+            border: none;
+        }
+
+        .dropdownInfor {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-contentInfor {
+            display: none;
+            background-color: white;
+            position: absolute;
+            z-index: 1;
+            border: 1px solid rgba(242,244,248,.7);
+        }
+        .dropdown-contentInfor li a{
+            width: 180px !important;
+            height: 35px !important;
+            line-height: 34px !important;
+            color: #787878!important;
+            font-size: 14px !important;
+            padding: 0px 20px !important;
+        }
+
+        .dropdown-contentInfor li a:hover{
+            color: black!important;
+        }
+
+        .dropdown-contentInfor li {
+            border-bottom: 1px solid rgba(242,244,248,.7);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgba(242, 244, 248, 0.7);
+        }
+
+        .dropdown-contentInfor a {
+            display: block;
+        }
+
+        .dropdownInfor:hover .dropdown-contentInfor {display: block;}
+
+    </style>
 </head>
 <body>
 <header class="header_area">
@@ -63,11 +107,7 @@
                             <ul class="dropdown">
                                 <li><a href="/index">Home</a></li>
                                 <li><a href="/shop">Shop</a></li>
-                                <li><a href="/">Product Details</a></li>
-                                <li><a href="/checkout">Checkout</a></li>
                                 <li><a href="/blog">Blog</a></li>
-                                <!--                                <li><a href="single-blog.html">Single Blog</a></li>-->
-                                <!--                                <li><a href="regular-page.html">Regular Page</a></li>-->
                                 <li><a href="/contact">Contact</a></li>
                             </ul>
                         </li>
@@ -79,6 +119,7 @@
             </div>
         </nav>
 
+
         <!-- Header Meta Data -->
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
@@ -89,13 +130,38 @@
                 </form>
             </div>
             <!-- Favourite Area -->
-            <div class="favourite-area">
-                <a href="#"><img src="../img/core-img/heart.svg" alt=""></a>
-            </div>
+<!--            <div class="favourite-area">-->
+<!--                <a href="#"><img src="../img/core-img/heart.svg" alt=""></a>-->
+<!--            </div>-->
             <!-- User Login Info -->
-            <div class="user-login-info">
-                <a href="/login"><img src="../img/core-img/user.svg" alt=""></a>
+            <!-- switch case -->
+<!--            <div class="user-login-info dropdownInfor" th:switch="${nguoidung}">-->
+<!--                <a class="dropbtnInfor"><img src="../img/core-img/user.svg" alt=""></a>-->
+<!--                <ul th:case="null" class="dropdown-contentInfor">-->
+<!--                    <li ><a href="/login">Đăng nhập</a></li>-->
+<!--                    <li ><a href="#">Đăng ký</a></li>-->
+<!--                </ul>-->
+<!--                <ul th:case="*" class="dropdown-contentInfor">-->
+<!--                    <li ><a href="/information">Thông tin tài khoản</a></li>-->
+<!--                    <li ><a href="/donmua">Đơn mua</a></li>-->
+<!--                    <li ><a href="/logout">Đăng Xuất</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+
+            <div class="user-login-info dropdownInfor">
+                <a class="dropbtnInfor"><img src="../img/core-img/user.svg" alt=""></a>
+
+                <ul  th:if="${nguoidung != null}" class="dropdown-contentInfor">
+                    <li ><a href="/information">Thông tin tài khoản</a></li>
+                    <li ><a href="/donmua">Đơn mua</a></li>
+                    <li ><a href="/logout">Đăng Xuất</a></li>
+                </ul>
+                <ul th:unless="${nguoidung != null}"  class="dropdown-contentInfor">
+                    <li ><a href="/login">Đăng nhập</a></li>
+                    <li ><a href="#">Đăng ký</a></li>
+                </ul>
             </div>
+
             <!-- Cart Area -->
             <div class="cart-area">
                 <a href="/giohang" id="essenceCartBtn"><img src="../img/core-img/bag.svg" alt=""></a>
@@ -104,10 +170,17 @@
 
     </div>
 </header>
+
+
+
+
 <!-- ##### Header Area End ##### -->
 <div layout:fragment="content">
 
 </div>
+
+
+
 <!-- ##### Footer Area Start ##### -->
 <footer class="footer_area clearfix">
     <div class="container">
@@ -192,7 +265,7 @@
 <script src="js/plugins.js"></script>
 <script src="js/classy-nav.min.js"></script>
 <script src="js/active.js"></script>
-
 <script src="js/map-active.js"></script>
+
 </body>
 </html>

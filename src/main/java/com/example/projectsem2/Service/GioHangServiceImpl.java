@@ -3,11 +3,11 @@ package com.example.projectsem2.Service;
 import com.example.projectsem2.comman.GenaricClass;
 import com.example.projectsem2.dto.dtoGioHangAndChiTietSanPham;
 import com.example.projectsem2.entity.tblGiohang;
+import com.example.projectsem2.entity.tblNguoidung;
 import com.example.projectsem2.entity.tblSanpham;
 import com.example.projectsem2.reponsitory.GioHangReponsitory;
 import com.example.projectsem2.reponsitory.SanPhamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +23,17 @@ public class GioHangServiceImpl implements GioHangService{
     GioHangReponsitory gioHangReponsitory;
     @Autowired
     SanPhamRepository sanPhamRepository;
+    @Autowired
+    NguoiDungService nguoiDungService;
+
+
+
 
     @Override
     public List<dtoGioHangAndChiTietSanPham> getByIdNguoidung() {
+        Long id = nguoiDungService.idNguoidung();
         List<dtoGioHangAndChiTietSanPham> find = new ArrayList<>();
-        List<tblGiohang> giohangList = gioHangReponsitory.findByIdNguoidung(GenaricClass.idNguoidung());
+        List<tblGiohang> giohangList = gioHangReponsitory.findByIdNguoidung(id);
         for (tblGiohang giohang: giohangList) {
            tblSanpham sanpham = sanPhamRepository.findByIdSanpham(giohang.getIdSanpham());
            find.add(new dtoGioHangAndChiTietSanPham(giohang , sanpham));
@@ -37,11 +43,11 @@ public class GioHangServiceImpl implements GioHangService{
 
     @Override
     public tblGiohang addGioHang(tblGiohang newGiohang) throws RuntimeException{
-        newGiohang.setIdNguoidung(GenaricClass.idNguoidung());
+        newGiohang.setIdNguoidung(nguoiDungService.idNguoidung());
 //        tblChitietsanpham chitietsanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(newGiohang.getIdChitietsanpham());
         tblSanpham sanpham = sanPhamRepository.findByIdSanpham(newGiohang.getIdSanpham());
         if (gioHangReponsitory.existsByIdSanpham(newGiohang.getIdSanpham())){
-            tblGiohang giohang = gioHangReponsitory.findByIdNguoidungAndIdSanpham(GenaricClass.idNguoidung() , newGiohang.getIdSanpham());
+            tblGiohang giohang = gioHangReponsitory.findByIdNguoidungAndIdSanpham(nguoiDungService.idNguoidung() , newGiohang.getIdSanpham());
             giohang.setGia(sanpham.getGiaBan());
             if (sanpham.getSoLuong() >= (giohang.getSoLuong() + newGiohang.getSoLuong())){
                 giohang.setSoLuong(giohang.getSoLuong()+ newGiohang.getSoLuong());

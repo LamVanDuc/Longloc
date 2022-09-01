@@ -10,7 +10,7 @@
 
     <!-- Title  -->
     <title>LongLoc - Shop quần áo thời trang</title>
-
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css">
     <!-- Favicon  -->
 
 
@@ -177,7 +177,7 @@
 
                             <!-- Single Product -->
 
-
+                            <div id="demo"></div>
 
                     </div>
                     <!-- Pagination -->
@@ -197,6 +197,7 @@
         </div>
         </div>
     </section>
+
     <!-- ##### Footer Area End ##### -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -211,12 +212,15 @@
     <script src="js/classy-nav.min.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.js"></script>
     <script>
 
             $(document).ready(function (){
                 // let searchParams = new URLSearchParams(window.location.search)
                 // searchParams.has('id')
                 // let idDanhmuc = searchParams.get('id')
+
 
                 var htmlContent='';
                 $.ajax({

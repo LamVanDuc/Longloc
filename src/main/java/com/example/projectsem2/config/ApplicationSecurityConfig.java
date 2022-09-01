@@ -44,7 +44,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/v1/sanpham/*").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/sanpham/getsal").permitAll();
         //phân quyền
-        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/error-403");
 
 //        http.authorizeRequests().antMatchers("/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
@@ -56,7 +56,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginProcessingUrl("/j_spring_security_check") // Submit URL
                 .loginPage("/login")//
-                .defaultSuccessUrl("/index")//
+                .defaultSuccessUrl("/index",true)//
                 .failureUrl("/login?error=true")
                 .usernameParameter("username")//
                 .passwordParameter("password")

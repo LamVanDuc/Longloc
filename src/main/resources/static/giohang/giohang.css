@@ -80,10 +80,10 @@
 }
 
 .giohang table tr td button:hover {
-    background-color: tomato;
+    background-color: red;
 }
 .giohang table thead tr{
-    background-color: #ddd;
+    background-color: #FFFFFF;
 }
 
 .giohang h2 {
@@ -103,5 +103,10 @@
 }
 #thanhtoan:hover {
     background-color: aquamarine;
+}
+
+.checkboxItem{
+    width: 15px;
+    height: 15px;
 }
 
