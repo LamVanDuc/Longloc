@@ -5,7 +5,6 @@ import com.example.projectsem2.entity.tblDiachigiaohang;
 import com.example.projectsem2.reponsitory.DiaChiGiaoHangReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,16 +14,18 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
 
     @Autowired
     DiaChiGiaoHangReponsitory diaChiGiaoHangReponsitory;
+    @Autowired
+    NguoiDungService nguoiDungService;
 
     @Override
     public List<tblDiachigiaohang> findByIdNguoidung() {
-        return diaChiGiaoHangReponsitory.findByIdNguoidung(GenaricClass.idNguoidung());
+        return diaChiGiaoHangReponsitory.findByIdNguoidung(nguoiDungService.idNguoidung());
     }
 
     @Override
     public tblDiachigiaohang findByMac_Dinh() throws RuntimeException{
         try{
-            return diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
+            return diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(nguoiDungService.idNguoidung() , GenaricClass.MACDINH_true);
         }catch (Exception ex){
             throw new RuntimeException("đã sảy ra lỗi : "+ex.getLocalizedMessage());
         }
@@ -41,24 +42,27 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
     public tblDiachigiaohang changeDiaChiGiaoHang(Long id) throws RuntimeException{
 
         try{
-            tblDiachigiaohang find = diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
-            tblDiachigiaohang diachigiaohang1 = diaChiGiaoHangReponsitory.findById(find.getIdDiachigiaohang()).map(dc1->{
-                dc1.setMacDinh(GenaricClass.MACDINH_false);
-                return  diaChiGiaoHangReponsitory.save(dc1);
-            }).orElseGet(()->{
-                throw new RuntimeException("đã sảy ra lỗi , update trạng thái false không thành công");
-            });
+            tblDiachigiaohang find = diaChiGiaoHangReponsitory.findByIdNguoidungAndMacDinh(nguoiDungService.idNguoidung() , GenaricClass.MACDINH_true);
+            tblDiachigiaohang diachigiaohang1 = diaChiGiaoHangReponsitory.findById(find.getIdDiachigiaohang()).map(dchi->{
+                dchi.setMacDinh(GenaricClass.MACDINH_false);
+                return  diaChiGiaoHangReponsitory.save(dchi);
+            }).orElseThrow(()-> new RuntimeException("đã sảy ra lỗi , update trạng thái false không thành công"));
 
-            tblDiachigiaohang tblDiachigiaohang = diachigiaohang1;
 
-            tblDiachigiaohang diachigiaohang = diaChiGiaoHangReponsitory.findById(id).map(dc->{
+
+            tblDiachigiaohang diachigiaohangfalse = diachigiaohang1;
+
+
+
+            tblDiachigiaohang diachigiaohang = diaChiGiaoHangReponsitory.findByIdDiachigiaohang(id).map(dc->{
                 dc.setMacDinh(GenaricClass.MACDINH_true);
                 return diaChiGiaoHangReponsitory.save(dc);
-            }).orElseGet(()->{
-                throw new RuntimeException("đã xảy ra lỗi , update trạng thái true không thành công .");
-            });
+            }).orElseThrow(()-> new RuntimeException("đã xảy ra lỗi , update trạng thái true không thành công ."));
 
-            return diachigiaohang;
+
+            tblDiachigiaohang diachigiaohangTrue = diachigiaohang;
+
+            return diachigiaohangTrue;
         }catch (Exception e){
             throw new RuntimeException(e.getMessage());
         }
@@ -69,14 +73,14 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
     @Override
     public tblDiachigiaohang add(tblDiachigiaohang diachigiaohang) {
         try{
-            boolean check = diaChiGiaoHangReponsitory.existsByIdNguoidungAndMacDinh(GenaricClass.idNguoidung() , GenaricClass.MACDINH_true);
+            boolean check = diaChiGiaoHangReponsitory.existsByIdNguoidungAndMacDinh(nguoiDungService.idNguoidung() , GenaricClass.MACDINH_true);
             if (check) {
-                diachigiaohang.setIdNguoidung(GenaricClass.idNguoidung());
+                diachigiaohang.setIdNguoidung(nguoiDungService.idNguoidung());
                 diachigiaohang.setMacDinh(GenaricClass.MACDINH_false);
                 diachigiaohang.setNgayTao(GenaricClass.dateTimeNow());
                 return diaChiGiaoHangReponsitory.save(diachigiaohang);
             }else {
-                diachigiaohang.setIdNguoidung(GenaricClass.idNguoidung());
+                diachigiaohang.setIdNguoidung(nguoiDungService.idNguoidung());
                 diachigiaohang.setMacDinh(GenaricClass.MACDINH_true);
                 diachigiaohang.setNgayTao(GenaricClass.dateTimeNow());
                 return diaChiGiaoHangReponsitory.save(diachigiaohang);
@@ -96,7 +100,7 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
             return diaChiGiaoHangReponsitory.save(dc);
         }).orElseGet(()->{
             newDiachigiaohang.setIdDiachigiaohang(id);
-            newDiachigiaohang.setIdNguoidung(GenaricClass.idNguoidung());
+            newDiachigiaohang.setIdNguoidung(nguoiDungService.idNguoidung());
             newDiachigiaohang.setNgayTao(GenaricClass.dateTimeNow());
             return diaChiGiaoHangReponsitory.save(newDiachigiaohang);
         });

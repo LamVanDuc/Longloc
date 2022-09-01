@@ -2,6 +2,7 @@ package com.example.projectsem2.comman;
 
 import com.example.projectsem2.Service.NguoiDungDetailImpl;
 import com.example.projectsem2.Service.NguoiDungDetailServiceImpl;
+import com.example.projectsem2.Service.NguoiDungService;
 import com.example.projectsem2.entity.tblNguoidung;
 import com.example.projectsem2.reponsitory.NguoidungReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ import java.util.List;
 
 public class GenaricClass {
 
-//    @Autowired
-//    private static NguoidungReponsitory nguoidungReponsitory;
+    @Autowired
+    private static NguoiDungService nguoiDungService;
 
     // trang thai don hang
     public static final String TRANGTHAI_dangCho ="Chờ xác nhận";
@@ -42,27 +43,6 @@ public class GenaricClass {
     public static final String ACTIVE = "ACTIVE";
     public static final String IN_ACTIVE = "INACTIVE";
 
-
-
-    public static Long idNguoidung(){
-
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
-////        Optional<tblNguoidung> nguoidungOptional =nguoidungReponsitory.findAllByEmail(currentPrincipalName);
-//        tblNguoidung nguoidung = new tblNguoidung();
-
-
-
-//        if(nguoidungOptional.isPresent()) {
-//            nguoidung = nguoidungOptional.get();
-//        } else {
-//            throw new RuntimeException("không tìm kiếm được user");
-//        }
-//        System.out.println("U id = " + nguoidung.getIdNguoidung());
-
-
-        return 3L;
-    }
 
     public static Date dateTimeNow(){
         return Date.from(Instant.now());

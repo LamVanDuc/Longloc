@@ -352,7 +352,7 @@ $('#thaydoidiachigiaohang').click(function (){
                 '                    <button type="button" data-toggle="modal" data-dismiss="modal" data-target="#updateModel" class="h6"  onclick="showDiaChiGiaoHang('+item.idDiachigiaohang+')" name="btn" class="h6">Cập nhật</button>' +
                 '                 </div></div>'
 
-          if(item.macDinh === true){
+          if(item.macDinh === 'true'){
               radioIndex = index;
           }
       })
@@ -379,9 +379,10 @@ function changeDiachigiaohang(){
             idDiaChiGiaoHang = parseInt(item.value);
         }
     });
+
     // /change/{id}
     $.ajax({
-        url: '/api/v1/diachigiaohang/change/'+id_DiaChiGiaoHang,
+        url: '/api/v1/diachigiaohang/change/'+idDiaChiGiaoHang,
         type: 'POST',
         dataType: "json",
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -414,7 +415,7 @@ function updateDiaChiGiaoHang(){
         contentType: 'application/json',
         data:JSON.stringify(requestData),
         success: function (response){
-            $('#modal').modal('toggle');
+            location.reload();
         },
         error: function (err) {
             if (err.message != undefined){
@@ -469,7 +470,7 @@ function addAdress(){
         Accept:'application/json',
         data:JSON.stringify(requestBody),
         success: function (response){
-            $('#modal').modal('show');
+           location.reload();
         },
         error: function (err) {
             if (err.message != undefined){
@@ -483,6 +484,8 @@ function addAdress(){
 
 
 }
+
+
 </script>
 </body>
 

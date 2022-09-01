@@ -9,6 +9,9 @@ import java.util.Optional;
 @Repository
 public interface NguoidungReponsitory extends JpaRepository<tblNguoidung , Long> {
     Optional<tblNguoidung> findAllByEmailAndTrangThai(String email , String trangThai);
+
+    Optional<tblNguoidung> findByEmailAndPassword(String email , String password);
+
     Optional<tblNguoidung> findByEmail(String email);
 
     Boolean existsByEmailAndTrangThai(String email, String trangThai);

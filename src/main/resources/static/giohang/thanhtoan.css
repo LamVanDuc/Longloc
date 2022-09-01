@@ -81,7 +81,10 @@
     transition: all 0.3s ease;
 }
 .thanhtien button:hover {
-    background-color: aquamarine;
+    background-color: #ff4584;
+}
+.thanhtien button:focus-visible , .thanhtien button:focus{
+    outline: none;
 }
 .loinhan {
     padding-left: 30px;

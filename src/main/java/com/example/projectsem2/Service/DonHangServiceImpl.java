@@ -29,6 +29,8 @@ public class DonHangServiceImpl implements DonHangService{
 
     @Autowired
     ChiTietDonHangRepository chiTietDonHangRepository;
+    @Autowired
+    NguoiDungService nguoiDungService;
 
 
 
@@ -110,7 +112,7 @@ public class DonHangServiceImpl implements DonHangService{
             }
             tblDonhang donhang = new tblDonhang(
                     idDonhang ,
-                    GenaricClass.idNguoidung(),
+                    nguoiDungService.idNguoidung(),
                     newDonhang.getIdDiachigiaohang(),
                    ghitru,
                     GenaricClass.TRANGTHAI_dangCho,
@@ -176,7 +178,7 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDaNhan(){
 
-        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(GenaricClass.idNguoidung(),GenaricClass.TRANGTHAI_daNhanHang);
+        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_daNhanHang);
         List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
         List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
         donhangList.forEach(item->{
@@ -214,7 +216,7 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiChoXacNhan() {
 
-        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(GenaricClass.idNguoidung(),GenaricClass.TRANGTHAI_dangCho);
+        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_dangCho);
         List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
         List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
         donhangList.forEach(item->{
@@ -252,7 +254,7 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDangGiao() {
 
-        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(GenaricClass.idNguoidung(),GenaricClass.TRANGTHAI_dangGiao);
+        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_dangGiao);
         List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
         List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
         donhangList.forEach(item->{
@@ -289,7 +291,7 @@ public class DonHangServiceImpl implements DonHangService{
 
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiHuydonhang() {
-        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(GenaricClass.idNguoidung() , GenaricClass.TRANGTHAI_huydonhang);
+        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung() , GenaricClass.TRANGTHAI_huydonhang);
         List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
         List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
         donhangList.forEach(item->{
@@ -308,7 +310,7 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     public List<dtoChiTietDonHang> findAllDonHangByNguoidung() {
 
-        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidung(GenaricClass.idNguoidung());
+        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidung(nguoiDungService.idNguoidung());
         List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
         List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
         donhangList.forEach(item->{
@@ -369,7 +371,7 @@ public class DonHangServiceImpl implements DonHangService{
 
     @Override
     public boolean huyDonhang(String id) {
-        tblDonhang donhang = donHangRepository.findByIdNguoidungAndIdDonhang(GenaricClass.idNguoidung(),id);
+        tblDonhang donhang = donHangRepository.findByIdNguoidungAndIdDonhang(nguoiDungService.idNguoidung(),id);
         if (donhang.getTrangThai().equals(GenaricClass.TRANGTHAI_dangCho)){
             donhang.setTrangThai(GenaricClass.TRANGTHAI_huydonhang);
             donHangRepository.save(donhang);
@@ -381,7 +383,7 @@ public class DonHangServiceImpl implements DonHangService{
 
     @Override
     public boolean daNhanDonhang(String id) {
-        tblDonhang donhang = donHangRepository.findByIdNguoidungAndIdDonhang(GenaricClass.idNguoidung(),id );
+        tblDonhang donhang = donHangRepository.findByIdNguoidungAndIdDonhang(nguoiDungService.idNguoidung(),id );
         if (donhang.getTrangThai().equals(GenaricClass.TRANGTHAI_dangGiao)){
             donhang.setTrangThai(GenaricClass.TRANGTHAI_daNhanHang);
             donHangRepository.save(donhang);
