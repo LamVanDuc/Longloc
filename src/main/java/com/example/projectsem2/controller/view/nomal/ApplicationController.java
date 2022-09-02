@@ -2,6 +2,7 @@ package com.example.projectsem2.controller.view.nomal;
 
 import com.example.projectsem2.Service.NguoiDungService;
 import com.example.projectsem2.entity.tblNguoidung;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,14 +35,16 @@ public class ApplicationController {
 
     @GetMapping("/login")
     public String getLogin(Model model){
+
+
         Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
-
-
         if (nguoidungOptinal.isPresent()){
             model.addAttribute("nguoidung",nguoidungOptinal.get());
         }else{
             model.addAttribute("nguoidung",null);
         }
+
+
         return "Login";
     }
 
@@ -179,5 +182,10 @@ public class ApplicationController {
             model.addAttribute("nguoidung",null);
         }
         return "single-product-details";
+    }
+
+    @GetMapping("/{danhmuc}")
+    public String getDanhmuc(){
+        return "/danhmuc";
     }
 }
