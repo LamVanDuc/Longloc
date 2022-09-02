@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api/account")
@@ -29,12 +30,40 @@ public class LoginController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    public static boolean patternMatches(String emailAddress, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(emailAddress)
+                .matches();
+    }
+
+    public Boolean testUsingStrictRegex(String emailAddress) {
+        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        return patternMatches(emailAddress, regexPattern);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<responseObject> saveUser(@RequestBody RegisterAccount registerAccount){
         try{
+            Boolean checkEmail=testUsingStrictRegex(registerAccount.getEmail());
+            Boolean checkNumber = registerAccount.getPhoneNumber().startsWith("0");
+            if(registerAccount.getPhoneNumber().length() <10 || registerAccount.getPhoneNumber().length() >12 || checkNumber.equals(false)){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Số điện thoại phải lớn hơn hoặc = 10 và bắt đầu từ 0 !",""));
+
+            }if (registerAccount.getPassword().length() <8){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Tài khoản phải từ 8 ký tự trở lên !",""));
+
+            }if (checkEmail.equals(false)){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Email không hợp lệ !",""));
+
+            }
             if (nguoiDungDetailService.checkEmailExist(registerAccount.getEmail())){
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(new responseObject("false","tài khoản đã tồn tại",""));
-            }else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","tài khoản đã tồn tại",""));
+            }
                 tblNguoidung nguoidung = new tblNguoidung();
                 nguoidung.setEmail(registerAccount.getEmail());
                 String password = passwordEncoder.encode(registerAccount.getPassword());
@@ -51,9 +80,9 @@ public class LoginController {
 
                 Object check = nguoiDungDetailService.saveNguoidung(nguoidung);
                 return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok" ," Tạo tài khoản thành công !",check));
-            }
+
         }catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new responseObject("ok" ," Tạo tài khoản Không thành công ",ex.getLocalizedMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new responseObject("false" ," Tạo tài khoản Không thành công ",ex.getLocalizedMessage()));
         }
     }
 

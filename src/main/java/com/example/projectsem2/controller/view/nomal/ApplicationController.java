@@ -40,6 +40,7 @@ public class ApplicationController {
         Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
         if (nguoidungOptinal.isPresent()){
             model.addAttribute("nguoidung",nguoidungOptinal.get());
+            return "donmua";
         }else{
             model.addAttribute("nguoidung",null);
         }
@@ -50,18 +51,6 @@ public class ApplicationController {
 
 
 
-    @GetMapping("/register")
-    public String getRegister(Model model){
-        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
-
-
-        if (nguoidungOptinal.isPresent()){
-            model.addAttribute("nguoidung",nguoidungOptinal.get());
-        }else{
-            model.addAttribute("nguoidung",null);
-        }
-        return "Register";
-    }
 
 
     @GetMapping("/contact")
@@ -162,6 +151,7 @@ public class ApplicationController {
 
         if (nguoidungOptinal.isPresent()){
             model.addAttribute("nguoidung",nguoidungOptinal.get());
+            return "donmua";
         }else{
             model.addAttribute("nguoidung",null);
         }

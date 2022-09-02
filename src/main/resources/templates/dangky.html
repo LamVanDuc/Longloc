@@ -9,7 +9,7 @@
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title  -->
-  <title>LongLoc - Shop quần áo thời trang</title>
+  <title>LongLoc | Đăng ký tài khoản</title>
 
   <!-- Favicon  -->
   <link rel="icon" href="/img/core-img/favicon.png">
@@ -24,106 +24,50 @@
 
 <body layout:fragment="content">
 
-<!-- ##### Right Side Cart Area ##### -->
-<div class="cart-bg-overlay"></div>
 
-<div class="right-side-cart-area">
-
-  <!-- Cart Button -->
-  <div class="cart-button">
-    <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
-  </div>
-
-  <div class="cart-content d-flex">
-
-    <!-- Cart List Area -->
-    <div class="cart-list">
-      <!-- Single Cart Item -->
-      <div class="single-cart-item">
-        <a href="#" class="product-image">
-          <img src="img/product-img/product-1.jpg" class="cart-thumb" alt="">
-          <!-- Cart Item Desc -->
-          <div class="cart-item-desc">
-            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-            <span class="badge">Mango</span>
-            <h6>Button Through Strap Mini Dress</h6>
-            <p class="size">Size: S</p>
-            <p class="color">Color: Red</p>
-            <p class="price">$45.00</p>
-          </div>
-        </a>
-      </div>
-
-      <!-- Single Cart Item -->
-      <div class="single-cart-item">
-        <a href="#" class="product-image">
-          <img src="img/product-img/product-2.jpg" class="cart-thumb" alt="">
-          <!-- Cart Item Desc -->
-          <div class="cart-item-desc">
-            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-            <span class="badge">Mango</span>
-            <h6>Button Through Strap Mini Dress</h6>
-            <p class="size">Size: S</p>
-            <p class="color">Color: Red</p>
-            <p class="price">$45.00</p>
-          </div>
-        </a>
-      </div>
-
-      <!-- Single Cart Item -->
-      <div class="single-cart-item">
-        <a href="#" class="product-image">
-          <img src="img/product-img/product-3.jpg" class="cart-thumb" alt="">
-          <!-- Cart Item Desc -->
-          <div class="cart-item-desc">
-            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-            <span class="badge">Mango</span>
-            <h6>Button Through Strap Mini Dress</h6>
-            <p class="size">Size: S</p>
-            <p class="color">Color: Red</p>
-            <p class="price">$45.00</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- Cart Summary -->
-    <div class="cart-amount-summary">
-
-      <h2>Summary</h2>
-      <ul class="summary-table">
-        <li><span>subtotal:</span> <span>$274.00</span></li>
-        <li><span>delivery:</span> <span>Free</span></li>
-        <li><span>discount:</span> <span>-15%</span></li>
-        <li><span>total:</span> <span>$232.00</span></li>
-      </ul>
-      <div class="checkout-btn mt-100">
-        <a href="checkout.html" class="btn essence-btn">check out</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ##### Right Side Cart End ##### -->
 <!--Register start-->
 <section class="dangky">
   <div class="to">
-    <form action="">
-      <h2>Đăng ký</h2>
-      <img src="/dangky/favicon.png" alt="logo" class="logo">
-      <label for="hoten" style="margin-left: -150px;">Họ và tên</label>
-      <input type="text" name="hoten" id="hoten">
-      <label for="matkhau">Mật khẩu</label>
-      <input type="password" name="matkhau" id="matkhau">
-      <label for="sdt">Số điện thoại</label>
-      <input type="text" name="sdt" id="sdt">
-      <label for="email" style="margin-left: -180px;">Email</label>
-      <input type="text" name="email" id="email">
-      <label for="diachi" style="margin-left: -170px;">Địa chỉ</label>
-      <input type="text" name="diachi" id="diachi">
-      <button type="submit">Đăng ký</button>
+    <form class="my-5">
+      <div class="d-flex justify-content-center">
+        <div class="my-5">
+          <h2 class="">Đăng ký</h2>
+          <img  src="/dangky/favicon.png" alt="logo" class="logo">
+        </div>
+      </div>
+
+      <div id="message"></div>
+
+        <label for="Email" class="mx-3 align-items-start">Email</label>
+        <input type="email" class="mx-3 w-75" name="Email" id="Email">
+      <div id="messageEmail" class="mx-3 text-danger"></div>
+
+
+      <label for="phoneNumber" class="mx-3">Số điện thoại</label>
+        <input type="number" class="mx-3 w-75" name="phoneNumber" id="phoneNumber">
+      <div id="messagePhoneNumber" class=" mx-3 text-danger"></div>
+
+
+
+      <label for="password" class="mx-3">Mật khẩu</label>
+      <input type="password"  class="mx-3 w-75" name="password" id="password">
+      <div id="messagePassword" class=" mx-3 text-danger"></div>
+
+        <label for="comfirmPassword" class="mx-3">Nhập lại mật khẩu</label>
+        <input type="password" class="mx-3 w-75" name="comfirmPassword" id="comfirmPassword">
+        <div id="messageComfirm" class="mx-3 text-danger"></div>
+
+      <div class=" d-flex justify-content-end">
+        <button type="button" id="dangky" class="mx-3 , my-3">Đăng ký</button>
+      </div>
+      
+      
+      
+      
     </form>
   </div>
 </section>
+
 <!--Register end-->
 
 
@@ -141,19 +85,78 @@
 <script src="js/active.js"></script>
 
 <script>
-  // function validate(){
-  //   if (document.formlogin.username.value == ""){
-  //     alert("Vui lòng nhập tên đăng nhập !");
-  //     document.formlogin.username.focus();
-  //     return false;
-  //   }
-  //   if (document.formlogin.password.value == ""){
-  //     alert("Vui lòng điền mật khẩu !");
-  //     document.formlogin.password.focus();
-  //     return false;
-  //   }
-  //
-  // }
+
+  $("#dangky").click(function (){
+    var check = true;
+    var email = $("#Email").val();
+    var phoneNumber = $("#phoneNumber").val();
+    var password = $("#password").val();
+    var comfirmPassword = $("#comfirmPassword").val();
+
+
+
+    if (comfirmPassword ===null || comfirmPassword === undefined || comfirmPassword === ""){
+      $("#messageComfirm").text("Vui lòng điền vào trường này");
+      check = false;
+      $("#comfirmPassword").focus();
+    }else if (password != comfirmPassword){
+      $("#messageComfirm").text("Mật khẩu không khớp !")
+    }
+
+    if (password ===null || password === undefined || password === ""){
+      $("#messagePassword").text("Vui lòng điền vào trường này");
+      $("#password").focus();
+      check = false;
+    }
+
+
+    if (phoneNumber ===null || phoneNumber === undefined || phoneNumber === ""){
+      $("#messagePhoneNumber").text("Vui lòng điền vào trường này");
+      $("#phoneNumber").focus();
+      check = false;
+    }
+
+
+    if (email ===null || email === undefined || email === ""){
+      $("#messageEmail").text("Vui lòng điền vào trường này");
+      $("#Email").focus();
+      check = false;
+    }
+
+
+    if (check === true){
+      var data = {
+        email : email,
+        phoneNumber : phoneNumber,
+        password : password,
+      }
+
+
+      $.ajax({
+        url: '/api/account/register',
+        type: 'POST',
+        dataType: "json",
+        contentType: 'application/json',
+        data:JSON.stringify(data),
+        success: function (response){
+          location.href="/login";
+        },
+        error: function (err) {
+          if (err.message != undefined){
+            $("#message").text("error : "+err.message);
+          }else{
+            $("#message").text("error : "+err.responseJSON.message);
+          }
+
+        }
+      });
+    }
+
+  })
+
+
+
+
 </script>
 </body>
 

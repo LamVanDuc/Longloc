@@ -15,7 +15,6 @@
 .to {
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    grid-template-rows: minmax(100px,auto);
 }
 .to form {
     border: 1px solid #80808000;
@@ -23,34 +22,27 @@
     grid-row: 3;
     height: 550px;
     width: 350px;
-    display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     border-radius: 15px;
     box-shadow: 0px 0px 14px 0px grey;
     background-color: white;
-    margin-bottom: 50px;
-    margin-left: -45px;
+
 }
-.to form h2 {
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
+
 .logo {
     display: block;
-    margin-bottom: 50px;
     width: 50px;
+    margin-left: 40px;
 }
 .dangky .to form label {
-    margin-left: -126px;
     display: block;
     font-weight: lighter;
 }
 .dangky .to form input {
     display: block;
     border-bottom: 2px solid #ededed;
-    width: 220px;
     margin-top: 6px;
     margin-bottom: 10px;
     outline-style: none;
@@ -61,9 +53,7 @@
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    margin-top: 12px;
     transition: all 0.3s ease;
+
 }
-.dangky .to form button:hover {
-    background-color: tomato;
-}
+

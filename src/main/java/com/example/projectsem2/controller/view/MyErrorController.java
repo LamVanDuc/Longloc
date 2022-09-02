@@ -28,6 +28,9 @@ public class MyErrorController implements ErrorController {
                 }else if (statusCode  == HttpStatus.ACCEPTED.value()){
                     return "/error-403";
                 }
+                else if (statusCode  == HttpStatus.METHOD_NOT_ALLOWED.value()){
+                    return "/error-405";
+                }
             }
             return "/error";
 

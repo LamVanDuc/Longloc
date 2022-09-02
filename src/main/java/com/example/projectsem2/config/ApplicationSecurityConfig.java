@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,15 +29,20 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         // không cần xác minh
         // web
-        http.authorizeRequests().antMatchers("/login","/","/img/**", "/login*","/register").permitAll();
+
+        http.authorizeRequests().antMatchers("/admin/img/**").permitAll();
+        http.authorizeRequests().antMatchers("/admin/css/**").permitAll();
+        http.authorizeRequests().antMatchers("/admin/js/**").permitAll();
         http.authorizeRequests().antMatchers("/Login/**").permitAll();
         http.authorizeRequests().antMatchers("/style.css","/static/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**" , "/js/**").permitAll();
         http.authorizeRequests().antMatchers("/shop").permitAll();
         http.authorizeRequests().antMatchers("/index","/","/home").permitAll();
         http.authorizeRequests().antMatchers("/contact").permitAll();
+        http.authorizeRequests().antMatchers("/api/account/register").permitAll();
         http.authorizeRequests().antMatchers("/blog").permitAll();
         http.authorizeRequests().antMatchers("/detail").permitAll();
+        http.authorizeRequests().antMatchers("/login","/","/img/**", "/login*","/dangky","/dangky/**","/Login/**").permitAll();
         // api
         http.authorizeRequests().antMatchers("/api/v1/sanpham/detail").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/sanpham/getall").permitAll();
