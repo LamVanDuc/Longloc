@@ -151,7 +151,14 @@ public class ApplicationController {
         return "thanhtoan";
     }
 
+<<<<<<< Updated upstream
 
+=======
+    @GetMapping("/dangky")
+    public String getDangKy(){
+        return "dangky";
+    }
+>>>>>>> Stashed changes
 
     @GetMapping("/detail")
     public String getProductDetail(Model model){
