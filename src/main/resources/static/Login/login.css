@@ -40,7 +40,7 @@ section .noi-dung .form h2{
     font-size: 1.5em;
     text-transform: uppercase;
     margin-bottom: 20px;
-    border-bottom: 4px solid #ff4584;
+    border-bottom: 4px solid #ededed;
     display: inline-block;
     letter-spacing: 1px;
 }
@@ -66,7 +66,7 @@ section .noi-dung .form .input-form input{
     border-radius: 30px;
 }
 section .noi-dung .form .input-form input[type="submit"]{
-    background: #ff4584;
+    background: #ededed;
     color: #fff;
     outline: none;
     border: none;
@@ -77,6 +77,9 @@ section .noi-dung .form .input-form input[type="submit"]{
     0 4px 4px rgba(0,0,0,0.12),
     0 8px 8px rgba(0,0,0,0.12),
     0 16px 16px rgba(0,0,0,0.12);
+}
+#btn {
+    color: black;
 }
 section .noi-dung .form .input-form input[type="submit"]:hover{
     background: #f53677;
