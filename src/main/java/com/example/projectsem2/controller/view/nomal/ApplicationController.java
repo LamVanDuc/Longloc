@@ -151,14 +151,21 @@ public class ApplicationController {
         return "thanhtoan";
     }
 
-<<<<<<< Updated upstream
 
-=======
     @GetMapping("/dangky")
-    public String getDangKy(){
+    public String getDangKy(Model model){
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung",nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
         return "dangky";
     }
->>>>>>> Stashed changes
+
+
 
     @GetMapping("/detail")
     public String getProductDetail(Model model){
