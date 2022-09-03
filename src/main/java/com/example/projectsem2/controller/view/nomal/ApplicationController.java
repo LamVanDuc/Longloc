@@ -174,7 +174,7 @@ public class ApplicationController {
         return "single-product-details";
     }
 
-    @GetMapping("/{danhmuc}")
+    @GetMapping("danhmuc/{danhmuc}")
     public String getDanhmuc(){
         return "/danhmuc";
     }
