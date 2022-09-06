@@ -33,9 +33,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/admin/img/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/css/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/js/**").permitAll();
+        http.authorizeRequests().antMatchers("/admin/style.css").permitAll();
+        http.authorizeRequests().antMatchers("/admin/fonst/**").permitAll();
+        http.authorizeRequests().antMatchers("/fonst/**").permitAll();
+        http.authorizeRequests().antMatchers("/js/**").permitAll();
         http.authorizeRequests().antMatchers("/Login/**").permitAll();
         http.authorizeRequests().antMatchers("/style.css","/static/**").permitAll();
         http.authorizeRequests().antMatchers("/css/**" , "/js/**").permitAll();
+        http.authorizeRequests().antMatchers("/fonts/**").permitAll();
         http.authorizeRequests().antMatchers("/shop").permitAll();
         http.authorizeRequests().antMatchers("/index","/","/home").permitAll();
         http.authorizeRequests().antMatchers("/contact").permitAll();
@@ -48,6 +53,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/v1/sanpham/getall").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/sanpham/*").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/sanpham/getsal").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/danhmuc/**").permitAll();
+        http.authorizeRequests().antMatchers("/danhmuc/**").permitAll();
+        http.authorizeRequests().antMatchers("/danhmuc/css/**").permitAll();
+        http.authorizeRequests().antMatchers("/danhmuc/js/**").permitAll();
+        http.authorizeRequests().antMatchers("/danhmuc/img/**").permitAll();
+        http.authorizeRequests().antMatchers("/danhmuc/style.css").permitAll();
         //phân quyền
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/error-403");
 

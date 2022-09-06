@@ -2,8 +2,9 @@ package com.example.projectsem2.controller.view.nomal;
 
 import com.example.projectsem2.Service.NguoiDungService;
 import com.example.projectsem2.entity.tblNguoidung;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ public class ApplicationController {
         }else{
             model.addAttribute("nguoidung",null);
         }
+
         return "index";
     }
 
@@ -80,24 +82,6 @@ public class ApplicationController {
         }
         return "shop";
     }
-
-
-
-    @GetMapping("/layout")
-    public String getLayout(Model model){
-        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
-
-
-        if (nguoidungOptinal.isPresent()){
-            model.addAttribute("nguoidung",nguoidungOptinal.get());
-        }else{
-            model.addAttribute("nguoidung",null);
-        }
-
-
-        return "layout";
-    }
-
 
 
     @GetMapping("/blog")
@@ -174,7 +158,22 @@ public class ApplicationController {
         return "single-product-details";
     }
 
-    @GetMapping("danhmuc/{danhmuc}")
+    @GetMapping("/layout")
+    public String getLayout(Model model){
+
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung",nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
+        return "layout";
+    }
+
+
+    @GetMapping("/danhmuc/{danhmuc}")
     public String getDanhmuc(){
         return "/danhmuc";
     }

@@ -73,31 +73,16 @@
                 <div class="classynav">
                     <ul>
                         <li><a href="/shop">Sản Phẩm</a>
-                            <div class="megamenu">
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Đồ Nữ</li>
-                                    <li><a href="/shop">Đầm</a></li>
-                                    <li><a href="váy và áo len">Váy &amp; Áo Len</a></li>
-                                    <li><a href="/shop">Áo Thun</a></li>
-                                    <li><a href="/shop">Sơ Mi Nữ</a></li>
-                                    <li><a href="/shop">Bras &amp; Đồ lót nữ</a></li>
-                                </ul>
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Đồ Nam</li>
-                                    <li><a href="/shop">Áo Phông</a></li>
-                                    <li><a href="/shop">Áo Polo</a></li>
-                                    <li><a href="/shop">Sơ Mi Nam</a></li>
-                                    <li><a href="/shop">Áo Khoác</a></li>
-                                    <li><a href="/shop">Áo Trench</a></li>
-                                </ul>
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Kid's Collection</li>
-                                    <li><a href="/shop">Dresses</a></li>
-                                    <li><a href="/shop">Shirts</a></li>
-                                    <li><a href="/shop">T-shirts</a></li>
-                                    <li><a href="/shop">Jackets</a></li>
-                                    <li><a href="/shop">Trench</a></li>
-                                </ul>
+                            <div class="megamenu" id="danhmuc">
+<!--                                <ul class="single-mega cn-col-4">-->
+<!--                                    <li class="title">Đồ Nữ</li>-->
+<!--                                    <li><a href="/danhmuc/shop">Đầm</a></li>-->
+<!--                                    <li><a href="danhmuc/váy và áo len">Váy &amp; Áo Len</a></li>-->
+<!--                                    <li><a href="/shop">Áo Thun</a></li>-->
+<!--                                    <li><a href="/shop">Sơ Mi Nữ</a></li>-->
+<!--                                    <li><a href="/shop">Bras &amp; Đồ lót nữ</a></li>-->
+<!--                                </ul>-->
+
                                 <div class="single-mega cn-col-4">
                                     <img src="img/bg-img/bg-6.jpg" alt="">
                                 </div>
@@ -122,34 +107,15 @@
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
-            <!-- Favourite Area -->
-<!--            <div class="favourite-area">-->
-<!--                <a href="#"><img src="../img/core-img/heart.svg" alt=""></a>-->
-<!--            </div>-->
-            <!-- User Login Info -->
-            <!-- switch case -->
-<!--            <div class="user-login-info dropdownInfor" th:switch="${nguoidung}">-->
-<!--                <a class="dropbtnInfor"><img src="../img/core-img/user.svg" alt=""></a>-->
-<!--                <ul th:case="null" class="dropdown-contentInfor">-->
-<!--                    <li ><a href="/login">Đăng nhập</a></li>-->
-<!--                    <li ><a href="#">Đăng ký</a></li>-->
-<!--                </ul>-->
-<!--                <ul th:case="*" class="dropdown-contentInfor">-->
-<!--                    <li ><a href="/information">Thông tin tài khoản</a></li>-->
-<!--                    <li ><a href="/donmua">Đơn mua</a></li>-->
-<!--                    <li ><a href="/logout">Đăng Xuất</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
-
             <div class="user-login-info dropdownInfor">
                 <a class="dropbtnInfor"><img src="../img/core-img/user.svg" alt=""></a>
 
-                <ul  th:if="${nguoidung != null}" class="dropdown-contentInfor">
+                <ul  th:if="${nguoidung != anonymousUser}" class="dropdown-contentInfor">
                     <li ><a href="/information">Thông tin tài khoản</a></li>
                     <li ><a href="/donmua">Đơn mua</a></li>
                     <li ><a href="/logout">Đăng Xuất</a></li>
                 </ul>
-                <ul th:unless="${nguoidung != null}"  class="dropdown-contentInfor">
+                <ul th:unless="${nguoidung != anonymousUser}"  class="dropdown-contentInfor">
                     <li ><a href="/login">Đăng nhập</a></li>
                     <li ><a href="/dangky">Đăng ký</a></li>
                 </ul>
@@ -164,15 +130,10 @@
     </div>
 </header>
 
-
-
-
 <!-- ##### Header Area End ##### -->
 <div layout:fragment="content">
 
 </div>
-
-
 
 <!-- ##### Footer Area Start ##### -->
 <footer class="footer_area clearfix">
@@ -259,7 +220,41 @@
 <script src="js/classy-nav.min.js"></script>
 <script src="js/active.js"></script>
 <script src="js/map-active.js"></script>
+
 <script>
+    $(document).ready(function (){
+        // let searchParams = new URLSearchParams(window.location.search)
+        // searchParams.has('id')
+        // let idDanhmuc = searchParams.get('id')
+        var htmlContent='';
+        $.ajax({
+            url: '/api/v1/danhmuc/getall',
+            type: 'GET',
+            dataType: "json",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (response){
+
+                response.forEach(function (item){
+                    htmlContent += '<ul class="single-mega cn-col-4">'
+                    htmlContent +='<li class="title"><a href="'+item.danhmuccha.tenDanhMuc+'">'+item.danhmuccha.tenDanhMuc+'</a>'
+
+                    item.danhmuccon.forEach(function (item){
+                        htmlContent+= '<li><a href="/danhmuc/'+item.tenDanhMuc+'">'+item.tenDanhMuc+'</a></li>\n'
+                    })
+                    htmlContent +='</ul>'
+
+                })
+
+                htmlContent+='<div class="single-mega cn-col-4">\n' +
+                    '             <img src="img/bg-img/bg-6.jpg" alt="">\n' +
+                    '         </div>'
+                $("#danhmuc").html(htmlContent);
+            },
+            error: function (err){
+            }
+        })
+
+    })
 
 </script>
 </body>

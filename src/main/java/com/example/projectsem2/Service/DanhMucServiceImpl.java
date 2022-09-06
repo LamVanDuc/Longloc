@@ -25,9 +25,27 @@ public class DanhMucServiceImpl implements DanhMucService{
 
 
     @Override
-    public List<tblDanhmuc> getAll() {
-        return danhMucRepository.findAll();
+    public List<dtoDanhmuc> getAll() {
+        List<dtoDanhmuc> dtoDanhmucs = new ArrayList<>();
+        List<tblDanhmuc> danhmucCha = danhMucRepository.findByIdDanhmucChaIsNull();
+
+
+        danhmucCha.forEach(item ->{
+            List<tblDanhmuc> danhmucList = danhMucRepository.findByIdDanhmucCha(item.getIdDanhmuc());
+            dtoDanhmucs.add(new dtoDanhmuc(item,danhmucList));
+        });
+
+
+        return dtoDanhmucs;
     }
+
+    @Override
+    public List<tblDanhmuc> getAllIdDanhMucChaNull() {
+        return danhMucRepository.findByIdDanhmucChaIsNull();
+    }
+
+
+
 
     @Override
     public List<tblDanhmuc> getDanhMucKhac(Long id) {
@@ -97,7 +115,5 @@ public class DanhMucServiceImpl implements DanhMucService{
 
         return dtoDanhmucAndSanpham;
     }
-
-
 
 }

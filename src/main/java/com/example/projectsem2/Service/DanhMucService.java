@@ -10,7 +10,10 @@ import java.util.Optional;
 
 public interface DanhMucService {
 
-    List<tblDanhmuc> getAll();
+    List<dtoDanhmuc> getAll();
+
+
+    List<tblDanhmuc> getAllIdDanhMucChaNull();
 
     List<tblDanhmuc> getDanhMucKhac(Long id);
 
