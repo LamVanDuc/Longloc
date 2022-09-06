@@ -12,7 +12,52 @@
     <title>LongLoc | Danh Mục</title>
     <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css">
     <!-- Favicon  -->
+    <link rel="stylesheet" href="/css/core-style.css">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .dropbtnInfor {
+            border: none;
+        }
 
+        .dropdownInfor {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-contentInfor {
+            display: none;
+            background-color: white;
+            position: absolute;
+            z-index: 1;
+            border: 1px solid rgba(242,244,248,.7);
+        }
+        .dropdown-contentInfor li a{
+            width: 180px !important;
+            height: 35px !important;
+            line-height: 34px !important;
+            color: #787878!important;
+            font-size: 14px !important;
+            padding: 0px 20px !important;
+        }
+
+        .dropdown-contentInfor li a:hover{
+            color: black!important;
+        }
+
+        .dropdown-contentInfor li {
+            border-bottom: 1px solid rgba(242,244,248,.7);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: rgba(242, 244, 248, 0.7);
+        }
+
+        .dropdown-contentInfor a {
+            display: block;
+        }
+
+        .dropdownInfor:hover .dropdown-contentInfor {display: block;}
+
+    </style>
 
 </head>
 
@@ -201,19 +246,18 @@
 <!-- ##### Footer Area End ##### -->
 
 <!-- jQuery (Necessary for All JavaScript Plugins) -->
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="/js/jquery/jquery-2.2.4.min.js"></script>
 <!-- Popper js -->
-<script src="js/popper.min.js"></script>
+<script src="/js/popper.min.js"></script>
 <!-- Bootstrap js -->
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <!-- Plugins js -->
-<script src="js/plugins.js"></script>
+<script src="/js/plugins.js"></script>
 <!-- Classy Nav js -->
-<script src="js/classy-nav.min.js"></script>
+<script src="/js/classy-nav.min.js"></script>
 <!-- Active js -->
-<script src="js/active.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.js"></script>
+<script src="/js/active.js"></script>
+
 <script>
 
     $(document).ready(function (){
@@ -223,49 +267,45 @@
         var pathname = window.location.pathname;
         console.log( 'patname : '+pathname)
 
+        var string = pathname.substr(9);
 
-       // var htmlContent='';
-        // $.ajax({
-        //     url: '/api/v1/sanpham/getall',
-        //     type: 'GET',
-        //     dataType: "json",
-        //     contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        //     success: function (response){
-        //         response.forEach(function (item , index){
-        //             htmlContent +='<div class="col-12 col-sm-6 col-lg-4">\n' +
-        //                 '                                <div class="single-product-wrapper">\n' +
-        //                 '                                    <div class="product-img">\n' +
-        //                 '                                        <img src="'+item.img+'" alt="">\n' +
-        //                 '                                        <img class="hover-img" src="'+item.img+'" alt="">\n' +
-        //                 // '                                        <div class="product-badge offer-badge">\n' +
-        //                 // // '                                            <span>-30%</span>\n' +
-        //                 // '                                        </div>\n' +
-        //                 // '                                        <div class="product-favourite">\n' +
-        //                 // '                                            <a href="#" class="favme fa fa-heart"></a>\n' +
-        //                 // '                                        </div>\n' +
-        //                 '                                    </div>\n' +
-        //                 '                                    <div class="product-description">\n' +
-        //                 '                                        <span>topshop</span>\n' +
-        //                 '                                        <a href="/detail?id='+item.idSanpham+'">\n' +
-        //                 '                                            <h6>'+item.tenSanPham+'</h6>\n' +
-        //                 '                                        </a>\n' +
-        //                 '                                        <p class="product-price"><span class="old-price">500000</span>'+item.giaBan+'</p>\n' +
-        //                 '                                        <div class="hover-content">\n' +
-        //                 '                                            <div class="add-to-cart-btn">\n' +
-        //                 '                                                <a href="#" onclick="themGioHang('+item.idSanpham+')" class="btn essence-btn">Add to Cart</a>\n' +
-        //                 '                                            </div>\n' +
-        //                 '                                        </div>\n' +
-        //                 '                                    </div>\n' +
-        //                 '                                </div>\n' +
-        //                 '                            </div>'
-        //             $('#itemSanpham').html(htmlContent)
-        //         })
-        //
-        //     },
-        //     error: function (err) {
-        //         alert("error : "+err.message);
-        //     }
-        // });
+       var htmlContent='';
+        $.ajax({
+            url: '/api/v1/danhmuc/name/'+string,
+            type: 'GET',
+            dataType: "json",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (response){
+                    response.data.sanphams.forEach(function (item){
+                        htmlContent +='<div class="col-12 col-sm-6 col-lg-4">\n' +
+                            '                                <div class="single-product-wrapper">\n' +
+                            '                                    <div class="product-img">\n' +
+                            '                                        <img src="'+item.img+'" alt="">\n' +
+                            '                                        <img class="hover-img" src="'+item.img+'" alt="">\n' +
+                            '                                    </div>\n' +
+                            '                                    <div class="product-description">\n' +
+                            '                                        <span>topshop</span>\n' +
+                            '                                        <a href="/detail?id='+item.idSanpham+'">\n' +
+                            '                                            <h6>'+item.tenSanPham+'</h6>\n' +
+                            '                                        </a>\n' +
+                            '                                        <p class="product-price"><span class="old-price">500000</span>'+item.giaBan+'</p>\n' +
+                            '                                        <div class="hover-content">\n' +
+                            '                                            <div class="add-to-cart-btn">\n' +
+                            '                                                <a href="#" onclick="themGioHang('+item.idSanpham+')" class="btn essence-btn">Add to Cart</a>\n' +
+                            '                                            </div>\n' +
+                            '                                        </div>\n' +
+                            '                                    </div>\n' +
+                            '                                </div>\n' +
+                            '                            </div>'
+                        $('#itemSanpham').html(htmlContent)
+                    })
+
+            },
+            error: function (err) {
+                alert("error : "+err.message);
+                $("#itemSanpham").text(err.message)
+            }
+        });
     })
 
 

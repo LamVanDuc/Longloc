@@ -21,9 +21,10 @@ public class DanhMucController {
 
     // get all
     @GetMapping("/getall")
-    public List<tblDanhmuc> getAll(){
+    public List<dtoDanhmuc> getAll(){
         return danhMucService.getAll();
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<responseObject> getByid(@PathVariable Long id){
@@ -45,7 +46,7 @@ public class DanhMucController {
     }
 
 
-    @GetMapping("filter/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<responseObject> getSanphamByDanhmuc(@PathVariable String name){
         dtoDanhmucAndSanpham dtoDanhmucAndSanpham = danhMucService.findSanphamByDanhmuc(name);
 
