@@ -47,17 +47,20 @@ public class LoginController {
         try{
             Boolean checkEmail=testUsingStrictRegex(registerAccount.getEmail());
             Boolean checkNumber = registerAccount.getPhoneNumber().startsWith("0");
+
+
+            if (checkEmail.equals(false)){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Email không hợp lệ !",""));
+
+            }
             if(registerAccount.getPhoneNumber().length() <10 || registerAccount.getPhoneNumber().length() >12 || checkNumber.equals(false)){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         new responseObject("false","Số điện thoại phải lớn hơn hoặc = 10 và bắt đầu từ 0 !",""));
 
             }if (registerAccount.getPassword().length() <8){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new responseObject("false","Tài khoản phải từ 8 ký tự trở lên !",""));
-
-            }if (checkEmail.equals(false)){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new responseObject("false","Email không hợp lệ !",""));
+                        new responseObject("false","Mật khẩu phải từ 8 ký tự trở lên !",""));
 
             }
             if (nguoiDungDetailService.checkEmailExist(registerAccount.getEmail())){
