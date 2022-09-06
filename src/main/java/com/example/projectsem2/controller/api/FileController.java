@@ -66,6 +66,19 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
+    public UploadFileResponse uploadMutiles(MultipartFile file) throws Exception{
+
+        String fileName = fileStorageService.storeFile(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/api/v1/file/downloadFile/")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
+
     @PostMapping("/uploadMultipleFiles")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) throws Exception {
 
@@ -73,7 +86,6 @@ public class FileController {
                 .stream()
                 .map(file -> {
                     try {
-
                         return uploadFile(file);
                     } catch (Exception e) {
                         e.printStackTrace();

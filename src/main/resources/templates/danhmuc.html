@@ -277,26 +277,39 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function (response){
                     response.data.sanphams.forEach(function (item){
-                        htmlContent +='<div class="col-12 col-sm-6 col-lg-4">\n' +
-                            '                                <div class="single-product-wrapper">\n' +
+                        htmlContent +='<div  class="col-12 col-sm-6 col-lg-4 mb-5">\n' +
+                            '                                <a href="/detail?id='+item.idSanpham+'" class="single-product-wrapper">\n' +
                             '                                    <div class="product-img">\n' +
-                            '                                        <img src="'+item.img+'" alt="">\n' +
-                            '                                        <img class="hover-img" src="'+item.img+'" alt="">\n' +
+                            '                                        <img style="height: 255px" src="'+item.img+'" alt="">\n' +
+                            '                                        <img style="height: 255px" class="hover-img" src="'+item.img+'" alt="">\n' +
+                            // '                                        <div class="product-badge offer-badge">\n' +
+                            // // '                                            <span>-30%</span>\n' +
+                            // '                                        </div>\n' +
+                            // '                                        <div class="product-favourite">\n' +
+                            // '                                            <a href="#" class="favme fa fa-heart"></a>\n' +
+                            // '                                        </div>\n' +
                             '                                    </div>\n' +
                             '                                    <div class="product-description">\n' +
                             '                                        <span>topshop</span>\n' +
-                            '                                        <a href="/detail?id='+item.idSanpham+'">\n' +
+                            '                                        <div>\n' +
                             '                                            <h6>'+item.tenSanPham+'</h6>\n' +
-                            '                                        </a>\n' +
-                            '                                        <p class="product-price"><span class="old-price">500000</span>'+item.giaBan+'</p>\n' +
-                            '                                        <div class="hover-content">\n' +
-                            '                                            <div class="add-to-cart-btn">\n' +
-                            '                                                <a href="#" onclick="themGioHang('+item.idSanpham+')" class="btn essence-btn">Add to Cart</a>\n' +
-                            '                                            </div>\n' +
                             '                                        </div>\n' +
+                            '                                        <p class="product-price">'+item.giaBan+'</p>\n' +//<span class="old-price">500000</span>
                             '                                    </div>\n' +
-                            '                                </div>\n' +
+                            '                                </a>\n' +
                             '                            </div>'
+                        // htmlContent += '<a href="/detail?id='+item.idSanpham+'" class="single-product-wrapper">\n' +
+                        //     '                                    <div class="product-img">\n' +
+                        //     '                                        <img src="'+item.img+'" alt="">\n' +
+                        //     '                                        <img class="hover-img" src="'+item.img+'" alt="">\n' +
+                        //     '                                    </div>\n' +
+                        //     '                                    <div class="product-description">\n' +
+                        //     '                                        <span>topshop</span>\n' +
+                        //     '                                            <h6>'+item.tenSanPham+'</h6>\n' +
+                        //     '                                        <p class="product-price">'+item.giaBan+'</p>\n' + //<span class="old-price">500000</span>
+                        //     '                                    </div>\n' +
+                        //     '                                </a>\n' +
+                        //     '                            </a>'
                         $('#itemSanpham').html(htmlContent)
                     })
 
