@@ -46,12 +46,12 @@ public class SanPhamController {
     }
 
     // get size and color
-    @GetMapping ("/getsal")
+    @PostMapping ("/getsac")
     public ResponseEntity<responseObject> findSanphamByIdSanphamchaAndMausacAndKichco(@RequestBody tblSanpham sanpham){
         tblSanpham tblSanpham = sanPhamService.findSanphamByIdSanphamchaAndMausacAndKichco(sanpham);
         if (tblSanpham == null){
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new responseObject("ok" , "Query Không thành công" , "không có sản phẩm"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new responseObject("false" , "Query Không thành công" , "Sản Phẩm Không tồn tại !"));
         }
         return ResponseEntity.status(HttpStatus.OK).body(
                 new responseObject("ok" , "Query thành công" , tblSanpham));

@@ -49,10 +49,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/detail").permitAll();
         http.authorizeRequests().antMatchers("/login","/","/img/**", "/login*","/dangky","/dangky/**","/Login/**").permitAll();
         // api
-        http.authorizeRequests().antMatchers("/api/v1/sanpham/detail").permitAll();
-        http.authorizeRequests().antMatchers("/api/v1/sanpham/getall").permitAll();
-        http.authorizeRequests().antMatchers("/api/v1/sanpham/*").permitAll();
-        http.authorizeRequests().antMatchers("/api/v1/sanpham/getsal").permitAll();
+
+        http.authorizeRequests().antMatchers("/api/v1/sanpham/**").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/danhmuc/**").permitAll();
         http.authorizeRequests().antMatchers("/danhmuc/**").permitAll();
         http.authorizeRequests().antMatchers("/danhmuc/css/**").permitAll();
