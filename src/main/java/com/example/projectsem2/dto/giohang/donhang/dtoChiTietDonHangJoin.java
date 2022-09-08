@@ -1,4 +1,4 @@
-package com.example.projectsem2.dto.donhang;
+package com.example.projectsem2.dto.giohang.donhang;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
