@@ -19,58 +19,134 @@
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
     <script src="../static/js/bootstrap.min.js"></script>
+    <style>
+        .form-select:focus{
+            color: #495057;
+            background-color: #fff;
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow:0 0 0 0.2rem rgb(0 123 255 / 25%);
+        }
+        .form-select{
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .form-input{
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        option{
+            font-weight: normal;
+            display: block;
+            white-space: nowrap;
+            min-height: 1.2em;
+            padding: 0px 2px 1px;
+        }
+        button[name=addtocart]:focus , button[name=addtocart]:hover{
+            background-color: #ff4584;
+        }
+    </style>
+
+
+
+    <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
 
 </head>
 
 <body layout:fragment="content">
-    <!-- ##### Single Product Details Area Start ##### -->
-    <section class="single_product_details_area d-flex align-items-center" >
 
-        <div class="single_product_thumb clearfix">
-            <div class="product_thumbnail_slides owl-carousel" id="image-detail">
-                <img src="img/product-img/product-big-1.jpg" alt="">
-                <img src="img/product-img/product-big-2.jpg" alt="">
-                <img src="img/product-img/product-big-3.jpg" alt="">
+
+
+<div class="container-fluid mb-3 container" >
+    <div class="row no-gutters " style="margin: 150px 0">
+        <div class="col-md-7 pr-2">
+            <div class="card" style="border: none">
+                <div class="demo">
+                    <ul id="lightSlider" style="height: 1vm">
+
+                    </ul>
+                </div>
             </div>
         </div>
+        <div class="col-md-5">
+            <div class="card " style="border: none">
+                <div>
+                    <div>
+                        <h2><span id="tenSanpham"></span></h2>
+                    </div>
+                    <div class="my-3">
+                        <span>giá : <span id="gia"></span></span>
+                    </div>
+                    <div>
+                        <p>thương hiệu : <span id="thuongHieu"></span> </p>
+                        <p>chất liệu : <span id="chatLieu"></span></p>
+                    </div>
+                    <div>
+                        <p>
+                            Mô tả : <span id="noidungMota"></span>
+                        </p>
+                    </div>
+                    <div>
+                        <div class="d-flex">
+                            <div>
+                                <label for="mausac">Màu sắc</label>
+                                <select class="form-select" onchange="getSanpham()" id="mausac">
+                                    <option>Chọn màu sắc</option>
+                                </select>
+                            </div>
+                            <div class="mx-5">
+                                <label for="kichco">Kích cỡ</label>
+                                <select class="form-select" onchange="getSanpham()" id="kichco">
+                                    <option>Chọn kích cỡ</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="message"></div>
+                    </div>
 
-        <!-- Single Product Description -->
-        <div class="single_product_desc clearfix">
-            <span name="chatLieu"></span>
-            <a>
-                <h2 name="tenSanPham"></h2>
-            </a>
-            <p class="product-price " name="price"><span  class="old-price"></span></p>
-            <p class="product-desc" name="desc"></p>
-
-            <!-- Form -->
-            <form class="cart-form clearfix" method="post">
-                <!-- Select Box -->
-                <div class="select-box d-flex mt-50 mb-30">
-                    <select name="select" id="productSize" onchange="getSanpham()" class="mr-5">
-                        <option> chọn danh mục </option>
-                        <option value="5465"> adag </option>
-                        <option value="5465"> danh muc </option>
-                        <option value="5465"> danh muc </option>
-                    </select>
-                    <select name="select" id="productColor" onchange="getSanpham()">
-                        <option> chọn danh mục </option>
-                        <option value="5654"> chọn dấgadg mục </option>
-                    </select>
+                    <div class="my-3">
+                        <label for="soluong">Số lượng mua : </label>
+                        <input type="number" class="form-input" id="soluong" min="1" style="width: 75px;" value="1">
+                    </div>
+                    <div class="cart-fav-box d-flex align-items-center">
+                        <!-- Cart -->
+                        <button type="submit" onclick="themGioHang()" name="addtocart" style="background-color: #b1b2ba" class="btn essence-btn">Thêm vào giỏ hàng</button>
+                        <!-- Favourite -->
+                    </div>
                 </div>
-                <div class="cart-fav-box d-flex align-items-center">
-
-                    <button type="button" name="addtocart" onclick="themGioHang()"  class="btn essence-btn">Thêm Giỏ Hàng</button>
-
-                </div>
-            </form>
+            </div>
         </div>
+    </div>
+</div>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+<script src='https://sachinchoolur.github.io/lightslider/dist/js/lightslider.js'></script>
+<script> $('#lightSlider').lightSlider({gallery: true, item: 1, loop: true, slideMargin: 0, thumbItem: 9});
+</script>
 
-    </section>
 
-    <!-- ##### Single Product Details Area End ##### -->
-<!--    <script src="js/jquery/jquery-2.2.4.min.js"></script>-->
-<!--    <script src="js/classy-nav.min.js"></script>-->
+
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/classy-nav.min.js"></script>
+    <script src="js/main.js"></script>
 <!--    <script src="js/active.js"></script>-->
 <!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" ></script>
@@ -93,53 +169,42 @@
     }
 
     $(document).ready(function (){
-        idSanphamCha = getParameter('id')
+        idSanphamCha = getParameter('id');
 
+        var htmlContentImage ='';
+        var htmlContentSize ='';
+        var htmlContentColor ='';
         var htmlContent ='';
+
         $.ajax({
             url: '/api/v1/sanpham/detail/'+idSanphamCha,
             type: 'GET',
             dataType: "json",
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function (response) {
-               var htmlSelect ='<option>Chọn Kích cỡ</option>';
+                response.data.images.forEach(function (item){
+                    htmlContentImage +=' <li data-thumb="'+item.tenAnh+'">\n' +
+                        '                    <img class="w-100" src="'+item.tenAnh+'"/>\n' +
+                        '                </li>';
+                })
+
+                htmlContentSize = '<option>Chọn kích cỡ</option>'
+                htmlContentColor = '<option>Chọn màu sắc</option>'
+                response.data.color.forEach(function (item){
+                    htmlContentColor += '<option value="'+item+'">'+item+'</option>'
+                })
                 response.data.size.forEach(function (item){
-                    htmlSelect +='<option value="'+item+'">'+item+'</option>'
-                });
-                $('select[id=productSize]').html(htmlSelect);
-                // if (response.data.images.length <=0){
-                //        htmlContent = '<img class="w-100 h-100" src="https://cf.shopee.vn/file/aa953c05529166595260cca216f84c24_tn" alt=" slide">\n'
-                //
-                //     $('#image-detail').html(htmlContent)
-                // }else {
-                //     response.data.image.forEach(function (item){
-                //         htmlContent +=  '<img class="w-100 h-100" src="'+item.tenAnh+'" alt="">\n'
-                //         $('#image-detail').html(htmlContent)
-                //     })
-                // }
+                    htmlContentSize += '<option value="'+item+'">'+item+'</option>'
+                })
 
-
-
-
-
-
-
-                // htmlContent = '<option>Chọn màu</option>'
-                // response.data.color.forEach(function (item){
-                //     htmlContent +='<option value="'+item+'">'+item+'</option>'
-                // })
-                // $('#productColor').innerHTML=htmlContent;
-                //
-                // $('span[name=chatLieu]').text(response.data.sanpham.chatLieu);
-                // $('h2[name=tenSanPham]').text(response.data.sanpham.tenSanPham);
-                // $('p[name=price]').text(response.data.sanpham.giaBan);
-                // $('p[name=desc]').text(response.data.sanpham.moTa);
-
-
-
-
-
-
+                $('#lightSlider').html(htmlContentImage)
+                $('#mausac').html(htmlContentColor)
+                $('#kichco').html(htmlContentSize)
+                $('#tenSanpham').html(response.data.sanpham.tenSanPham)
+                $('#chatLieu').html(response.data.sanpham.chatLieu)
+                $('#thuongHieu').html(response.data.sanpham.thuongHieu)
+                $('#noidungMota').html(response.data.sanpham.moTa)
+                $('#gia').html(formatMoney(response.data.sanpham.giaBan))
             },
             error: function (err) {
                 alert("error : " + err.message);
@@ -147,20 +212,50 @@
         });
     });
 
+
+
+
     var idSanpham = '';
     function getSanpham(){
-      var color = $('#productColor').val();
-      var size = $('#productSize').val();
+      var color = $('#mausac').val();
+      var size = $('#kichco').val();
 
-      if (checkvalue(color) && checkvalue(size)){
-          alert("ok")
+      if (checkvalue(color) === true && checkvalue(size) === true){
+
+          var postData = {
+              idSanphamCha: idSanphamCha,
+              mauSac: color ,
+              kichCo: size ,
+
+          }
+          var htmlContent = '';
+
+          $.ajax({
+          url: '/api/v1/sanpham/getsac',
+              type: 'POST',
+              dataType: "json",
+              contentType: 'application/json',
+              data:JSON.stringify(postData),
+              success: function (response) {
+                  htmlContent +='<p>Số lượng : '+response.data.soLuong+'</p>'
+                  idSanpham = response.data.idSanpham;
+
+              $('#message').html(htmlContent);
+          },
+          error: function (err) {
+
+              htmlContent +='<p>Sản phẩm đã hết hàng , vui lòng chọn lại !</p>'
+              $('#message').html(htmlContent)
+          }
+
+      });
       }else {
-          alert("false")
+
       }
     }
 
     function checkvalue(value){
-        if (color === null || color === undefined || color ===''){
+        if (value === null || value === undefined || value ==='' || value === "Chọn kích cỡ" || value ==="Chọn màu sắc"){
             return false;
         }else {
             return true;
@@ -169,11 +264,11 @@
 
     function themGioHang(){
         if (idSanpham === '' || idSanpham === null || idSanpham === undefined){
-            $('#message').html('<div class="alert alert-danger" role="alert" >Vui lòng chọn size và màu sắc yêu thích !</div>')
+            $('#message').html('<div class="alert alert-danger" role="alert" >Có thể bạn chưa chọn hoặc hàng đã hết , Vui lòng chọn size và màu sắc yêu thích !</div>')
         }else {
             var dataGiohang ={
                 idSanpham : idSanpham,
-                soLuong : $('#soluongmua').val()
+                soLuong : $('#soluong').val()
             }
 
             $.ajax({
@@ -188,10 +283,11 @@
                 //     "Authorization": "Bearer "+jwt
                 // },
                 success: function (response) {
-                    $('#message').html('<div class="alert alert-success" role="alert" >Thêm giỏ hàng thành công .</div>')
+                    location.href="/giohang";
                 },
                 error: function (err) {
-                    if (err.status === 500){
+                    if (err.status === 200){
+                        alert("vui lòng đăng nhập !")
                         location.href="/login";
                     }
                     if (err.message === undefined){
