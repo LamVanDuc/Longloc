@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout.html}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Tabs - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="/donmua/donmua.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#tabs" ).tabs();
+        } );
+    </script>
+
+</head>
+<body layout:fragment="content">
+<section class="donmua">
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">Tất cả</a></li>
+            <li><a href="#tabs-2">Đơn đã mua</a></li>
+            <li><a href="#tabs-3">Đơn đang giao</a></li>
+            <li><a href="#tabs-4">Đơn đã giao</a></li>
+            <li><a href="#tabs-5">Đơn đã hủy</a></li>
+        </ul>
+        <div id="tabs-1">
+            <form action="">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Miêu tả</th>
+                        <th>Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><img src="img/product-img/product-1.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/product-img/product-2.jpg" alt="" ></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="tabs-2">
+            <form action="">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Miêu tả</th>
+                        <th>Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><img src="img/product-img/product-1.jpg" alt="" ></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/product-img/product-2.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="tabs-3">
+            <form action="">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Miêu tả</th>
+                        <th>Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><img src="img/product-img/product-1.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/product-img/product-2.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="tabs-4">
+            <form action="">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Miêu tả</th>
+                        <th>Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><img src="img/product-img/product-1.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/product-img/product-2.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="tabs-5">
+            <form action="">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Miêu tả</th>
+                        <th>Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><img src="img/product-img/product-1.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước : </li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/product-img/product-2.jpg" alt=""></td>
+                        <td>
+                            <ul>
+                                <li>Tên sản phẩm :</li>
+                                <li>Kích thước :</li>
+                                <li>Số lượng :</li>
+                            </ul>
+                        </td>
+                        <td>300.000 <sup>vnd</sup></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+    </div>
+</section>
+</body>
+
+</html>
