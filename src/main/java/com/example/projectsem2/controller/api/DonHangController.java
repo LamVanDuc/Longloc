@@ -1,7 +1,7 @@
 package com.example.projectsem2.controller.api;
 
 import com.example.projectsem2.Service.DonHangService;
-import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
+import com.example.projectsem2.dto.giohang.donhang.dtoChiTietDonHang;
 import com.example.projectsem2.dto.responseObject;
 import com.example.projectsem2.entity.tblDonhang;
 import javassist.NotFoundException;

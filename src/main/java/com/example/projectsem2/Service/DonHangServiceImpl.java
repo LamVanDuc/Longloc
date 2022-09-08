@@ -1,7 +1,7 @@
 package com.example.projectsem2.Service;
 
 import com.example.projectsem2.comman.GenaricClass;
-import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
+import com.example.projectsem2.dto.giohang.donhang.dtoChiTietDonHang;
 import com.example.projectsem2.dto.dtoSanphamAndChitietdonhang;
 import com.example.projectsem2.entity.*;
 import com.example.projectsem2.reponsitory.ChiTietDonHangRepository;

@@ -1,4 +1,4 @@
-package com.example.projectsem2.dto.donhang;
+package com.example.projectsem2.dto.giohang.donhang;
 
 
 import com.example.projectsem2.entity.tblDonhang;

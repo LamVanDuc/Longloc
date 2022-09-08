@@ -1,7 +1,6 @@
 package com.example.projectsem2.Service;
 
-import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
-import com.example.projectsem2.dto.donhang.dtoDonhangAndChitietdonhang;
+import com.example.projectsem2.dto.giohang.donhang.dtoChiTietDonHang;
 import com.example.projectsem2.entity.tblChitietdonhang;
 import com.example.projectsem2.entity.tblDonhang;
 import javassist.NotFoundException;

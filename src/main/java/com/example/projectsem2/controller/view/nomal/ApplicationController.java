@@ -172,9 +172,24 @@ public class ApplicationController {
         return "layout";
     }
 
+    @GetMapping("/infomation")
+    public String thongTinCaNhan(Model model){
+
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung",nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
+        return "thongtincanhan";
+    }
+
 
     @GetMapping("/danhmuc/{danhmuc}")
     public String getDanhmuc(){
         return "/danhmuc";
     }
+
 }
