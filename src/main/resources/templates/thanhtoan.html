@@ -246,7 +246,6 @@ var id_DiaChiGiaoHang;
 
   })
 
-
 function dathang(){
     var dataDathang ={
       idDiachigiaohang : id_DiaChiGiaoHang,
@@ -260,8 +259,7 @@ function dathang(){
     contentType: 'application/json',
     data:JSON.stringify(dataDathang),
     success: function (response){
-      alert("dat hang thanh cong");
-      location.href="/shop";
+      location.href="/donmua";
     },
     error: function (err) {
       if (err.message != undefined){
