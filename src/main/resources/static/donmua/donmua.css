@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#tabs {
+    width: 90%;
+    margin-left: 5%;
+    border: none;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+}
+.donmua ul li a {
+    padding: 8px 90px;
+}
+#ui-id-2 {
+    padding: 8px 100px;
+}
+#ui-id-3 {
+    padding: 8px 100px;
+}
+#ui-id-4 {
+    padding: 8px 100px;
+}
+#ui-id-5 {
+    padding: 8px 100px;
+}
+
+#ui-id-1 {
+    padding: 8px 100px;
+}
+.ui-widget-header {
+    background-color: #ffffff;
+    border: none;
+}
+#tabs form table td:nth-child(2) {
+    width: 930px;
+    padding-left: 60px;
+}
+#tabs form table ul {
+    list-style-type: none;
+}
+#tabs form table thead tr th {
+    border-bottom: 1px outset gray;
+    padding: 15px 12px;
+}
+#tabs form table thead tr th:nth-child(2) {
+    text-align: left;
+    padding-left: 100px;
+}
+#tabs form table ul li:nth-child(1) {
+    font-weight: bold;
+}
+#tabs form table ul li:nth-child(2) {
+    font-weight: lighter;
+}
+#tabs form table td:nth-child(1) img {
+    padding-left: 20px;
+    max-width: 258px;
+    max-height: 100px;
+}
+#tabs form table td:nth-child(3) {
+    width: 200px;
+    text-align: center;
+}
+#tabs form table td {
+    border-bottom: 1px dashed gray;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+#tabs form table {
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
