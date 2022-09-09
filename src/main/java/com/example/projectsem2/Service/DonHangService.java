@@ -55,5 +55,7 @@ public interface DonHangService {
 
     boolean daNhanDonhang(String id);
 
+    Boolean mualaidonhang(String idDonhang);
+
 
 }

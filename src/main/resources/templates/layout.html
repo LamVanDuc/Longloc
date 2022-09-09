@@ -216,9 +216,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
     $(document).ready(function (){
-        // let searchParams = new URLSearchParams(window.location.search)
-        // searchParams.has('id')
-        // let idDanhmuc = searchParams.get('id')
+
         var htmlContent='';
         $.ajax({
             url: '/api/v1/danhmuc/getall',
@@ -235,7 +233,6 @@
                         htmlContent+= '<li><a href="/danhmuc/'+item.tenDanhMuc+'">'+item.tenDanhMuc+'</a></li>\n'
                     })
                     htmlContent +='</ul>'
-
                 })
 
                 htmlContent+='<div class="single-mega cn-col-4">\n' +

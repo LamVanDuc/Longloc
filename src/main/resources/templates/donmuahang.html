@@ -92,33 +92,11 @@
             <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn4" href="#danhan">Đã nhận</a></li>
             <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn5" href="#dahuy">Đã hủy</a></li>
         </ul>
-
-        <div id="tatca">
-
-
-
-        </div>
-
-
-        <div id="dangcho">
-
-
-
-        </div>
-        <div id="danggiao">
-
-
-
-        </div>
-        <div id="danhan">
-
-
-
-        </div>
-        <div id="dahuy">
-
-        </div>
-
+        <div id="tatca"></div>
+        <div id="dangcho"></div>
+        <div id="danggiao"></div>
+        <div id="danhan"></div>
+        <div id="dahuy"></div>
     </div>
 
     <script src="js/main.js"></script>
@@ -134,7 +112,8 @@
                     var htmlContent = '';
                     var tongtien = 0;
                     response.data.forEach(function (item) {
-                        htmlContent += '<div class="my-5">\n' +
+                        htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
+                            '<div class="mx-5">\n' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
@@ -160,7 +139,7 @@
                                 '                                    <h5>' + item.sanpham.tenSanPham + '</h5>\n' +
                                 '                                </div>\n' +
                                 '                                <div style="color: #8C8CAA">\n' +
-                                '                                    <label>Phân loại</label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
+                                '                                    <label>Phân loại : </label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
                                 '                                </div>\n' +
                                 '                                <div>x'+item.chitietdonhang.soLuong+'</div>\n' +
                                 '                            </div>\n' +
@@ -171,7 +150,6 @@
                                 '                    </div>'
 
                             tongtien += parseInt(item.chitietdonhang.gia) * parseInt(item.chitietdonhang.soLuong);
-
                         })
 
                         htmlContent += '<div class="border-top py-3 px-2">\n' +
@@ -180,13 +158,11 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="mualai()" class="btn btn-danger">Mua lại</button>\n' +
+                            '                                <button type="button" onclick="mualai(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Mua lại</button>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
-                            '\n' +
-                            '                </div>' +
-                            '<hr class="mb-5" style="height:2px;border-width:0;color:gray;background-color:gray">'
+                            '                </div>'
                     })
 
                     $("#tatca").html(htmlContent)
@@ -212,7 +188,8 @@
                     var htmlContent = '';
                     var tongtien = 0;
                     response.data.forEach(function (item) {
-                        htmlContent += '<div class="my-5">\n' +
+                        htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
+                            '<div class="mx-5">\n' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
@@ -238,7 +215,7 @@
                                 '                                    <h5>' + item.sanpham.tenSanPham + '</h5>\n' +
                                 '                                </div>\n' +
                                 '                                <div style="color: #8C8CAA">\n' +
-                                '                                    <label>Phân loại</label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
+                                '                                    <label>Phân loại : </label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
                                 '                                </div>\n' +
                                 '                                <div>x'+item.chitietdonhang.soLuong+'</div>\n' +
                                 '                            </div>\n' +
@@ -258,13 +235,12 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="huydonhang()" class="btn btn-danger">Hủy</button>\n' +
+                            '                                <button type="button" onclick="huydonhang(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Hủy</button>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
                             '\n' +
-                            '                </div>' +
-                            '<hr class="mb-5" style="height:2px;border-width:0;color:gray;background-color:gray">'
+                            '                </div>'
                     })
 
                     $("#dangcho").html(htmlContent)
@@ -292,7 +268,8 @@
                     var htmlContent = '';
                     var tongtien = 0;
                     response.data.forEach(function (item) {
-                        htmlContent += '<div class="my-5">\n' +
+                        htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
+                            '<div class="mx-5">\n' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
@@ -318,7 +295,7 @@
                                 '                                    <h5>' + item.sanpham.tenSanPham + '</h5>\n' +
                                 '                                </div>\n' +
                                 '                                <div style="color: #8C8CAA">\n' +
-                                '                                    <label>Phân loại</label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
+                                '                                    <label>Phân loại : </label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
                                 '                                </div>\n' +
                                 '                                <div>x'+item.chitietdonhang.soLuong+'</div>\n' +
                                 '                            </div>\n' +
@@ -338,17 +315,14 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="daNhanHang()" class="btn btn-danger">Đã nhận hàng</button>\n' +
+                            '                                <button type="button" onclick="daNhanHang(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Đã nhận hàng</button>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
                             '\n' +
-                            '                </div>' +
-                            '<hr class="mb-5" style="height:2px;border-width:0;color:gray;background-color:gray">'
+                            '                </div>'
                     })
-
                     $("#danggiao").html(htmlContent)
-
                 },
                 error: function (err) {
                     if (err.message != undefined){
@@ -371,7 +345,8 @@
                     var htmlContent = '';
                     var tongtien = 0;
                     response.data.forEach(function (item) {
-                        htmlContent += '<div class="my-5">\n' +
+                        htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
+                            '<div class="mx-5">\n' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
@@ -397,7 +372,7 @@
                                 '                                    <h5>' + item.sanpham.tenSanPham + '</h5>\n' +
                                 '                                </div>\n' +
                                 '                                <div style="color: #8C8CAA">\n' +
-                                '                                    <label>Phân loại</label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
+                                '                                    <label>Phân loại : </label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
                                 '                                </div>\n' +
                                 '                                <div>x'+item.chitietdonhang.soLuong+'</div>\n' +
                                 '                            </div>\n' +
@@ -417,13 +392,12 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="mualai()" class="btn btn-danger">Mua lại</button>\n' +
+                            '                                <button type="button" onclick="mualai(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Mua lại</button>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
                             '\n' +
-                            '                </div>' +
-                            '<hr class="mb-5" style="height:2px;border-width:0;color:gray;background-color:gray">'
+                            '                </div>'
                     })
 
                     $("#danhan").html(htmlContent)
@@ -450,7 +424,8 @@
                     var htmlContent = '';
                     var tongtien = 0;
                     response.data.forEach(function (item) {
-                        htmlContent += '<div class="my-5">\n' +
+                        htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
+                            '<div class="mx-5">\n' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
@@ -462,10 +437,7 @@
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>'
-
                         item.chitietsanphamAndChitietdonhang.forEach(function (item) {
-
-
                             htmlContent += '<div class="d-flex  align-items-center justify-content-between py-3">\n' +
                                 '                        <div class="d-flex w-75">\n' +
                                 '                            <div>\n' +
@@ -476,7 +448,7 @@
                                 '                                    <h5>' + item.sanpham.tenSanPham + '</h5>\n' +
                                 '                                </div>\n' +
                                 '                                <div style="color: #8C8CAA">\n' +
-                                '                                    <label>Phân loại</label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
+                                '                                    <label>Phân loại : </label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
                                 '                                </div>\n' +
                                 '                                <div>x'+item.chitietdonhang.soLuong+'</div>\n' +
                                 '                            </div>\n' +
@@ -485,9 +457,7 @@
                                 '                            <span style="color: red">' + formatMoney(item.chitietdonhang.gia) + '</span>\n' +
                                 '                        </div>\n' +
                                 '                    </div>'
-
                             tongtien += parseInt(item.chitietdonhang.gia) * parseInt(item.chitietdonhang.soLuong);
-
                         })
 
                         htmlContent += '<div class="border-top py-3 px-2">\n' +
@@ -496,13 +466,12 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="mualai()" class="btn btn-danger">Mua lại</button>\n' +
+                            '                                <button type="button" onclick="mualai(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Mua lại</button>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
-                            '\n' +
-                            '                </div>' +
-                            '<hr class="mb-5" style="height:2px;border-width:0;color:gray;background-color:gray">'
+                            '                </div>'
+
                     })
                     $("#dahuy").html(htmlContent)
 
@@ -518,11 +487,73 @@
             });
         })
 
+        function mualai(id){
+            if(confirm('Bạn muốn mua lại hàng ?')){
+                $.ajax({
+                    url: '/api/v1/donhang/mualai/'+id,
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: 'application/json',
+                    success: function (response){
+                        location.href="/thanhtoan";
 
-        function mualai(){}
+                    },
+                    error: function (err) {
+                        if (err.message != undefined){
+                            alert("error : "+err.message);
+                        }else {
+                            alert("Error : "+err.responseJSON.message)
+                        }
 
+                    }
+                });
+            }
+        }
 
-        function huydonhang(){}
+        function daNhanHang(id){
+            if(confirm('Bạn muốn mua lại hàng ?')){
+                $.ajax({
+                    url: '/api/v1/donhang/nhandon/'+id,
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: 'application/json',
+                    success: function (response){
+                        location.reload()
+                    },
+                    error: function (err) {
+                        if (err.message != undefined){
+                            alert("error : "+err.message);
+                        }else {
+                            alert("Error : "+err.responseJSON.message)
+                        }
+
+                    }
+                });
+            }
+        }
+
+        function huydonhang(id){
+            if(confirm('Bạn muốn hủy đơn hàng này ?')){
+                $.ajax({
+                    url: '/api/v1/donhang/huydon/'+id,
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: 'application/json',
+                    success: function (response){
+                        location.reload();
+
+                    },
+                    error: function (err) {
+                        if (err.message != undefined){
+                            alert("error : "+err.message);
+                        }else {
+                            alert("Error : "+err.responseJSON.message)
+                        }
+
+                    }
+                });
+            }
+        }
 
     </script>
 </section>

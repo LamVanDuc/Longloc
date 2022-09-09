@@ -23,6 +23,14 @@ public class tblGiohang {
     @Column(name = "id_sanpham")
     private Long idSanpham;
 
+    public tblGiohang(Long idSanpham, Long soLuong) {
+        this.idSanpham = idSanpham;
+        this.soLuong = soLuong;
+    }
+
+    public tblGiohang() {
+    }
+
     public long getIdGiohang() {
         return idGiohang;
     }
