@@ -102,6 +102,17 @@ public class DonHangController {
                     new responseObject("false" , "Đơn hàng không trong Trạng thái đang giao" ,check));
         }
     }
+    @PostMapping("/mualai/{id}")
+    public ResponseEntity<responseObject> muaLaiDonHang(@PathVariable String id){
+        try{
+            Boolean donhang1 = donHangService.mualaidonhang(id);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok" , "Add giỏ hàng thành công !" ,donhang1));
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new responseObject("false","đã sảy ra lỗi!",ex.getLocalizedMessage()));
+        }
+    }
 
 
 

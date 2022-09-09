@@ -44,7 +44,6 @@ public class GioHangServiceImpl implements GioHangService{
     @Override
     public tblGiohang addGioHang(tblGiohang newGiohang) throws RuntimeException{
         newGiohang.setIdNguoidung(nguoiDungService.idNguoidung());
-//        tblChitietsanpham chitietsanpham = chiTietSanPhamReponsitory.findByIdChitietsanpham(newGiohang.getIdChitietsanpham());
         tblSanpham sanpham = sanPhamRepository.findByIdSanpham(newGiohang.getIdSanpham());
         if (gioHangReponsitory.existsByIdSanpham(newGiohang.getIdSanpham())){
             tblGiohang giohang = gioHangReponsitory.findByIdNguoidungAndIdSanpham(nguoiDungService.idNguoidung() , newGiohang.getIdSanpham());

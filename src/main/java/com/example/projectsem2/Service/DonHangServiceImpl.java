@@ -383,4 +383,22 @@ public class DonHangServiceImpl implements DonHangService{
             return false;
         }
     }
+
+    @Override
+    public Boolean mualaidonhang(String idDonhang) {
+        GioHangServiceImpl.giohangs.clear();
+        Optional<tblDonhang> donhang = findDonhangByIdDonHang(idDonhang);
+        if (donhang.isEmpty()){
+            throw new RuntimeException("Không tìm thấy đơn hàng");
+        }else {
+            List<tblChitietdonhang> chitietdonhang = chiTietDonHangRepository.findByIdDonhang(donhang.get().getIdDonhang());
+            chitietdonhang.forEach(item->{
+                tblGiohang giohang = gioHangService.addGioHang(new tblGiohang(item.getIdSanpham() , item.getSoLuong()));
+                GioHangServiceImpl.giohangs.add(giohang);
+            });
+            return true;
+        }
+    }
+
+
 }
