@@ -3,6 +3,7 @@ package com.example.projectsem2.controller.view.nomal;
 import com.example.projectsem2.Service.NguoiDungService;
 import com.example.projectsem2.entity.tblNguoidung;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -171,14 +172,49 @@ public class ApplicationController {
         return "layout";
     }
 
+    @GetMapping("/infomation")
+    public String thongTinCaNhan(Model model){
+
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung",nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
+        return "thongtincanhan";
+    }
+
 
     @GetMapping("/danhmuc/{danhmuc}")
-    public String getDanhmuc(){
+
+    public String getDanhmuc(Model model){
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung",nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
         return "/danhmuc";
     }
 
-    @GetMapping("/donmuahang")
-    public String getDonMuaHang(){
+
+    @GetMapping("/donmua")
+    public String getDonMuaHang(Model model){
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung",nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
         return "donmuahang";
     }
+
 }
+
+

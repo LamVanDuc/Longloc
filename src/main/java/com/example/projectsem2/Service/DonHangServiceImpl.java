@@ -1,7 +1,7 @@
 package com.example.projectsem2.Service;
 
 import com.example.projectsem2.comman.GenaricClass;
-import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
+import com.example.projectsem2.dto.giohang.donhang.dtoChiTietDonHang;
 import com.example.projectsem2.dto.dtoSanphamAndChitietdonhang;
 import com.example.projectsem2.entity.*;
 import com.example.projectsem2.reponsitory.ChiTietDonHangRepository;
@@ -160,189 +160,180 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     public List<dtoChiTietDonHang> findAllTrangthaiDaNhan() {
         List<tblDonhang> donhangList =  donHangRepository.findByTrangThai(GenaricClass.TRANGTHAI_daNhanHang);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDaNhan(){
 
         List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_daNhanHang);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findAllTrangthaiChoXacNhan() {
 
         List<tblDonhang> donhangList = donHangRepository.findByTrangThai(GenaricClass.TRANGTHAI_dangCho);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiChoXacNhan() {
 
         List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_dangCho);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findAllTrangthaiDangGiao() {
 
+
         List<tblDonhang> donhangList =  donHangRepository.findByTrangThai(GenaricClass.TRANGTHAI_dangGiao);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDangGiao() {
 
         List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_dangGiao);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findAllTrangthaiHuydonhang() {
 
         List<tblDonhang> donhangList =  donHangRepository.findByTrangThai(GenaricClass.TRANGTHAI_huydonhang);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiHuydonhang() {
         List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung() , GenaricClass.TRANGTHAI_huydonhang);
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findAllDonHangByNguoidung() {
 
         List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidung(nguoiDungService.idNguoidung());
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
     public List<dtoChiTietDonHang> findAllDonHang() {
 
         List<tblDonhang> donhangList = donHangRepository.findAll();
-        List<dtoChiTietDonHang> chitietDonhang = new ArrayList<dtoChiTietDonHang>();
-        List<dtoSanphamAndChitietdonhang> chitietdonhangs =new ArrayList<>();
-        donhangList.forEach(item->{
-            List<tblChitietdonhang> dtoChitietDonhangs =chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
-            dtoChitietDonhangs.forEach(chitietdonhang->{
-                tblSanpham sanpham =sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
-                chitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
-            });
-            chitietDonhang.add( new dtoChiTietDonHang(item , chitietdonhangs));
-        });
-
-        return chitietDonhang;
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
     @Override
@@ -392,4 +383,22 @@ public class DonHangServiceImpl implements DonHangService{
             return false;
         }
     }
+
+    @Override
+    public Boolean mualaidonhang(String idDonhang) {
+        GioHangServiceImpl.giohangs.clear();
+        Optional<tblDonhang> donhang = findDonhangByIdDonHang(idDonhang);
+        if (donhang.isEmpty()){
+            throw new RuntimeException("Không tìm thấy đơn hàng");
+        }else {
+            List<tblChitietdonhang> chitietdonhang = chiTietDonHangRepository.findByIdDonhang(donhang.get().getIdDonhang());
+            chitietdonhang.forEach(item->{
+                tblGiohang giohang = gioHangService.addGioHang(new tblGiohang(item.getIdSanpham() , item.getSoLuong()));
+                GioHangServiceImpl.giohangs.add(giohang);
+            });
+            return true;
+        }
+    }
+
+
 }

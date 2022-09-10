@@ -2,11 +2,14 @@ package com.example.projectsem2.controller.api;
 
 
 import com.example.projectsem2.Service.NguoiDungService;
+import com.example.projectsem2.dto.dtoThayDoiNguoiDung;
+import com.example.projectsem2.dto.responseObject;
 import com.example.projectsem2.entity.tblNguoidung;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,33 @@ public class NguoidungController {
        return nguoiDungService.findByEmail();
     }
 
+    @PostMapping("/changepassword")
+    public ResponseEntity<responseObject> changePassword(@RequestBody dtoThayDoiNguoiDung dtoThayDoiNguoiDung){
+        try {
+            tblNguoidung nguoidung = nguoiDungService.changePassword(dtoThayDoiNguoiDung);
+
+            return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok", "thay đổi password thành công" , nguoidung));
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new responseObject("false", "Đã sảy ra lỗi !" , ex));
+        }
+    }
+
+    @PostMapping("/changephone")
+    public ResponseEntity<responseObject> changePhonenumber(@RequestBody dtoThayDoiNguoiDung dtoThayDoiNguoiDung){
+        try {
+            Boolean checkNumber = dtoThayDoiNguoiDung.getPhoneNumber().startsWith("0");
+            if(dtoThayDoiNguoiDung.getPhoneNumber().length() <10 || dtoThayDoiNguoiDung.getPhoneNumber().length() >12 || checkNumber.equals(false)){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Số điện thoại phải lớn hơn hoặc = 10 và bắt đầu từ 0 !",""));
+
+            }
+            tblNguoidung nguoidung = nguoiDungService.update(dtoThayDoiNguoiDung);
+
+            return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok", "thay đổi số điện thoại thành công" , nguoidung));
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new responseObject("false", "đã xảy ra lỗi!" , ex));
+        }
+    }
 
 
 }

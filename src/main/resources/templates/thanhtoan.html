@@ -67,32 +67,6 @@
           </tr>
           </thead>
           <tbody id="data">
-
-<!--          <tr>-->
-<!--            <td><img src="/img/product-img/product-2.jpg" alt="" style="width: 80px"><span>Sản Phẩm 2</span></td>-->
-<!--            <td>đỏ</td>-->
-<!--            <td>xl</td>-->
-<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
-<!--            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>-->
-<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td><img src="/img/product-img/product-3.jpg" alt="" style="width: 80px"><span>Sản Phẩm 3</span></td>-->
-<!--            <td>đỏ</td>-->
-<!--            <td>xl</td>-->
-<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
-<!--            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>-->
-<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
-<!--          </tr>-->
-<!--          <tr>-->
-<!--            <td><img src="/img/product-img/product-4.jpg" alt="" style="width: 80px"><span>Sản Phẩm 4</span></td>-->
-<!--            <td>đỏ</td>-->
-<!--            <td>xl</td>-->
-<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
-<!--            <td><input type="number" value="1" min="1" style="width: 30px;outline: none;"></td>-->
-<!--            <td><span>300.000</span><sup>vnd</sup></td>-->
-<!--          </tr>-->
-
           </tbody>
         </table>
         <h4 style="color: red"><span>Tổng tiền :</span><span id="total"></span></h4>
@@ -195,33 +169,7 @@
 
 <!-- ##### Thanh toan End ##### -->
 
-<!-- ##### Brands Area Start ##### -->
-<!--<div class="brands-area d-flex align-items-center justify-content-between">-->
-<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
-<!--  <div class="single-brands-logo">-->
-<!--    <img src="img/core-img/brand1.png" alt="">-->
-<!--  </div>-->
-<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
-<!--  <div class="single-brands-logo">-->
-<!--    <img src="img/core-img/brand2.png" alt="">-->
-<!--  </div>-->
-<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
-<!--  <div class="single-brands-logo">-->
-<!--    <img src="img/core-img/brand3.png" alt="">-->
-<!--  </div>-->
-<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
-<!--  <div class="single-brands-logo">-->
-<!--    <img src="img/core-img/brand4.png" alt="">-->
-<!--  </div>-->
-<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
-<!--  <div class="single-brands-logo">-->
-<!--    <img src="img/core-img/brand5.png" alt="">-->
-<!--  </div>-->
-<!--  &lt;!&ndash; Brand Logo &ndash;&gt;-->
-<!--  <div class="single-brands-logo">-->
-<!--    <img src="img/core-img/brand6.png" alt="">-->
-<!--  </div>-->
-<!--</div>-->
+
 <script src="js/jquery/jquery-2.2.4.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -298,7 +246,6 @@ var id_DiaChiGiaoHang;
 
   })
 
-
 function dathang(){
     var dataDathang ={
       idDiachigiaohang : id_DiaChiGiaoHang,
@@ -312,8 +259,7 @@ function dathang(){
     contentType: 'application/json',
     data:JSON.stringify(dataDathang),
     success: function (response){
-      alert("dat hang thanh cong");
-      location.href="/shop";
+      location.href="/donmua";
     },
     error: function (err) {
       if (err.message != undefined){

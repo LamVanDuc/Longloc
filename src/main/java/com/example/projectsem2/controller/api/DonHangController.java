@@ -1,7 +1,7 @@
 package com.example.projectsem2.controller.api;
 
 import com.example.projectsem2.Service.DonHangService;
-import com.example.projectsem2.dto.donhang.dtoChiTietDonHang;
+import com.example.projectsem2.dto.giohang.donhang.dtoChiTietDonHang;
 import com.example.projectsem2.dto.responseObject;
 import com.example.projectsem2.entity.tblDonhang;
 import javassist.NotFoundException;
@@ -100,6 +100,17 @@ public class DonHangController {
         }else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new responseObject("false" , "Đơn hàng không trong Trạng thái đang giao" ,check));
+        }
+    }
+    @PostMapping("/mualai/{id}")
+    public ResponseEntity<responseObject> muaLaiDonHang(@PathVariable String id){
+        try{
+            Boolean donhang1 = donHangService.mualaidonhang(id);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok" , "Add giỏ hàng thành công !" ,donhang1));
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new responseObject("false","đã sảy ra lỗi!",ex.getLocalizedMessage()));
         }
     }
 

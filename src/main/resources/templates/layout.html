@@ -76,15 +76,6 @@
                     <ul>
                         <li><a href="/shop">Sản Phẩm</a>
                             <div class="megamenu" id="danhmuc">
-<!--                                <ul class="single-mega cn-col-4">-->
-<!--                                    <li class="title">Đồ Nữ</li>-->
-<!--                                    <li><a href="/danhmuc/shop">Đầm</a></li>-->
-<!--                                    <li><a href="danhmuc/váy và áo len">Váy &amp; Áo Len</a></li>-->
-<!--                                    <li><a href="/shop">Áo Thun</a></li>-->
-<!--                                    <li><a href="/shop">Sơ Mi Nữ</a></li>-->
-<!--                                    <li><a href="/shop">Bras &amp; Đồ lót nữ</a></li>-->
-<!--                                </ul>-->
-
                                 <div class="single-mega cn-col-4">
                                     <img src="img/bg-img/bg-6.jpg" alt="">
                                 </div>
@@ -113,7 +104,7 @@
                 <a class="dropbtnInfor"><img src="../img/core-img/user.svg" alt=""></a>
 
                 <ul  th:if="${nguoidung != anonymousUser}" class="dropdown-contentInfor">
-                    <li ><a href="/information">Thông tin tài khoản</a></li>
+                    <li ><a href="/infomation">Thông tin tài khoản</a></li>
                     <li ><a href="/donmua">Đơn mua</a></li>
                     <li ><a href="/logout">Đăng Xuất</a></li>
                 </ul>
@@ -225,9 +216,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
     $(document).ready(function (){
-        // let searchParams = new URLSearchParams(window.location.search)
-        // searchParams.has('id')
-        // let idDanhmuc = searchParams.get('id')
+
         var htmlContent='';
         $.ajax({
             url: '/api/v1/danhmuc/getall',
@@ -238,13 +227,12 @@
 
                 response.forEach(function (item){
                     htmlContent += '<ul class="single-mega cn-col-4">'
-                    htmlContent +='<li class="title"><a href="'+item.danhmuccha.tenDanhMuc+'">'+item.danhmuccha.tenDanhMuc+'</a>'
+                    htmlContent +='<li class="title"><a>'+item.danhmuccha.tenDanhMuc+'</a>'
 
                     item.danhmuccon.forEach(function (item){
                         htmlContent+= '<li><a href="/danhmuc/'+item.tenDanhMuc+'">'+item.tenDanhMuc+'</a></li>\n'
                     })
                     htmlContent +='</ul>'
-
                 })
 
                 htmlContent+='<div class="single-mega cn-col-4">\n' +
