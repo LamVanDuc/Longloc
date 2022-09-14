@@ -26,4 +26,7 @@ public interface SanPhamRepository extends JpaRepository<tblSanpham ,Long> {
 
 
     List<tblSanpham> findByIdDanhmucAndIdSanphamChaIsNull(Long id);
+
+    @Query(value = "select t from tblSanpham t where t.tenSanPham LIKE %?1% and t.idSanphamCha is null")
+    List<tblSanpham> findByTenSanPhamAndIdSanphamChaIsNull(String name);
 }

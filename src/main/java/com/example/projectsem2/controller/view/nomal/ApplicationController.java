@@ -215,6 +215,47 @@ public class ApplicationController {
         return "donmuahang";
     }
 
+
+    @GetMapping("/search")
+    public String getSearchSanPham(Model model){
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung",nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
+        return "search-san-pham";
+    }
+
+    @GetMapping("/chitietthanhtoan")
+    public String getDetailThanhToan(Model model){
+
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung" , nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
+        return "chitietdonhang";
+    }
+
+    @GetMapping("/chitietdonmua")
+    public String getChitietdonmua(Model model){
+
+        Optional<tblNguoidung> nguoidungOptinal = nguoiDungService.findByEmail();
+
+        if (nguoidungOptinal.isPresent()){
+            model.addAttribute("nguoidung" , nguoidungOptinal.get());
+        }else{
+            model.addAttribute("nguoidung",null);
+        }
+        return "chitietdonmua";
+    }
+
+
+
 }
 
 

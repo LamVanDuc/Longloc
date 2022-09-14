@@ -3,6 +3,7 @@ package com.example.projectsem2.Service;
 import com.example.projectsem2.comman.GenaricClass;
 import com.example.projectsem2.dto.giohang.donhang.dtoChiTietDonHang;
 import com.example.projectsem2.dto.dtoSanphamAndChitietdonhang;
+import com.example.projectsem2.dto.giohang.donhang.dtoChiTietDonHang2;
 import com.example.projectsem2.entity.*;
 import com.example.projectsem2.reponsitory.ChiTietDonHangRepository;
 import com.example.projectsem2.reponsitory.DonHangRepository;
@@ -26,6 +27,8 @@ public class DonHangServiceImpl implements DonHangService{
     SanPhamService sanPhamService;
     @Autowired
     GioHangService gioHangService;
+    @Autowired
+    DiaChiGiaoHangService diaChiGiaoHangService;
 
     @Autowired
     ChiTietDonHangRepository chiTietDonHangRepository;
@@ -283,6 +286,31 @@ public class DonHangServiceImpl implements DonHangService{
         return donHangs;
     }
 
+
+
+
+    @Override
+    public dtoChiTietDonHang2 finDonhang(String id) {
+
+        Optional<tblDonhang> donhang =  donHangRepository.findByIdDonhangAndIdNguoidung(id,nguoiDungService.idNguoidung());
+
+        if (donhang.equals(null)){
+            throw new RuntimeException("đơn hàng không tồn tại");
+        }
+        tblDiachigiaohang diachigiaohang = diaChiGiaoHangService.findDiachigiaohang(donhang.get().getIdDiachigiaohang());
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(donhang.get().getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+        dtoChiTietDonHang2 dtoChiTietDonHang = new dtoChiTietDonHang2(donhang.get(), sanphamAndChitietdonhangs , diachigiaohang);
+        return dtoChiTietDonHang;
+    }
+
+
+
+
     @Override
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiHuydonhang() {
         List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung() , GenaricClass.TRANGTHAI_huydonhang);
@@ -339,7 +367,7 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     public boolean nhanGiaoDonhang(String id) {
         tblDonhang donhang = donHangRepository.findByIdDonhang(id);
-        if (donhang.getTrangThai().equals(GenaricClass.TRANGTHAI_daNhanHang)){
+        if (donhang.getTrangThai().equals(GenaricClass.TRANGTHAI_daXacNhan)){
             donhang.setTrangThai(GenaricClass.TRANGTHAI_dangGiao);
             donHangRepository.save(donhang);
             return true;
@@ -398,6 +426,23 @@ public class DonHangServiceImpl implements DonHangService{
             });
             return true;
         }
+    }
+
+    @Override
+    public List<dtoChiTietDonHang> findAllTrangthaiChoNhanGiao() {
+        List<tblDonhang> donhangList =  donHangRepository.findByTrangThai( GenaricClass.TRANGTHAI_daXacNhan);
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
+
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
     }
 
 
