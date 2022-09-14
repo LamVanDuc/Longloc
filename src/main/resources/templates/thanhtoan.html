@@ -8,20 +8,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
   <!-- Title  -->
   <title>LongLoc | Đặt hàng</title>
-
   <!-- Favicon  -->
   <link rel="icon" href="img/core-img/favicon.png">
-
   <!-- Core Style CSS -->
   <link rel="stylesheet" href="css/core-style.css">
   <link rel="stylesheet" href="/giohang/thanhtoan.css">
   <link rel="stylesheet" href="style.css">
 
 </head>
-
 <body layout:fragment="content">
 <!-- ##### Thanh toan Start ##### -->
 <secticon class="thanhtoan">
@@ -77,7 +73,6 @@
   </div>
 </secticon>
 <!-- model bootStrap-->
-
 
 <!-- Modal show all-->
 <div class="modal fade" id="changeAdress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -166,9 +161,7 @@
     </div>
 </div>
 
-
 <!-- ##### Thanh toan End ##### -->
-
 
 <script src="js/jquery/jquery-2.2.4.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -179,9 +172,9 @@
 <script src="js/main.js"></script>
 <script>
 
-var id_DiaChiGiaoHang;
+    var id_DiaChiGiaoHang;
 
-  $(document).ready(function (){
+    $(document).ready(function (){
 
     var htmlContent='';
     $.ajax({
@@ -246,7 +239,7 @@ var id_DiaChiGiaoHang;
 
   })
 
-function dathang(){
+    function dathang(){
     var dataDathang ={
       idDiachigiaohang : id_DiaChiGiaoHang,
       ghiChu: $('#ghichu').val()
@@ -259,7 +252,7 @@ function dathang(){
     contentType: 'application/json',
     data:JSON.stringify(dataDathang),
     success: function (response){
-      location.href="/donmua";
+      location.href="/chitietthanhtoan?id="+response.data.idDonhang;
     },
     error: function (err) {
       if (err.message != undefined){
@@ -273,7 +266,7 @@ function dathang(){
 
 }
 
-$('#thaydoidiachigiaohang').click(function (){
+    $('#thaydoidiachigiaohang').click(function (){
   $.ajax({
     url: '/api/v1/diachigiaohang/getall',
     type: 'GET',
@@ -319,7 +312,7 @@ $('#thaydoidiachigiaohang').click(function (){
   });
 })
 
-function changeDiachigiaohang(){
+    function changeDiachigiaohang(){
     $('input[name=radio-diachi]').each(function (index ,item){
         if(item.checked == true){
             idDiaChiGiaoHang = parseInt(item.value);
@@ -346,7 +339,7 @@ function changeDiachigiaohang(){
     });
 }
 
-function updateDiaChiGiaoHang(){
+    function updateDiaChiGiaoHang(){
 
       var id = $("#update-diachigiaohang-id").val();
       var requestData = {
@@ -375,7 +368,7 @@ function updateDiaChiGiaoHang(){
 
 }
 
-function showDiaChiGiaoHang(id){
+    function showDiaChiGiaoHang(id){
 
     $.ajax({
         url: '/api/v1/diachigiaohang/'+id,
@@ -400,8 +393,7 @@ function showDiaChiGiaoHang(id){
 
 }
 
-
-function addAdress(){
+    function addAdress(){
       var requestBody = {
           tenNguoiNhan: $("#add-diachigiaohang-name").val(),
           diaChi: $("#add-diachigiaohang-diachi").val(),
@@ -430,7 +422,6 @@ function addAdress(){
 
 
 }
-
 
 </script>
 </body>

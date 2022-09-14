@@ -1,12 +1,19 @@
 package com.example.projectsem2.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.util.Date;
-
 import java.util.Objects;
 
 @Entity
 @Table(name = "sanpham", schema = "dbo", catalog = "clothes")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class tblSanpham {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -58,7 +65,37 @@ public class tblSanpham {
     @Column(name = "ngay_chinh_sua")
     private Date ngayChinhSua;
 
+    public tblSanpham( Long idSanphamCha,
+                       Long idDanhmuc,
+                       String tenSanPham,
+                       Long idNhacungcap,
+                       String moTa,
+                       String thuongHieu,
+                       Double giaBan,
+                       String chatLieu,
+                       String phanLoai,
+                       String mauSac,
+                       String kichCo,
+                       Long soLuong,
+                       String img
+                       ) {
 
+
+        this.idSanphamCha = idSanphamCha;
+        this.idNhacungcap = idNhacungcap;
+        this.idDanhmuc = idDanhmuc;
+        this.img = img;
+        this.tenSanPham = tenSanPham;
+        this.moTa = moTa;
+        this.thuongHieu = thuongHieu;
+        this.giaBan = giaBan;
+        this.chatLieu = chatLieu;
+        this.phanLoai = phanLoai;
+        this.mauSac = mauSac;
+        this.kichCo = kichCo;
+        this.soLuong = soLuong;
+
+    }
 
     public long getIdSanpham() {
         return idSanpham;

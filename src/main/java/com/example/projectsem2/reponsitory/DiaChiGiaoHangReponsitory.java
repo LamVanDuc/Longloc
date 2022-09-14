@@ -18,4 +18,6 @@ public interface DiaChiGiaoHangReponsitory extends JpaRepository<tblDiachigiaoha
     tblDiachigiaohang findByIdNguoidungAndMacDinh(Long idNguoidung , String macdinh);
 
     Boolean existsByIdNguoidungAndMacDinh(Long idNguoidung , String macdinh);
+
+    Optional<tblDiachigiaohang> findByIdDiachigiaohangAndIdNguoidung(Long idDiachi , Long idNguoidung);
 }

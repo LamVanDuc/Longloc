@@ -17,8 +17,8 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/core-style.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="../static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/js/bootstrap.min.js"></script>
     <style>
         .form-select:focus{
             color: #495057;
@@ -63,16 +63,11 @@
             background-color: #ff4584;
         }
     </style>
-
-
-
     <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
 
 </head>
 
 <body layout:fragment="content">
-
-
 
 <div class="container-fluid mb-3 container" >
     <div class="row no-gutters " style="margin: 150px 0">
@@ -213,8 +208,6 @@
     });
 
 
-
-
     var idSanpham = '';
     function getSanpham(){
       var color = $('#mausac').val();
@@ -277,13 +270,9 @@
                 dataType: "json",
                 data : JSON.stringify(dataGiohang),
                 contentType: 'application/json',
-                // headers: {
-                //     "Content-Type": "application/json",
-                //     "Accept": "application/json",
-                //     "Authorization": "Bearer "+jwt
-                // },
                 success: function (response) {
-                    location.href="/giohang";
+                    alert("thêm giỏ hàng thành công !")
+
                 },
                 error: function (err) {
                     if (err.status === 200){
@@ -292,8 +281,10 @@
                     }
                     if (err.message === undefined){
                         alert(err.responseJSON.message)
+                    }else{
+                        alert(err.message)
                     }
-                    alert("error : " + err.message);
+
                 }
             });
         }

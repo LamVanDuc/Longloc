@@ -2,6 +2,7 @@ package com.example.projectsem2.controller.api;
 
 
 import com.example.projectsem2.Service.NguoiDungService;
+import com.example.projectsem2.comman.GenaricClass;
 import com.example.projectsem2.dto.dtoThayDoiNguoiDung;
 import com.example.projectsem2.dto.responseObject;
 import com.example.projectsem2.entity.tblNguoidung;
@@ -49,11 +50,18 @@ public class NguoidungController {
     public ResponseEntity<responseObject> changePhonenumber(@RequestBody dtoThayDoiNguoiDung dtoThayDoiNguoiDung){
         try {
             Boolean checkNumber = dtoThayDoiNguoiDung.getPhoneNumber().startsWith("0");
+            if (checkNumber.equals(false)){
+                dtoThayDoiNguoiDung.setPhoneNumber("0"+dtoThayDoiNguoiDung.getPhoneNumber());
+            }
+            if(dtoThayDoiNguoiDung.getPhoneNumber().length() !=10 || checkNumber.equals(false) || GenaricClass.isNumeric(dtoThayDoiNguoiDung.getPhoneNumber()).equals(false)){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Số điện thoại không hợp lệ !",""));
+            }
             if(dtoThayDoiNguoiDung.getPhoneNumber().length() <10 || dtoThayDoiNguoiDung.getPhoneNumber().length() >12 || checkNumber.equals(false)){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         new responseObject("false","Số điện thoại phải lớn hơn hoặc = 10 và bắt đầu từ 0 !",""));
-
             }
+
             tblNguoidung nguoidung = nguoiDungService.update(dtoThayDoiNguoiDung);
 
             return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok", "thay đổi số điện thoại thành công" , nguoidung));

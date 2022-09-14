@@ -17,6 +17,15 @@ public class tblImage {
     @Column(name = "id_sanpham")
     private Long idSanpham;
 
+    public tblImage( String tenAnh, Long idSanpham) {
+        this.tenAnh = tenAnh;
+        this.idSanpham = idSanpham;
+    }
+
+    public tblImage() {
+
+    }
+
     public long getIdImage() {
         return idImage;
     }

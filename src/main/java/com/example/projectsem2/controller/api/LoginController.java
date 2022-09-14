@@ -42,26 +42,32 @@ public class LoginController {
         return patternMatches(emailAddress, regexPattern);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register/user")
     public ResponseEntity<responseObject> saveUser(@RequestBody RegisterAccount registerAccount){
         try{
             Boolean checkEmail=testUsingStrictRegex(registerAccount.getEmail());
             Boolean checkNumber = registerAccount.getPhoneNumber().startsWith("0");
 
-
+            if (checkNumber.equals(false)){
+                registerAccount.setPhoneNumber("0"+registerAccount.getPhoneNumber());
+            }
             if (checkEmail.equals(false)){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         new responseObject("false","Email không hợp lệ !",""));
 
             }
-            if(registerAccount.getPhoneNumber().length() <10 || registerAccount.getPhoneNumber().length() >12 || checkNumber.equals(false)){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new responseObject("false","Số điện thoại phải lớn hơn hoặc = 10 và bắt đầu từ 0 !",""));
-
-            }if (registerAccount.getPassword().length() <8){
+           if (registerAccount.getPassword().length() <8){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         new responseObject("false","Mật khẩu phải từ 8 ký tự trở lên !",""));
 
+            }
+            if(registerAccount.getPhoneNumber().length() ==10 || checkNumber.equals(false)){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Số điện thoại không hợp lệ !",""));
+
+            }if (GenaricClass.isNumeric(registerAccount.getPhoneNumber())){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Số điện thoại không hợp lệ !",""));
             }
             if (nguoiDungDetailService.checkEmailExist(registerAccount.getEmail())){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -88,6 +94,42 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new responseObject("false" ," Tạo tài khoản Không thành công ",ex.getLocalizedMessage()));
         }
     }
+
+    @PostMapping("/register/admin")
+    public ResponseEntity<responseObject> saveUserAdmin(@RequestBody RegisterAccount registerAccount){
+        try{
+
+            if (registerAccount.getPassword().length() <8){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","Mật khẩu phải từ 8 ký tự trở lên !",""));
+
+            }
+            if (nguoiDungDetailService.checkEmailExist(registerAccount.getEmail())){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        new responseObject("false","tài khoản đã tồn tại",""));
+            }
+            tblNguoidung nguoidung = new tblNguoidung();
+            nguoidung.setEmail(registerAccount.getEmail());
+            String password = passwordEncoder.encode(registerAccount.getPassword());
+            nguoidung.setPassword(password);
+            nguoidung.setDienThoai(registerAccount.getPhoneNumber());
+            Set<tblRole> roles = new HashSet<tblRole>();
+
+            tblRole role = roleService.findByTenRole(GenaricClass.ROLE_ADMIN);
+            roles.add(role);
+            nguoidung.setRole(roles);
+            nguoidung.setNgayTao(GenaricClass.dateTimeNow());
+            nguoidung.setTrangThai(GenaricClass.ACTIVE);
+
+            Object check = nguoiDungDetailService.saveNguoidung(nguoidung);
+            return ResponseEntity.status(HttpStatus.OK).body(new responseObject("ok" ," Tạo tài khoản thành công !",check));
+
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new responseObject("false" ," Tạo tài khoản Không thành công ",ex.getLocalizedMessage()));
+        }
+    }
+
+
 
     @GetMapping("/get")
     public List<tblNguoidung> getallNguoidung(){

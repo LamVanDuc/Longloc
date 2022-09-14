@@ -126,5 +126,11 @@ public class SanPhamServiceImpl implements SanPhamService{
         return sanpham1;
     }
 
+    @Override
+    public List<tblSanpham> findSanPham(String name) {
+        List<tblSanpham> sanphams = sanPhamRepository.findByTenSanPhamAndIdSanphamChaIsNull(name);
+        return sanphams;
+    }
+
 
 }

@@ -19,9 +19,6 @@
 <div class="container " style="margin-top: 85px">
     <a href="/shop" style="" class="btn my-2" data-abc="true"> <i class="fa fa-chevron-left"></i> Sản phẩm</a>
     <article class="card">
-        <header >
-            <div class="alert alert-success py-auto" role="alert">Đặt hàng thành công !</div>
-        </header>
         <div class="card-body">
             <h6>Mã đơn hàng: <strong name="idDonhang"></strong></h6>
             <article class="card">
@@ -140,14 +137,17 @@
                         '                    </div>'
 
                     tongtien += parseInt(item.chitietdonhang.soLuong) + parseInt(item.chitietdonhang.gia);
+
                 })
+
                 htmlContent += '<div class="border-top py-3 px-2">\n' +
                     '                        <div class="d-flex flex-column align-items-end">\n' +
                     '                            <div>\n' +
                     '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                     '                            </div>\n' +
                     '                            <div class="py-3">\n' +
-                    '                                <a type="button" onclick="" href="/donmua#dangcho" class="btn btn-danger">Xem đơn mua hàng</a>\n' +
+                    '                                <button type="button" onclick="mualai(\''+response.data.donhang.idDonhang+'\')" class="btn btn-danger">Mua lại</button>\n' +
+                    '                                <a type="button" href="/donmua"  class="btn btn-dark" style="background-color: #8C8CAA">Quay về</a>\n' +
                     '                            </div>\n' +
                     '                        </div>\n' +
                     '                    </div>\n' +
@@ -163,6 +163,29 @@
             }
         });
     })
+
+    function mualai(id){
+        if(confirm('Bạn muốn mua lại hàng ?')){
+            $.ajax({
+                url: '/api/v1/donhang/mualai/'+id,
+                type: 'POST',
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (response){
+                    location.href="/thanhtoan";
+
+                },
+                error: function (err) {
+                    if (err.message != undefined){
+                        alert("error : "+err.message);
+                    }else {
+                        alert("Error : "+err.responseJSON.message)
+                    }
+
+                }
+            });
+        }
+    }
 
 
 

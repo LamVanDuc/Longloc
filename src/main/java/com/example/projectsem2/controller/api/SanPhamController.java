@@ -37,6 +37,13 @@ public class SanPhamController {
                 new responseObject("false","Sản phẩm không tồn tại",""));
     }
 
+    @GetMapping("/search/{name}")
+    public ResponseEntity<responseObject> findById( @PathVariable String name){
+        List<tblSanpham> sanpham = sanPhamService.findSanPham(name);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok","query thành công",sanpham));
+    }
+
 
     //getdetail
     @GetMapping("/detail/{id}")
