@@ -27,4 +27,7 @@ public interface SanPhamService {
     tblSanpham findSanphamByIdSanphamchaAndMausacAndKichco(tblSanpham sanpham);
 
 
+    List<tblSanpham> findSanPham(String name);
+
+
 }

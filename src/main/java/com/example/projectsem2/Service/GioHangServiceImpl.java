@@ -55,7 +55,7 @@ public class GioHangServiceImpl implements GioHangService{
                 throw new RuntimeException("Số trong giỏ và thêm vào lớn hơn số lượng sản phẩm có !");
             }
         }else{
-            if (sanpham.getSoLuong() >=newGiohang.getSoLuong()){
+            if (sanpham.getSoLuong() >= newGiohang.getSoLuong()){
                 newGiohang.setGia(sanpham.getGiaBan());
                 return gioHangReponsitory.save(newGiohang);
             }else {
@@ -87,6 +87,7 @@ public class GioHangServiceImpl implements GioHangService{
         return findGiohang;
     }
 
+
     @Override
     public Boolean deleteGiohang(Long id) {
         Boolean exists = gioHangReponsitory.existsById(id);
@@ -96,6 +97,8 @@ public class GioHangServiceImpl implements GioHangService{
         }
         return false;
     }
+
+
 
     @Override
     public Optional<tblGiohang> getById(Long id) {

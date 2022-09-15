@@ -12,7 +12,30 @@ public class ApplicationAdminController {
 
     @GetMapping("/index")
     public String getCheckout(){
-        return "admin/index";
+        return "admin/admin-index";
+    }
+    @GetMapping("/login")
+    public String getLoginAdmin(){
+        return "admin/login";
+    }
+
+    @GetMapping("/product")
+    public String getAddProduct(){
+        return "admin/admin-add-product";
+    }
+
+    @GetMapping("/products")
+    public String getProducts(){
+        return "admin/admin-products";
+    }
+
+    @GetMapping("/rditproduct")
+    public String geteditProduct(){
+        return "admin/admin-account";
+    }
+    @GetMapping("/donhang")
+    public String getdonhang(){
+        return "admin/donhang";
     }
 
 }

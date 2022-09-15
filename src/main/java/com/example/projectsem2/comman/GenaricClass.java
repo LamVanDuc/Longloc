@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class GenaricClass {
 
@@ -74,7 +75,7 @@ public class GenaricClass {
         }
         int dandom = (int) (Math.random() * 10000);
 
-        idDonHang="DH"+ year + month + day +"L"+dandom;
+        idDonHang="DH"+ stDay + strMonth + year +"L"+dandom;
         return idDonHang;
     }
 
@@ -85,4 +86,13 @@ public class GenaricClass {
         Date todate = cal.getTime();
         return todate;
     }
+    private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+
+    public static Boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        return pattern.matcher(strNum).matches();
+    }
+
 }

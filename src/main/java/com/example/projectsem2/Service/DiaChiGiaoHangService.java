@@ -12,6 +12,8 @@ public interface DiaChiGiaoHangService {
 
     Optional<tblDiachigiaohang> findById(Long id);
 
+    tblDiachigiaohang findDiachigiaohang(Long id);
+
     tblDiachigiaohang changeDiaChiGiaoHang(Long id);
 
     tblDiachigiaohang add(tblDiachigiaohang diachigiaohang);

@@ -95,8 +95,8 @@
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
             <div class="search-area">
-                <form action="#" method="post">
-                    <input type="search" name="search" id="headerSearch" placeholder="Nhập tìm kiếm">
+                <form action="/search">
+                    <input type="text" name="search" id="headerSearch" placeholder="Nhập tìm kiếm">
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
@@ -245,6 +245,39 @@
         })
 
     })
+
+    if ($("#headerSearch").onblur== true || $("#headerSearch").onkeypress === 13){
+        alert("search ok");
+    }
+
+    function searchSanPham(){
+        $.ajax({
+            url: '/api/v1/danhmuc/getall',
+            type: 'GET',
+            dataType: "json",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (response){
+
+                response.forEach(function (item){
+                    htmlContent += '<ul class="single-mega cn-col-4">'
+                    htmlContent +='<li class="title"><a>'+item.danhmuccha.tenDanhMuc+'</a>'
+
+                    item.danhmuccon.forEach(function (item){
+                        htmlContent+= '<li><a href="/danhmuc/'+item.tenDanhMuc+'">'+item.tenDanhMuc+'</a></li>\n'
+                    })
+                    htmlContent +='</ul>'
+                })
+
+                htmlContent+='<div class="single-mega cn-col-4">\n' +
+                    '             <img src="img/bg-img/bg-6.jpg" alt="">\n' +
+                    '         </div>'
+                $("#danhmuc").html(htmlContent);
+            },
+            error: function (err){
+            }
+        })
+    }
+
 
 </script>
 </body>

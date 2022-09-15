@@ -51,6 +51,18 @@ public class DonHangController {
                 new responseObject("ok" , "query thành công" ,donHangService.findDonhangByIdNguoiDungAndTrangthaiChoXacNhan()));
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<responseObject> finDonHang(@PathVariable String id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok" , "query thành công" ,donHangService.finDonhang(id)));
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new responseObject("ok" , "query Không thành công" ,ex.getLocalizedMessage()));
+        }
+
+    }
+
 
     @GetMapping("/danggiao")
     public ResponseEntity<responseObject> findTrangThaiDangGiaoByNguoidung(){
@@ -175,6 +187,11 @@ public class DonHangController {
                 new responseObject("ok" , "query thành công" ,donHangService.findAllTrangthaiDangGiao()));
     }
 
+    @GetMapping("/admin/chonhangiao")
+    public ResponseEntity<responseObject> findAllTrangthaiChoNhanGiao(){
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok" , "query thành công" ,donHangService.findAllTrangthaiChoNhanGiao()));
+    }
     @GetMapping("/admin/all")
     public ResponseEntity<responseObject> findAllDonHang(){
         return ResponseEntity.status(HttpStatus.OK).body(

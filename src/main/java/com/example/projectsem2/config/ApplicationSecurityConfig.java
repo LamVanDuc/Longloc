@@ -31,6 +31,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         // web
 
         http.authorizeRequests().antMatchers("/admin/img/**").permitAll();
+        http.authorizeRequests().antMatchers("/admin/login").permitAll();
         http.authorizeRequests().antMatchers("/admin/css/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/js/**").permitAll();
         http.authorizeRequests().antMatchers("/admin/style.css").permitAll();
@@ -44,7 +45,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/shop").permitAll();
         http.authorizeRequests().antMatchers("/index","/","/home").permitAll();
         http.authorizeRequests().antMatchers("/contact").permitAll();
-        http.authorizeRequests().antMatchers("/api/account/register").permitAll();
+        http.authorizeRequests().antMatchers("/api/account/register/user").permitAll();
         http.authorizeRequests().antMatchers("/blog").permitAll();
         http.authorizeRequests().antMatchers("/detail").permitAll();
         http.authorizeRequests().antMatchers("/login","/","/img/**", "/login*","/dangky","/dangky/**","/Login/**").permitAll();
@@ -57,22 +58,24 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/danhmuc/js/**").permitAll();
         http.authorizeRequests().antMatchers("/danhmuc/img/**").permitAll();
         http.authorizeRequests().antMatchers("/danhmuc/style.css").permitAll();
+        http.authorizeRequests().antMatchers("/resources/**").permitAll();
+        http.authorizeRequests().antMatchers("/search/**").permitAll();
         //phân quyền
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/error-403");
 
-//        http.authorizeRequests().antMatchers("/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
+        //http.authorizeRequests().antMatchers("/**").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
 
-        // còn lại tất cả đều xác minh
 
+        // còn lại tất cả đều xác minh
         http.authorizeRequests()
                 .anyRequest().authenticated()
                 .and().formLogin()
-                .loginProcessingUrl("/loginForm") // Submit URL
-                .loginPage("/login")//
-                .defaultSuccessUrl("/index",true)//
+                .loginProcessingUrl("/loginForm")
+                .loginPage("/login")
+                .defaultSuccessUrl("/index",true)
                 .failureUrl("/login?error=true")
-                .usernameParameter("username")//
+                .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout=true");
 
@@ -83,6 +86,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(nguoiDungDetailService).passwordEncoder(passwordEncoder());
+
     }
 
     @Bean

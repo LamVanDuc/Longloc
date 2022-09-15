@@ -1,110 +1,109 @@
 <!doctype html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout.html}">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/layoutadmin.html}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lòng Lọc | đơn mua</title>
+    <title>Lòng Lọc | đơn hàng</title>
 
-    <link rel="stylesheet" href="/donmua/donmua.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-        $( function() {
-            $( "#tabs" ).tabs();
-        });
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="../css/admin/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <style>
-        .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
-            color: black;
-            text-decoration: none;
-            text-decoration-line: none;
-            text-decoration-thickness: initial;
-            text-decoration-style: initial;
-            text-decoration-color: initial;
+        body {font-family: Arial;}
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
         }
-        .ui-state-active{
-            background-color: #ccc !important;
-            color: #cccccc !important;
-        }
-        .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{
-            color: black !important;
-        }
-        .ui-tabs .ui-tabs-nav .ui-tabs-anchor{
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
             float: left;
-            padding: 0.5em 1em;
-            text-decoration: none;
-            text-decoration-line: none;
-            text-decoration-thickness: initial;
-            text-decoration-style: initial;
-            text-decoration-color: initial;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
         }
-        .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
-            border: 1px solid #cccccc;
 
-            border-top-style: solid;
-            border-top-width: 1px;
-
-            border-right-style: solid;
-            border-right-width: 1px;
-
-            border-bottom-style: solid;
-            border-bottom-width: 1px;
-
-            border-left-style: solid;
-            border-left-width: 1px;
-            border-image-source: initial;
-            border-image-slice: initial;
-            border-image-width: initial;
-            border-image-outset: initial;
-            border-image-repeat: initial;
-            background: #cccccc;
-            background-image: initial;
-            background-position-x: initial;
-            background-position-y: initial;
-            background-size: initial;
-            background-repeat-x: initial;
-            background-repeat-y: initial;
-            background-attachment: initial;
-            background-origin: initial;
-            background-clip: initial;
-            font-weight: normal;
-            color: black;
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
         }
-        li a{
-            height: 40px;
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
         }
-        .w-20{
-            width: 20%;
-        }
-        .ui-tabs .ui-tabs-nav li{
-            border-bottom-width: thin !important;
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
         }
     </style>
-
 </head>
 <body layout:fragment="content">
 <section class="donmua">
     <div id="tabs">
-        <ul class="d-flex flex-row">
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn1" href="#tatca">Tất cả</a></li>
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn2" href="#dangcho">Chờ xác nhận</a></li>
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn3" href="#danggiao">đang giao</a></li>
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn4" href="#danhan">Đã nhận</a></li>
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn5" href="#dahuy">Đã hủy</a></li>
-        </ul>
-        <div id="tatca"></div>
-        <div id="dangcho"></div>
-        <div id="danggiao"></div>
-        <div id="danhan"></div>
-        <div id="dahuy"></div>
+        <div class="tab">
+            <button class="tablinks"  onclick="openCity(event, 'tatca')">Tất cả</button>
+            <button class="tablinks" id="btn2" onclick="openCity(event, 'dangcho')">Đang chờ</button>
+            <button class="tablinks" id="btn3" onclick="openCity(event, 'danggiao')">Đang giao</button>
+            <button class="tablinks" id="btn4" onclick="openCity(event, 'danhan')">Đã nhận</button>
+            <button class="tablinks"  id="btn5" onclick="openCity(event, 'dahuy')">Đã hủy</button>
+            <button class="tablinks"  id="btn6" onclick="openCity(event, 'nhangiao')">Nhận giao đơn hàng</button>
+        </div>
+
+        <div id="tatca" class="tabcontent active">
+        </div>
+        <div id="dangcho" class="tabcontent"></div>
+        <div id="danggiao" class="tabcontent"></div>
+        <div id="danhan" class="tabcontent"></div>
+        <div id="dahuy" class="tabcontent"></div>
+        <div id="nhangiao" class="tabcontent"></div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../js/admin/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/demo/chart-area-demo.js"></script>
+    <script src="../assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="../js/admin/datatables-simple-demo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
     <script>
+
+
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
 
         $(document).ready(function () {
             $.ajax({
-                url: '/api/v1/donhang/all',
+                url: '/api/v1/donhang/admin/all',
                 type: 'GET',
                 dataType: "json",
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -183,7 +182,7 @@
 
         $('#btn2').click(function (){
             $.ajax({
-                url: '/api/v1/donhang/dangcho',
+                url: '/api/v1/donhang/admin/dangcho',
                 type: 'GET',
                 dataType: "json",
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -240,7 +239,7 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="huydonhang(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Hủy</button>\n' +
+                            '                                <button type="button" onclick="duyetdon(\''+item.donhang.idDonhang+'\')" class="btn btn-success">Duyệt</button>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
@@ -265,7 +264,7 @@
 
         $('#btn3').click(function (){
             $.ajax({
-                url: '/api/v1/donhang/danggiao',
+                url: '/api/v1/donhang/admin/danggiao',
                 type: 'GET',
                 dataType: "json",
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -344,7 +343,7 @@
 
         $('#btn4').click(function (){
             $.ajax({
-                url: '/api/v1/donhang/danhan',
+                url: '/api/v1/donhang/admin/danhan',
                 type: 'GET',
                 dataType: "json",
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -419,7 +418,7 @@
 
         $('#btn5').click(function (){
             $.ajax({
-                url: '/api/v1/donhang/dahuy',
+                url: '/api/v1/donhang/admin/dahuy',
                 type: 'GET',
                 dataType: "json",
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -492,6 +491,80 @@
             });
         })
 
+        $('#btn6').click(function (){
+            $.ajax({
+                url: '/api/v1/donhang/admin/chonhangiao',
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (response){
+                    var htmlContent = '';
+                    var tongtien = 0;
+                    response.data.forEach(function (item) {
+                        htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
+                            '<div class="mx-5">\n' +
+                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                    <div class="border-bottom py-3">\n' +
+                            '                        <div class="d-flex justify-content-between">\n' +
+                            '                            <div  class="font-weight-bold">\n' +
+                            '                                <label>Mã : </label><span>' + item.donhang.idDonhang + '</span>\n' +
+                            '                            </div>\n' +
+                            '                            <div class="px-2">\n' +
+                            '                                <label>Trang thai : </label>\n' +
+                            '                                <span style="color: green">' + item.donhang.trangThai + '</span>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </div>' +
+                            '                  </a>'
+                        item.chitietsanphamAndChitietdonhang.forEach(function (item) {
+                            htmlContent += '<div class="d-flex  align-items-center justify-content-between py-3">\n' +
+                                '                        <div class="d-flex w-75">\n' +
+                                '                            <div>\n' +
+                                '                                <img style="height: 75px; width: 75px" src="' + item.sanpham.img + '">\n' +
+                                '                            </div>\n' +
+                                '                            <div class="px-2">\n' +
+                                '                                <div>\n' +
+                                '                                    <h5>' + item.sanpham.tenSanPham + '</h5>\n' +
+                                '                                </div>\n' +
+                                '                                <div style="color: #8C8CAA">\n' +
+                                '                                    <label>Phân loại : </label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
+                                '                                </div>\n' +
+                                '                                <div>x'+item.chitietdonhang.soLuong+'</div>\n' +
+                                '                            </div>\n' +
+                                '                        </div>\n' +
+                                '                        <div>\n' +
+                                '                            <span style="color: red">' + formatMoney(item.chitietdonhang.gia) + '</span>\n' +
+                                '                        </div>\n' +
+                                '                    </div>'
+                            tongtien += parseInt(item.chitietdonhang.gia) * parseInt(item.chitietdonhang.soLuong);
+                        })
+
+                        htmlContent += '<div class="border-top py-3 px-2">\n' +
+                            '                        <div class="d-flex flex-column align-items-end">\n' +
+                            '                            <div>\n' +
+                            '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
+                            '                            </div>\n' +
+                            '                            <div class="py-3">\n' +
+                            '                                <button type="button" onclick="nhangiao(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Nhận giao</button>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </div>\n' +
+                            '                </div>'
+
+                    })
+                    $("#nhangiao").html(htmlContent)
+
+                },
+                error: function (err) {
+                    if (err.message != undefined){
+                        alert("error : "+err.message);
+                    }else {
+                        alert("Error : "+err.responseJSON.message)
+                    }
+
+                }
+            });
+        })
         function mualai(id){
             if(confirm('Bạn muốn mua lại hàng ?')){
                 $.ajax({
@@ -516,7 +589,7 @@
         }
 
         function daNhanHang(id){
-            if(confirm('Bạn đã thanh toán cho người giao ?')){
+            if(confirm('Bạn muốn mua lại hàng ?')){
                 $.ajax({
                     url: '/api/v1/donhang/nhandon/'+id,
                     type: 'POST',
@@ -558,6 +631,52 @@
                     }
                 });
             }
+        }
+
+        function duyetdon(id) {
+            if (confirm('Duyệt đơn hàng này ?')) {
+                $.ajax({
+                    url: '/api/v1/donhang/duyet/' + id,
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: 'application/json',
+                    success: function (response) {
+                        location.reload();
+
+                    },
+                    error: function (err) {
+                        if (err.message != undefined) {
+                            alert("error : " + err.message);
+                        } else {
+                            alert("Error : " + err.responseJSON.message)
+                        }
+
+                    }
+                });
+            }
+        }
+
+            function nhangiao(id){
+                if(confirm('giao đơn hàng này ?')){
+                    $.ajax({
+                        url: '/api/v1/donhang/xacnhangiao/'+id,
+                        type: 'POST',
+                        dataType: "json",
+                        contentType: 'application/json',
+                        success: function (response){
+                            location.reload();
+
+                        },
+                        error: function (err) {
+                            if (err.message != undefined){
+                                alert("error : "+err.message);
+                            }else {
+                                alert("Error : "+err.responseJSON.message)
+                            }
+
+                        }
+                    });
+                }
         }
 
     </script>
