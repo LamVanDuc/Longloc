@@ -39,12 +39,12 @@ public class DiaChiGiaoHangServiceImpl implements DiaChiGiaoHangService{
     }
 
     @Override
-    public tblDiachigiaohang findDiachigiaohang(Long id) {
+    public Optional<tblDiachigiaohang> findDiachigiaohang(Long id) {
         Optional<tblDiachigiaohang> diachigiaohang = diaChiGiaoHangReponsitory.findByIdDiachigiaohangAndIdNguoidung(id , nguoiDungService.idNguoidung());
 
         if (diachigiaohang.isEmpty()){throw new RuntimeException("Không tồn tại địa chỉ giao hàng");}
-        tblDiachigiaohang diachigiaohang1 = diachigiaohang.get();
-        return diachigiaohang1;
+
+        return diachigiaohang;
     }
 
     @Override

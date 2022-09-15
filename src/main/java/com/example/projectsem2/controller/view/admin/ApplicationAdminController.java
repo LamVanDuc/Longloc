@@ -38,4 +38,9 @@ public class ApplicationAdminController {
         return "admin/donhang";
     }
 
+    @GetMapping("/chitietdonhang")
+    public String getDetailDonhang(){
+        return "admin/detaildonhang";
+    }
+
 }

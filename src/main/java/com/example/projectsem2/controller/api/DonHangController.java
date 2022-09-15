@@ -197,6 +197,16 @@ public class DonHangController {
         return ResponseEntity.status(HttpStatus.OK).body(
                 new responseObject("ok" , "query thành công" ,donHangService.findAllDonHang()));
     }
+    @GetMapping("/admin/get/{id}")
+    public ResponseEntity<responseObject> finDonHangAdmin(@PathVariable String id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new responseObject("ok" , "query thành công" ,donHangService.finDonhangAdmin(id)));
+        }catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    new responseObject("ok" , "query Không thành công" ,ex.getLocalizedMessage()));
+        }
 
+    }
 
 }

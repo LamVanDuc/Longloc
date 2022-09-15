@@ -12,7 +12,7 @@ public interface DiaChiGiaoHangService {
 
     Optional<tblDiachigiaohang> findById(Long id);
 
-    tblDiachigiaohang findDiachigiaohang(Long id);
+    Optional<tblDiachigiaohang> findDiachigiaohang(Long id);
 
     tblDiachigiaohang changeDiaChiGiaoHang(Long id);
 

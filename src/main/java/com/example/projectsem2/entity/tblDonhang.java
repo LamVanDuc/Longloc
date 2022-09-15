@@ -48,6 +48,7 @@ public class tblDonhang {
         this.ngayDuKienGiaoHang = ngayDuKienGiaoHang;
     }
 
+
     public String getIdDonhang() {
         return idDonhang;
     }
