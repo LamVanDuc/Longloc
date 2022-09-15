@@ -44,6 +44,8 @@ public interface DonHangService {
 
     dtoChiTietDonHang2 finDonhang(String id);
 
+    dtoChiTietDonHang2 finDonhangAdmin(String id);
+
     List<dtoChiTietDonHang> findAllDonHangByNguoidung();
     List<dtoChiTietDonHang> findAllDonHang();
 

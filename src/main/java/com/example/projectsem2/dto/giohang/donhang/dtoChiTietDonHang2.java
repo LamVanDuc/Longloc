@@ -5,15 +5,16 @@ import com.example.projectsem2.entity.tblDiachigiaohang;
 import com.example.projectsem2.entity.tblDonhang;
 
 import java.util.List;
+import java.util.Optional;
 
 public class dtoChiTietDonHang2 {
 
     private tblDonhang donhang;
     private List<dtoSanphamAndChitietdonhang> chitietsanphamAndChitietdonhang;
-    private tblDiachigiaohang diachigiaohang;
+    private Optional<tblDiachigiaohang> diachigiaohang;
 
 
-    public dtoChiTietDonHang2(tblDonhang donhang, List<dtoSanphamAndChitietdonhang> chitietsanphamAndChitietdonhang, tblDiachigiaohang diachigiaohang) {
+    public dtoChiTietDonHang2(tblDonhang donhang, List<dtoSanphamAndChitietdonhang> chitietsanphamAndChitietdonhang, Optional<tblDiachigiaohang> diachigiaohang) {
         this.donhang = donhang;
         this.chitietsanphamAndChitietdonhang = chitietsanphamAndChitietdonhang;
         this.diachigiaohang = diachigiaohang;
@@ -41,11 +42,11 @@ public class dtoChiTietDonHang2 {
         this.chitietsanphamAndChitietdonhang = chitietsanphamAndChitietdonhang;
     }
 
-    public tblDiachigiaohang getDiachigiaohang() {
+    public Optional<tblDiachigiaohang> getDiachigiaohang() {
         return diachigiaohang;
     }
 
-    public void setDiachigiaohang(tblDiachigiaohang diachigiaohang) {
+    public void setDiachigiaohang(Optional<tblDiachigiaohang> diachigiaohang) {
         this.diachigiaohang = diachigiaohang;
     }
 }

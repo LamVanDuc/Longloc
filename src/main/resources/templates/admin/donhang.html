@@ -57,7 +57,7 @@
 <section class="donmua">
     <div id="tabs">
         <div class="tab">
-            <button class="tablinks"  onclick="openCity(event, 'tatca')">Tất cả</button>
+            <button class="tablinks active"  onclick="openCity(event, 'tatca')">Tất cả</button>
             <button class="tablinks" id="btn2" onclick="openCity(event, 'dangcho')">Đang chờ</button>
             <button class="tablinks" id="btn3" onclick="openCity(event, 'danggiao')">Đang giao</button>
             <button class="tablinks" id="btn4" onclick="openCity(event, 'danhan')">Đã nhận</button>
@@ -65,7 +65,7 @@
             <button class="tablinks"  id="btn6" onclick="openCity(event, 'nhangiao')">Nhận giao đơn hàng</button>
         </div>
 
-        <div id="tatca" class="tabcontent active">
+        <div id="tatca" class="tabcontent " style="display: block;">
         </div>
         <div id="dangcho" class="tabcontent"></div>
         <div id="danggiao" class="tabcontent"></div>
@@ -114,7 +114,7 @@
                         htmlContent +=
                             '<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
                             '<div class="mx-5">\n' +
-                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                   <a href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" >' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
@@ -160,7 +160,7 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="mualai(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Mua lại</button>\n' +
+                            '                                <a type="button" href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" class="btn btn-danger">xem</a>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
@@ -192,14 +192,14 @@
                     response.data.forEach(function (item) {
                         htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
                             '<div class="mx-5">\n' +
-                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                   <a href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" >' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
                             '                                <label>Mã : </label><span>' + item.donhang.idDonhang + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="px-2">\n' +
-                            '                                <label>Trang thai : </label>\n' +
+                            '                                <label>'+item.donhang.ngayChinhSua+' : </label>\n' +
                             '                                <span style="color: green">' + item.donhang.trangThai + '</span>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
@@ -274,14 +274,14 @@
                     response.data.forEach(function (item) {
                         htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
                             '<div class="mx-5">\n' +
-                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                   <a href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" >' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
                             '                                <label>Mã : </label><span>' + item.donhang.idDonhang + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="px-2">\n' +
-                            '                                <label>Trang thai : </label>\n' +
+                            '                                <label>'+item.donhang.ngayChinhSua+' : </label>\n' +
                             '                                <span style="color: green">' + item.donhang.trangThai + '</span>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
@@ -321,7 +321,7 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="daNhanHang(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Đã nhận hàng</button>\n' +
+                            '                                <a type="button" href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" class="btn btn-danger">Xem</a>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
@@ -353,14 +353,14 @@
                     response.data.forEach(function (item) {
                         htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
                             '<div class="mx-5">\n' +
-                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                   <a href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" >' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
                             '                                <label>Mã : </label><span>' + item.donhang.idDonhang + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="px-2">\n' +
-                            '                                <label>Trang thai : </label>\n' +
+                            '                                <label>'+item.donhang.ngayChinhSua+' : </label>\n' +
                             '                                <span style="color: green">' + item.donhang.trangThai + '</span>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
@@ -397,7 +397,7 @@
                             '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="py-3">\n' +
-                            '                                <button type="button" onclick="mualai(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Mua lại</button>\n' +
+                            '                                <a type="button" href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" class="btn btn-danger">Xem</a>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
@@ -428,14 +428,14 @@
                     response.data.forEach(function (item) {
                         htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
                             '<div class="mx-5">\n' +
-                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                   <a href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" >' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
                             '                                <label>Mã : </label><span>' + item.donhang.idDonhang + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="px-2">\n' +
-                            '                                <label>Trang thai : </label>\n' +
+                            '                                <label>'+item.donhang.ngayChinhSua+' : </label>\n' +
                             '                                <span style="color: green">' + item.donhang.trangThai + '</span>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
@@ -503,14 +503,14 @@
                     response.data.forEach(function (item) {
                         htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
                             '<div class="mx-5">\n' +
-                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                   <a href="/admin/chitietdonhang?id='+item.donhang.idDonhang+'" >' +
                             '                    <div class="border-bottom py-3">\n' +
                             '                        <div class="d-flex justify-content-between">\n' +
                             '                            <div  class="font-weight-bold">\n' +
                             '                                <label>Mã : </label><span>' + item.donhang.idDonhang + '</span>\n' +
                             '                            </div>\n' +
                             '                            <div class="px-2">\n' +
-                            '                                <label>Trang thai : </label>\n' +
+                            '                                <label>'+item.donhang.ngayChinhSua+' : </label>\n' +
                             '                                <span style="color: green">' + item.donhang.trangThai + '</span>\n' +
                             '                            </div>\n' +
                             '                        </div>\n' +
@@ -565,73 +565,9 @@
                 }
             });
         })
-        function mualai(id){
-            if(confirm('Bạn muốn mua lại hàng ?')){
-                $.ajax({
-                    url: '/api/v1/donhang/mualai/'+id,
-                    type: 'POST',
-                    dataType: "json",
-                    contentType: 'application/json',
-                    success: function (response){
-                        location.href="/thanhtoan";
 
-                    },
-                    error: function (err) {
-                        if (err.message != undefined){
-                            alert("error : "+err.message);
-                        }else {
-                            alert("Error : "+err.responseJSON.message)
-                        }
 
-                    }
-                });
-            }
-        }
 
-        function daNhanHang(id){
-            if(confirm('Bạn muốn mua lại hàng ?')){
-                $.ajax({
-                    url: '/api/v1/donhang/nhandon/'+id,
-                    type: 'POST',
-                    dataType: "json",
-                    contentType: 'application/json',
-                    success: function (response){
-                        location.reload()
-                    },
-                    error: function (err) {
-                        if (err.message != undefined){
-                            alert("error : "+err.message);
-                        }else {
-                            alert("Error : "+err.responseJSON.message)
-                        }
-
-                    }
-                });
-            }
-        }
-
-        function huydonhang(id){
-            if(confirm('Bạn muốn hủy đơn hàng này ?')){
-                $.ajax({
-                    url: '/api/v1/donhang/huydon/'+id,
-                    type: 'POST',
-                    dataType: "json",
-                    contentType: 'application/json',
-                    success: function (response){
-                        location.reload();
-
-                    },
-                    error: function (err) {
-                        if (err.message != undefined){
-                            alert("error : "+err.message);
-                        }else {
-                            alert("Error : "+err.responseJSON.message)
-                        }
-
-                    }
-                });
-            }
-        }
 
         function duyetdon(id) {
             if (confirm('Duyệt đơn hàng này ?')) {
