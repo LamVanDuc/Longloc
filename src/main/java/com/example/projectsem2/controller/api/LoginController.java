@@ -61,14 +61,14 @@ public class LoginController {
                         new responseObject("false","Mật khẩu phải từ 8 ký tự trở lên !",""));
 
             }
-            if(registerAccount.getPhoneNumber().length() ==10 || checkNumber.equals(false)){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new responseObject("false","Số điện thoại không hợp lệ !",""));
-
-            }if (GenaricClass.isNumeric(registerAccount.getPhoneNumber())){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                        new responseObject("false","Số điện thoại không hợp lệ !",""));
-            }
+//            if(registerAccount.getPhoneNumber().length() ==10 || checkNumber.equals(false)){
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+//                        new responseObject("false","Số điện thoại không hợp lệ !",""));
+//
+//            }if (GenaricClass.isNumeric(registerAccount.getPhoneNumber())){
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+//                        new responseObject("false","Số điện thoại không hợp lệ !",""));
+//            }
             if (nguoiDungDetailService.checkEmailExist(registerAccount.getEmail())){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                         new responseObject("false","tài khoản đã tồn tại",""));

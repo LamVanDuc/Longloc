@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
+
 public class DanhMucServiceImpl implements DanhMucService{
 
 
@@ -50,6 +51,12 @@ public class DanhMucServiceImpl implements DanhMucService{
     @Override
     public List<tblDanhmuc> getDanhMucKhac(Long id) {
         return null;
+    }
+
+    @Override
+    public List<tblDanhmuc> getDanhMucCharIsNotNull() {
+        List<tblDanhmuc> danhmucList = danhMucRepository.findByIdDanhmucChaIsNotNull();
+        return danhmucList;
     }
 
     @Override

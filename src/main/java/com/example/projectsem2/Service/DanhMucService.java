@@ -17,6 +17,9 @@ public interface DanhMucService {
 
     List<tblDanhmuc> getDanhMucKhac(Long id);
 
+
+    List<tblDanhmuc> getDanhMucCharIsNotNull();
+
     tblDanhmuc addDanhmuc(tblDanhmuc danhmuc);
 
     tblDanhmuc updateDanhmuc(Long id , tblDanhmuc danhmuc);

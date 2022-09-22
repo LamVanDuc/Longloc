@@ -20,6 +20,8 @@ public class GenaricClass {
 
     @Autowired
     private static NguoiDungService nguoiDungService;
+    public static final String UsernameSendMail ="Duclvth2108005@fpt.edu.vn";
+    public static final String PasswrodSendMail ="Lamduc@1503";
 
     // trang thai don hang
     public static final String TRANGTHAI_dangCho ="Chờ xác nhận";

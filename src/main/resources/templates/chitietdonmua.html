@@ -8,24 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <title>LongLoc - Shop quần áo thời trang</title>
-    <style>
-        a:hover , a:focus{
-            font-size: 16px;
-        }
-        #thongtinthe {
-            text-align: center;
-            padding: 15px 266px;
-            border-top: 1px solid black;
-            background-clip: content-box;
-            background-color: #e7e9eb
-        }
-        #thongtinthe input{
-            margin: 10px 0;
-        }
-        #macvv {width: 70px;}
-        #sothe{width: 258px;}
-        #hotenthe{width: 258px;}
-    </style>
+
 </head>
 <body layout:fragment="content">
 
@@ -48,24 +31,7 @@
                     <div class="col">
                         <strong>Phương thức thanh toán:</strong>
                         <br>
-                        <div>
-                            <select name="" id="phuongthucthanhtoan" onchange="thongTinThe(this)">
-                                <option value="">Chọn phương thức thanh toán</option>
-                                <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                                <option value="the">Thanh toán bằng thẻ</option>
-                            </select>
-                        </div>
                     </div>
-                </div>
-                <div id="thongtinthe" style="display: none">
-                    <form action="">
-                        <h4>Thông tin chủ thẻ</h4>
-                        <input type="text" id="sothe" placeholder="Số thẻ"><br>
-                        <input type="text" id="hotenthe" placeholder="Họ và tên chủ thẻ"><br>
-                        <input type="text" id="hanthe" placeholder="Ngày hết hạn (MM/YY)">
-                        <input type="text" id="macvv" placeholder="Mã CVV"><br>
-                        <input type="submit"  value="xác nhận">
-                    </form>
                 </div>
             </article>
             <hr>
@@ -117,18 +83,7 @@
 <!-- Active js -->
 <script src="js/active.js"></script>
 <script>
-    function thongTinThe(obj){
-        var x = document.getElementById("thongtinthe");
-        var value = obj.value
-        if (value === 'the') {
-            x.style.display = "block";
-        } else if (value === 'cod') {
-            x.style.display = "none";
-        }else{
-            x.style.display = "none";
-        }
 
-    }
 </script>
 <script>
 

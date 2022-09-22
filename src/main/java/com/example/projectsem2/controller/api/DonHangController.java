@@ -70,6 +70,12 @@ public class DonHangController {
                 new responseObject("ok" , "query thành công" ,donHangService.findDonhangByIdNguoiDungAndTrangthaiDangGiao()));
     }
 
+    @GetMapping("/daxacnhan")
+    public ResponseEntity<responseObject> findTrangThaiDaXacNhanByNguoidung(){
+        return ResponseEntity.status(HttpStatus.OK).body(
+                new responseObject("ok" , "query thành công" ,donHangService.findDonhangByIdNguoiDungAndTrangthaiDaXacNhan()));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<responseObject> findAllDonHangByNguoiDung(){
         return ResponseEntity.status(HttpStatus.OK).body(

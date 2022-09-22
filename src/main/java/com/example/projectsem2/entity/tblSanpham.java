@@ -97,6 +97,19 @@ public class tblSanpham {
 
     }
 
+    public tblSanpham(String tenSanpham, String moTa, String thuongHieu, Double giaBan, String chatLieu, String phanLoai, String fileDownloadUri) {
+
+
+        this.img = fileDownloadUri;
+        this.tenSanPham = tenSanpham;
+        this.moTa = moTa;
+        this.thuongHieu = thuongHieu;
+        this.giaBan = giaBan;
+        this.chatLieu = chatLieu;
+        this.phanLoai = phanLoai;
+
+    }
+
     public long getIdSanpham() {
         return idSanpham;
     }

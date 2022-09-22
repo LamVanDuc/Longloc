@@ -17,6 +17,25 @@
   <link rel="stylesheet" href="/giohang/thanhtoan.css">
   <link rel="stylesheet" href="style.css">
 
+    <style>
+        a:hover , a:focus{
+            font-size: 16px;
+        }
+        #thongtinthe {
+            text-align: center;
+            padding: 15px 266px;
+            border-top: 1px solid black;
+            background-clip: content-box;
+            background-color: #e7e9eb
+        }
+        #thongtinthe input{
+            margin: 10px 0;
+        }
+        #macvv {width: 70px;}
+        #sothe{width: 258px;}
+        #hotenthe{width: 258px;}
+    </style>
+
 </head>
 <body layout:fragment="content">
 <!-- ##### Thanh toan Start ##### -->
@@ -48,6 +67,7 @@
             <textarea id="ghichu" type="text" class="w-100" style="height: 100px;" placeholder="Nhập ghi Chú của bạn !"></textarea>
         </div>
     </div>
+
     <div class="sanpham">
       <h3 style="text-align: center;padding: 20px">Sản Phẩm</h3>
       <form action="">
@@ -66,8 +86,27 @@
           </tbody>
         </table>
         <h4 style="color: red"><span>Tổng tiền :</span><span id="total"></span></h4>
+<!--          <div>-->
+<!--              <div>-->
+<!--                  <select name="" class="w-100" id="phuongthucthanhtoan" onchange="thongTinThe(this)">-->
+<!--                      <option class="w-100" value="">Chọn phương thức thanh toán</option>-->
+<!--                      <option class="w-100" value="cod">Thanh toán khi nhận hàng (COD)</option>-->
+<!--                      <option class="w-100" value="the">Thanh toán bằng thẻ</option>-->
+<!--                  </select>-->
+<!--              </div>-->
+<!--              <div id="thongtinthe" style="display: none">-->
+<!--                  <form action="">-->
+<!--                      <h4 style="text-align: start">Thông tin chủ thẻ</h4>-->
+<!--                      <input type="text" id="sothe" placeholder="Số thẻ"><br>-->
+<!--                      <input type="text" id="hotenthe" placeholder="Họ và tên chủ thẻ"><br>-->
+<!--                      <input type="text" id="hanthe" placeholder="Ngày hết hạn (MM/YY)">-->
+<!--                      <input type="text" id="macvv" placeholder="Mã CVV"><br>-->
+<!--                      <input type="submit"  value="xác nhận">-->
+<!--                  </form>-->
+<!--              </div>-->
+<!--          </div>-->
 
-        <div class="thanhtien d-flex justify-content-end"><button class="btn" style="height: 50px" onclick="dathang()">Đặt hàng</button></div>
+        <div class="thanhtien d-flex justify-content-end mt-2"><button class="btn" style="height: 50px" onclick="dathang()">Đặt hàng</button></div>
       </form>
     </div>
   </div>
@@ -171,7 +210,18 @@
 <script src="js/active.js"></script>
 <script src="js/main.js"></script>
 <script>
+    function thongTinThe(obj){
+        var x = document.getElementById("thongtinthe");
+        var value = obj.value
+        if (value === 'the') {
+            x.style.display = "block";
+        } else if (value === 'cod') {
+            x.style.display = "none";
+        }else{
+            x.style.display = "none";
+        }
 
+    }
     var id_DiaChiGiaoHang;
 
     $(document).ready(function (){
@@ -228,11 +278,9 @@
 
       },
       error: function (err) {
-        if (err.message != undefined){
-          alert("error : "+err.message);
-        }else {
-          alert("Error : "+err.responseJSON.message)
-        }
+
+          alert("Chưa có địa chỉ giao hàng , vui lòng thêm địa chỉ giao hàng")
+
 
       }
     });
@@ -252,9 +300,12 @@
     contentType: 'application/json',
     data:JSON.stringify(dataDathang),
     success: function (response){
-      location.href="/chitietthanhtoan?id="+response.data.idDonhang;
+        console.log("sucess đặt hàng")
+        alert("Đặt hàng thành công");
+        location.href="/chitietthanhtoan?id="+response.data.idDonhang;
     },
     error: function (err) {
+        console.log("error"+ err)
       if (err.message != undefined){
         alert("error : "+err.message);
       }else {
@@ -263,8 +314,9 @@
 
     }
   });
-
 }
+
+
 
     $('#thaydoidiachigiaohang').click(function (){
   $.ajax({
