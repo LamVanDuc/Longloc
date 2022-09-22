@@ -72,12 +72,23 @@
 <div class="container-fluid mb-3 container" >
     <div class="row no-gutters " style="margin: 150px 0">
         <div class="col-md-7 pr-2">
-            <div class="card" style="border: none">
-                <div class="demo">
-                    <ul id="lightSlider" style="height: 1vm">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators" id="itemImage" >
 
-                    </ul>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner w-100 " id="carouselContent">
+
                 </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
         <div class="col-md-5">
@@ -177,10 +188,22 @@
             dataType: "json",
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function (response) {
-                response.data.images.forEach(function (item){
-                    htmlContentImage +=' <li data-thumb="'+item.tenAnh+'">\n' +
-                        '                    <img class="w-100" src="'+item.tenAnh+'"/>\n' +
-                        '                </li>';
+                response.data.images.forEach(function (item , index){
+
+                    if(index === 0){
+                        htmlContent += '<li data-target="#carouselExampleIndicators" data-slide-to="'+index+'" class="active"></li>'
+
+                        htmlContentImage += '<div class="carousel-item active">\n' +
+                            '                     <img class="d-block w-100" src="'+item.tenAnh+'" alt="slide">\n' +
+                            '                </div>';
+                    }else{
+                        htmlContent += '<li data-target="#carouselExampleIndicators" data-slide-to="'+index+'"></li>'
+
+                        htmlContentImage += '<div class="carousel-item">\n' +
+                            '                     <img class="d-block w-100" src="'+item.tenAnh+'" alt="slide">\n' +
+                            '                </div>';
+                    }
+
                 })
 
                 htmlContentSize = '<option>Chọn kích cỡ</option>'
@@ -192,7 +215,8 @@
                     htmlContentSize += '<option value="'+item+'">'+item+'</option>'
                 })
 
-                $('#lightSlider').html(htmlContentImage)
+                $('#carouselContent').html(htmlContentImage)
+                $('#itemImage').html(htmlContent)
                 $('#mausac').html(htmlContentColor)
                 $('#kichco').html(htmlContentSize)
                 $('#tenSanpham').html(response.data.sanpham.tenSanPham)

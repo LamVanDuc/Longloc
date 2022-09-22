@@ -39,6 +39,9 @@ public interface DonHangService {
     List<dtoChiTietDonHang> findAllTrangthaiDangGiao();
     List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDangGiao();
 
+
+    List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDaXacNhan();
+
     List<dtoChiTietDonHang>findAllTrangthaiHuydonhang();
     List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiHuydonhang();
 

@@ -10,6 +10,8 @@ import java.util.List;
 public interface DanhMucRepository extends JpaRepository<tblDanhmuc ,Long> {
     tblDanhmuc findByIdDanhmuc(Long id);
 
+    List<tblDanhmuc> findByIdDanhmucChaIsNotNull();
+
     List<tblDanhmuc> findByIdDanhmucChaIsNull();
 
     List<tblDanhmuc> findByIdDanhmucCha(Long id);

@@ -47,8 +47,8 @@ public class GioHangServiceImpl implements GioHangService{
         tblSanpham sanpham = sanPhamRepository.findByIdSanpham(newGiohang.getIdSanpham());
         if (gioHangReponsitory.existsByIdSanpham(newGiohang.getIdSanpham())){
             tblGiohang giohang = gioHangReponsitory.findByIdNguoidungAndIdSanpham(nguoiDungService.idNguoidung() , newGiohang.getIdSanpham());
-            giohang.setGia(sanpham.getGiaBan());
             if (sanpham.getSoLuong() >= (giohang.getSoLuong() + newGiohang.getSoLuong())){
+                giohang.setGia(sanpham.getGiaBan());
                 giohang.setSoLuong(giohang.getSoLuong()+ newGiohang.getSoLuong());
                 return gioHangReponsitory.save(giohang);
             }else {

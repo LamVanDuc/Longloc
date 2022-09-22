@@ -88,12 +88,14 @@
         <ul class="d-flex flex-row">
             <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn1" href="#tatca">Tất cả</a></li>
             <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn2" href="#dangcho">Chờ xác nhận</a></li>
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn3" href="#danggiao">đang giao</a></li>
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn4" href="#danhan">Đã nhận</a></li>
-            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn5" href="#dahuy">Đã hủy</a></li>
+            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn3" href="#daxacnhan">Đã Xác Nhận</a></li>
+            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn4" href="#danggiao">đang giao</a></li>
+            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn5" href="#danhan">Đã nhận</a></li>
+            <li class="w-20"><a class="w-100 text-center" style="padding-top: 12px" id="btn6" href="#dahuy">Đã hủy</a></li>
         </ul>
         <div id="tatca"></div>
         <div id="dangcho"></div>
+        <div id="daxacnhan"></div>
         <div id="danggiao"></div>
         <div id="danhan"></div>
         <div id="dahuy"></div>
@@ -265,6 +267,88 @@
 
         $('#btn3').click(function (){
             $.ajax({
+                url: '/api/v1/donhang/daxacnhan',
+                type: 'GET',
+                dataType: "json",
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (response){
+                    var htmlContent = '';
+                    var tongtien = 0;
+                    response.data.forEach(function (item) {
+                        htmlContent +='<hr class="mt-5" style="height:2px;border-width:0;color:gray;background-color:gray">' +
+                            '<div class="mx-5">\n' +
+                            '                   <a href="/chitietdonmua?id='+item.donhang.idDonhang+'" >' +
+                            '                    <div class="border-bottom py-3">\n' +
+                            '                        <div class="d-flex justify-content-between">\n' +
+                            '                            <div  class="font-weight-bold">\n' +
+                            '                                <label>Mã : </label><span>' + item.donhang.idDonhang + '</span>\n' +
+                            '                            </div>\n' +
+                            '                            <div class="px-2">\n' +
+                            '                                <label>Trang thai : </label>\n' +
+                            '                                <span style="color: green">' + item.donhang.trangThai + '</span>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </div>' +
+                            '                  </a>'
+
+                        item.chitietsanphamAndChitietdonhang.forEach(function (item) {
+
+
+                            htmlContent += '<div class="d-flex  align-items-center justify-content-between py-3">\n' +
+                                '                        <div class="d-flex w-75">\n' +
+                                '                            <div>\n' +
+                                '                                <img style="height: 75px; width: 75px" src="' + item.sanpham.img + '">\n' +
+                                '                            </div>\n' +
+                                '                            <div class="px-2">\n' +
+                                '                                <div>\n' +
+                                '                                    <h5>' + item.sanpham.tenSanPham + '</h5>\n' +
+                                '                                </div>\n' +
+                                '                                <div style="color: #8C8CAA">\n' +
+                                '                                    <label>Phân loại : </label><span>' + item.sanpham.kichCo + " , " + item.sanpham.mauSac + '</span>\n' +
+                                '                                </div>\n' +
+                                '                                <div>x'+item.chitietdonhang.soLuong+'</div>\n' +
+                                '                            </div>\n' +
+                                '                        </div>\n' +
+                                '                        <div>\n' +
+                                '                            <span style="color: red">' + formatMoney(item.chitietdonhang.gia) + '</span>\n' +
+                                '                        </div>\n' +
+                                '                    </div>'
+
+                            tongtien += parseInt(item.chitietdonhang.gia) * parseInt(item.chitietdonhang.soLuong);
+
+                        })
+
+                        htmlContent += '<div class="border-top py-3 px-2">\n' +
+                            '                        <div class="d-flex flex-column align-items-end">\n' +
+                            '                            <div>\n' +
+                            '                                <label>Tổng tiền : </label><span style="color:red;">' + formatMoney(tongtien) + '</span>\n' +
+                            '                            </div>\n' +
+                            '                            <div class="py-3">\n' +
+                            '                                <button type="button" onclick="huydonhang(\''+item.donhang.idDonhang+'\')" class="btn btn-danger">Hủy</button>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </div>\n' +
+                            '\n' +
+                            '                </div>'
+                    })
+
+                    $("#daxacnhan").html(htmlContent)
+
+
+                },
+                error: function (err) {
+                    if (err.message != undefined){
+                        alert("error : "+err.message);
+                    }else {
+                        alert("Error : "+err.responseJSON.message)
+                    }
+
+                }
+            });
+        })
+
+        $('#btn4').click(function (){
+            $.ajax({
                 url: '/api/v1/donhang/danggiao',
                 type: 'GET',
                 dataType: "json",
@@ -342,7 +426,7 @@
             });
         })
 
-        $('#btn4').click(function (){
+        $('#btn5').click(function (){
             $.ajax({
                 url: '/api/v1/donhang/danhan',
                 type: 'GET',
@@ -417,7 +501,7 @@
             });
         })
 
-        $('#btn5').click(function (){
+        $('#btn6').click(function (){
             $.ajax({
                 url: '/api/v1/donhang/dahuy',
                 type: 'GET',

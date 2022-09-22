@@ -283,7 +283,7 @@
                     Accept: 'application/json',
                     data: JSON.stringify(requestBody),
                     success: function (response) {
-                        $("#diachi").reload();
+                        location.reload();
                     },
                     error: function (err) {
                         if (err.message != undefined) {
@@ -399,7 +399,7 @@
                 if (confirm("Số điện thoại sẽ được thay đổi ?")){
 
                     var postDataNumber = {
-                        phoneNumber: $("#phoneNumber").val()
+                        phoneNumber: $("#sodienthoai").val()
                     }
                     $.ajax({
                         url: '/api/v1/nguoidung/changephone',
@@ -414,7 +414,7 @@
                             $("#messagePassword").html(htmlContent)
                         },
                         error: function (err) {
-                            htmlContent = '<div class="alert alert-danger" role="alert">'+err.responseJSON.data.localizedMessage+'</div>'
+                            htmlContent = '<div class="alert alert-danger" role="alert">'+err.responseJSON.message+'</div>'
 
                             $("#messagePhoneNumber").html(htmlContent)
 

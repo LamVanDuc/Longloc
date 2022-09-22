@@ -11,6 +11,10 @@ import com.example.projectsem2.reponsitory.DonHangRepository;
 import com.example.projectsem2.reponsitory.SanPhamRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +42,9 @@ public class DonHangServiceImpl implements DonHangService{
     ChiTietDonHangRepository chiTietDonHangRepository;
     @Autowired
     NguoiDungService nguoiDungService;
+
+    @Autowired
+    JavaMailSender javaMailSender;
 
 
 
@@ -153,6 +160,15 @@ public class DonHangServiceImpl implements DonHangService{
                 }
             }
 
+            String msgBody = "Xin chào ! \n Bạn đã đặt thành công đơn hàng có mã đơn hàng là : "+idDonhang+"\n Vui lòng vào trong trang web :http://localhost:9090/"+
+                    " để kiểm tra thông tin đơn hàng .\n Xin cảm ơn và hẹn gặp lại .";
+            SimpleMailMessage message = new SimpleMailMessage();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            message.setTo(currentPrincipalName);
+            message.setSubject("Cảm ơn bạn đã đặt hàng Lòng Lọc shop !");
+            message.setText(msgBody);
+            this.javaMailSender.send(message);
             return responseDonhang;
         }catch (Exception ex){
             throw new RuntimeException("đã sảy ra lỗi : "+ex.getMessage());
@@ -259,6 +275,23 @@ public class DonHangServiceImpl implements DonHangService{
     public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDangGiao() {
 
         List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_dangGiao);
+        List<dtoChiTietDonHang> donHangs = new ArrayList<>();
+
+        for (tblDonhang item: donhangList) {
+            List<tblChitietdonhang> chitietdonhangList = chiTietDonHangRepository.findByIdDonhang(item.getIdDonhang());
+            List<dtoSanphamAndChitietdonhang> sanphamAndChitietdonhangs = new ArrayList<>();
+            for (tblChitietdonhang chitietdonhang : chitietdonhangList){
+                tblSanpham sanpham = sanPhamRepository.findByIdSanpham(chitietdonhang.getIdSanpham());
+                sanphamAndChitietdonhangs.add(new dtoSanphamAndChitietdonhang(chitietdonhang , sanpham));
+            }
+            donHangs.add(new dtoChiTietDonHang(item , sanphamAndChitietdonhangs));
+        }
+        return donHangs;
+    }
+
+    @Override
+    public List<dtoChiTietDonHang> findDonhangByIdNguoiDungAndTrangthaiDaXacNhan() {
+        List<tblDonhang> donhangList =  donHangRepository.findByIdNguoidungAndTrangThai(nguoiDungService.idNguoidung(),GenaricClass.TRANGTHAI_daXacNhan);
         List<dtoChiTietDonHang> donHangs = new ArrayList<>();
 
         for (tblDonhang item: donhangList) {
@@ -417,7 +450,7 @@ public class DonHangServiceImpl implements DonHangService{
     @Override
     public boolean huyDonhang(String id) {
         tblDonhang donhang = donHangRepository.findByIdNguoidungAndIdDonhang(nguoiDungService.idNguoidung(),id);
-        if (donhang.getTrangThai().equals(GenaricClass.TRANGTHAI_dangCho)){
+        if (donhang.getTrangThai().equals(GenaricClass.TRANGTHAI_dangCho) || donhang.getTrangThai().equals(GenaricClass.TRANGTHAI_daXacNhan)){
             donhang.setTrangThai(GenaricClass.TRANGTHAI_huydonhang);
             donhang.setNgayChinhSua(GenaricClass.dateTimeNow());
             donHangRepository.save(donhang);

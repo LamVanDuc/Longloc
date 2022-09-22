@@ -49,6 +49,7 @@ public class NguoidungController {
     @PostMapping("/changephone")
     public ResponseEntity<responseObject> changePhonenumber(@RequestBody dtoThayDoiNguoiDung dtoThayDoiNguoiDung){
         try {
+            String phone = dtoThayDoiNguoiDung.getPhoneNumber();
             Boolean checkNumber = dtoThayDoiNguoiDung.getPhoneNumber().startsWith("0");
             if (checkNumber.equals(false)){
                 dtoThayDoiNguoiDung.setPhoneNumber("0"+dtoThayDoiNguoiDung.getPhoneNumber());

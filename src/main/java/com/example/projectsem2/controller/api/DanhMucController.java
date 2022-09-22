@@ -45,6 +45,12 @@ public class DanhMucController {
             return  dtoDanhmucs;
     }
 
+    @GetMapping("")
+    public List<tblDanhmuc> findDanhMucByDanhMuc(){
+        List<tblDanhmuc> danhmucList = danhMucService.getDanhMucCharIsNotNull();
+        return danhmucList;
+    }
+
 
     @GetMapping("/name/{name}")
     public ResponseEntity<responseObject> getSanphamByDanhmuc(@PathVariable String name){

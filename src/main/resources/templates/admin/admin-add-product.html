@@ -13,7 +13,7 @@
 <body layout:fragment="content">
 <div>
   <div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addproduct">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdd">
         Add Product
     </button>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addimage">
@@ -21,9 +21,6 @@
     </button>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailproduct">
       Add detai product
-    </button>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addproduct">
-      Add Product
     </button>
 
     <div>
@@ -49,19 +46,29 @@
 <div>
 
   <!-- Modal -->
-  <div class="modal fade" id="addproduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Thêm sản phẩm</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="formAddProduct" name="formAddProduct" enctype="multipart/form-data">
-              <div class="modal-body">
+        <form id="addProduct" enctype="multipart/form-data">
+              <div class="modal-body mb-3">
+                <label>Danh mục</label>
+                <select class="form-select" name="idDanhmuc" aria-label="Default select example">
+                  <option selected>Chọn Danh mục</option>
+
+                </select>
+
+<!--                <select class="form-select" name="idNhaCungCap" aria-label="Default select example">-->
+<!--                  <option selected>Chọn nhà cung cấp</option>-->
+
+<!--                </select>-->
 
                 <div class="mb-3">
                   <label class="form-label" >Tên sản phẩm</label>
-                  <input type="text" name="tenSanPham" class="form-control" >
+                  <input type="text" name="tenSanpham" class="form-control" >
                 </div>
 
                 <div class="mb-3">
@@ -92,7 +99,7 @@
 
                 <div class="mb-3">
                   <label class="form-label" >Ảnh</label>
-                  <input type="file" name="file" class="form-control">
+                  <input type="file" name="file" class="form-control" required>
                 </div>
               </div>
               <div class="modal-footer">
@@ -133,14 +140,14 @@
         </div>
         <form id="formAddImage" name="formAddImage" enctype="multipart/form-data">
           <div class="modal-body">
-              <select class="form-select" name="id" aria-label="Default select example">
+              <select class="form-select" name="idSanphamCha" aria-label="Default select example">
                 <option selected>Chọn sản phẩm</option>
 
               </select>
 
               <div class="mb-3">
                 <label class="form-label" >Chọn ảnh</label>
-                <input type="file" name="files" class="form-control">
+                <input type="file" name="files" class="form-control" multiple required>
               </div>
           </div>
           <div class="modal-footer">
@@ -168,38 +175,6 @@
 
             </select>
 
-            <div class="mb-3">
-              <label class="form-label" >Tên sản phẩm</label>
-              <input type="text" name="tenSanPham" class="form-control">
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label" >Mô tả</label>
-              <input type="text" name="moTa" class="form-control">
-
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label" >Thương hiệu </label>
-              <input type="text" name="thuongHieu" class="form-control" >
-            </div>
-
-
-            <div class="mb-3">
-              <label class="form-label" >Giá bán</label>
-              <input type="number" name="giaBan" class="form-control" >
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label" >Chất liệu</label>
-              <input type="text" name="chatLieu" class="form-control" >
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label" >Phân loại</label>
-              <input type="text" name="phanLoai" class="form-control" >
-
-            </div>
 
             <div class="mb-3">
               <label class="form-label" >Màu sắc</label>
@@ -214,11 +189,6 @@
             <div class="mb-3">
               <label class="form-label" >Số lượng</label>
               <input type="text" name="soLuong" class="form-control" >
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label" >Ảnh</label>
-              <input type="file" name="file" class="form-control" >
             </div>
           </div>
           <div class="modal-footer">
@@ -279,18 +249,71 @@ $(document).ready(function (){
 
       $("#data").html(content)
 
-      $('select[class=form-select]').html(htmlContent)
+      $('select[name=idSanphamCha]').html(htmlContent)
 
     },
     error: function (err) {
       alert("error : "+err.message);
     }
   });
+
+
+
+  var htmlContentDanhmuc ='';
+  $.ajax({
+    url: '/api/v1/danhmuc',
+    type: 'GET',
+    dataType: "json",
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    success: function (response){
+      htmlContentDanhmuc += '<option>Chọn danh mục</option>'
+      response.forEach(function (item , index){
+        htmlContentDanhmuc +='<option value="'+item.idDanhmuc+'">'+item.tenDanhMuc+'</option>'
+      })
+    $("select[name=idDanhmuc]").html(htmlContentDanhmuc);
+
+    },
+    error: function (err) {
+
+    }
+  });
+
+
+  // $.ajax({
+  //   url: '/api/v1/sanpham/getall',
+  //   type: 'GET',
+  //   dataType: "json",
+  //   contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+  //   success: function (response){
+  //     htmlContent += '<option>Chọn sản phẩm</option>'
+  //     response.forEach(function (item , index){
+  //       htmlContent +='<option value="'+item.idSanpham+'">'+item.tenSanPham+'</option>'
+  //
+  //       content+='<tr>\n' +
+  //               '            <td>'+index+'</td>\n' +
+  //               '            <td>'+item.tenSanPham+'</td>\n' +
+  //               '            <td>'+formatMoney(item.giaBan)+'</td>\n' +
+  //               '            <td> xem , sửa , xóa</td>\n' +
+  //               '          </tr>'
+  //     })
+  //
+  //     $("#data").html(content)
+  //
+  //     $('select[class=form-select]').html(htmlContent)
+  //
+  //   },
+  //   error: function (err) {
+  //     alert("error : "+err.message);
+  //   }
+  // });
+
+
+
 })
 
-  $('#formAddProduct').submit(function(event) {
-    var formElement = this ;
+  $('#addProduct').submit(function(event) {
 
+    var formElement = this ;
     var formData = new FormData(formElement);
 
     $.ajax({
@@ -302,14 +325,14 @@ $(document).ready(function (){
       contentType: false,
       success: function (response) {
         console.log(response);
-        alert('Add success')
+        alert("Thêm thành công sản phẩm")
+        location.reload();
       },
       error: function (error) {
         console.log(error);
-        alert('add false')
+        alert("Đã sảy ra lỗi : ")
       }
     });
-
     event.preventDefault();
   });
 
@@ -320,14 +343,14 @@ $(document).ready(function (){
 
     $.ajax({
       type: "POST",
-      enctype: 'multipart/form-data',
-      url: "/api/v1/uploadMultipleFiles",
+      url: "/api/v1/file/uploadMultipleFiles",
       data: formData,
       processData: false,
       contentType: false,
       success: function (response) {
         console.log(response);
         alert('Add success')
+        location.reload();
       },
       error: function (error) {
         console.log(error);
@@ -345,14 +368,14 @@ $(document).ready(function (){
 
     $.ajax({
       type: "POST",
-      enctype: 'multipart/form-data',
-      url: "/api/v2/addsanpham",
+      url: "/api/v1/file/uploadChitietsanpham",
       data: formData,
       processData: false,
       contentType: false,
       success: function (response) {
         console.log(response);
-        alert('Add success')
+        alert('Thêm thành công')
+        location.reload();
       },
       error: function (error) {
         console.log(error);
